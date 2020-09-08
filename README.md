@@ -12,6 +12,14 @@ These instructions will get you a copy of the project up and running on your loc
 - Java 11
 - IntelliJ IDE 
 
+## Build Status
+
+#### CircleCI
+* [![<CircleCI>](https://circleci.com/gh/josousa82/Recipe-Project.svg?style=shield)](https://circleci.com/gh/josousa82/Recipe-Project)
+  
+#### TravisCI
+* [![Build Status](https://travis-ci.com/josousa82/Recipe-Project.svg?branch=master)](https://travis-ci.com/josousa82/Recipe-Project)
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
@@ -55,7 +63,7 @@ Give an example
 Add additional notes about how to deploy this on a live system
 
 ## Built With
-
+  
 * [Maven](https://maven.apache.org/) - Dependency Management
 
 
