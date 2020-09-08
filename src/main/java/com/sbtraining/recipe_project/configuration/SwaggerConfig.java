@@ -30,11 +30,11 @@ public class SwaggerConfig  {
 
     private ApiInfo metadata() {
         return new ApiInfoBuilder()
-                .title("Pet Clinic Backend")
-                .description("Spring boot Rest Api for a pet store, part of a tutorial")
-                .version("1.0.0")
-                .license("Apache License Version 2.0")
-                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+                .title("Recipe Project")
+                .description("Spring boot Api for a Recipe Project, part of a tutorial")
+                .version("0.0.1")
+                .license("MIT License")
+                .licenseUrl("LICENSE")
                 .build();
     }
 
