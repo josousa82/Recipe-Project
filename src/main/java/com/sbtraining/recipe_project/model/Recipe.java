@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.model;
 
 
+import com.sbtraining.recipe_project.model.enums.Difficulty;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
@@ -24,14 +25,15 @@ public class Recipe {
     private String url;
     private String directions;
 
-    @OneToOne
-    private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
+
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
