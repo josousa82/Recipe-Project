@@ -22,11 +22,23 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
+
+    @OneToOne
     private Difficulty difficulty;
+
+    @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;

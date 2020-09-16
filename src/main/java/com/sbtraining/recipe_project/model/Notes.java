@@ -1,7 +1,6 @@
 package com.sbtraining.recipe_project.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by sousaJ on 16/09/2020
@@ -12,6 +11,13 @@ import javax.persistence.Id;
 public class Notes {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @OneToOne
+    private Recipe recipe;
+
+    @Lob
     private String notes;
+
 }
