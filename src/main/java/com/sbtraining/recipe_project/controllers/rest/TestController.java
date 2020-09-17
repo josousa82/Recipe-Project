@@ -1,4 +1,4 @@
-package com.sbtraining.recipe_project.controllers;
+package com.sbtraining.recipe_project.controllers.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,4 +20,6 @@ public class TestController {
         model.addAttribute("test", "Teste");
         return Objects.requireNonNull(model.getAttribute("test")).toString();
     }
+
+
 }

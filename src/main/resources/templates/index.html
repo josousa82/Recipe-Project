@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+        <div th:each="category : ${categories}">
+            <p th:text="${category.getCategoryName()}"></p>
+        </div>
+
+        <div th:each="unit : ${unitOfMeasures}">
+            <p th:text="${unit.getDescription()}"></p>
+        </div>
+
+</body>
+</html>
