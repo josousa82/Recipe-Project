@@ -2,7 +2,6 @@ package com.sbtraining.recipe_project.model;
 
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -30,6 +29,9 @@ public class Recipe {
     private Set<Ingredient> ingredients;
 
     @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
 
     @Lob
