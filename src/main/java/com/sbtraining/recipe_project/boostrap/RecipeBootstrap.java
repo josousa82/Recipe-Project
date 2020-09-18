@@ -1,14 +1,8 @@
 package com.sbtraining.recipe_project.boostrap;
 
-import com.sbtraining.recipe_project.model.Ingredient;
-import com.sbtraining.recipe_project.model.Notes;
-import com.sbtraining.recipe_project.model.Recipe;
-import com.sbtraining.recipe_project.model.RecipeIngredient;
+import com.sbtraining.recipe_project.model.*;
 import com.sbtraining.recipe_project.model.enums.Difficulty;
-import com.sbtraining.recipe_project.repositories.IngredientRepository;
-import com.sbtraining.recipe_project.repositories.RecipeIngredientRepository;
-import com.sbtraining.recipe_project.repositories.RecipeRepository;
-import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
+import com.sbtraining.recipe_project.repositories.*;
 import com.sbtraining.recipe_project.services.RecipeService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -32,14 +26,16 @@ public class RecipeBootstrap implements CommandLineRunner {
     private final RecipeRepository recipeRepository;
     private final IngredientRepository ingredientRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final CategoryRepository categoryRepository;
 
 
-    public RecipeBootstrap(RecipeService recipeService, RecipeIngredientRepository recipeIngredientRepository, RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public RecipeBootstrap(RecipeService recipeService, RecipeIngredientRepository recipeIngredientRepository, RecipeRepository recipeRepository, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository, CategoryRepository categoryRepository) {
         this.recipeService = recipeService;
         this.recipeIngredientRepository = recipeIngredientRepository;
         this.recipeRepository = recipeRepository;
         this.ingredientRepository = ingredientRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -77,6 +73,7 @@ public class RecipeBootstrap implements CommandLineRunner {
         guacaRecipe.setCookTime(0);
         guacaRecipe.setServings(4);
         guacaRecipe.setDifficulty(Difficulty.EASY);
+
         guacaRecipe.setSource("simplyrecipes");
         guacaRecipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
         guacaRecipe.setDirections("1 Cut the avocado, remove flesh: " + "\n" +
@@ -104,6 +101,8 @@ public class RecipeBootstrap implements CommandLineRunner {
         guacaNotes.setNotes("Be careful handling chiles if using. Wash your hands thoroughly after handling" +
                 "and do not touch your eyes or the area near your eyes with your hands for several hours.");
         guacaRecipe.setNotes(guacaNotes);
+
+        guacaRecipe.getCategories().add(categoryRepository.findByCategoryName("Mexican").get());
         return guacaRecipe;
     }
 
