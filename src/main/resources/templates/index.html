@@ -6,7 +6,9 @@
 </head>
 <body>
 
+
         <div th:each="category : ${categories}">
+
             <p th:text="${category.getCategoryName()}"></p>
         </div>
 

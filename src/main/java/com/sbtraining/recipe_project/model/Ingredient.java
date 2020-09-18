@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * Created by sousaJ on 16/09/2020
@@ -17,8 +18,8 @@ public class Ingredient {
 
     private BigDecimal amount;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private UnitOfMeasure uom;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<UnitOfMeasure> uom;
 
     @ManyToOne
     private Recipe recipe;
@@ -55,11 +56,11 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
-    public UnitOfMeasure getUom() {
+    public Set<UnitOfMeasure> getUom() {
         return uom;
     }
 
-    public void setUom(UnitOfMeasure uom) {
+    public void setUom(Set<UnitOfMeasure> uom) {
         this.uom = uom;
     }
 }

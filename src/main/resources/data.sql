@@ -14,3 +14,18 @@ INSERT INTO unit_of_measure (description) VALUES('Liter');
 INSERT INTO unit_of_measure (description) VALUES('Deciliter');
 INSERT INTO unit_of_measure (description) VALUES('Centiliter');
 
+
+INSERT INTO ingredient (description) VALUES ('Avocado');
+INSERT INTO ingredient (description) VALUES ('Salt');
+INSERT INTO ingredient (description) VALUES ('Lime');
+INSERT INTO ingredient (description) VALUES ('Lemon');
+INSERT INTO ingredient (description) VALUES ('Cilantro');
+INSERT INTO ingredient (description) VALUES ('Chiles');
+INSERT INTO ingredient (description) VALUES ('Onion');
+INSERT INTO ingredient (description) VALUES ('Tomato');
+INSERT INTO ingredient (description) VALUES ('Black Pepper');
+INSERT INTO ingredient (description) VALUES ('Red radishes');
+INSERT INTO ingredient (description) VALUES ('Jicama');
+INSERT INTO ingredient (description) VALUES ('Tortilla chips');
+
+
