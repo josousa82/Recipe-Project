@@ -64,7 +64,6 @@ public class RecipeBootstrap implements CommandLineRunner {
                 .flatMap(Collection::parallelStream)
                 .map(RecipeIngredient::getIngredient)
                 .map(Ingredient::getDescription)
-                .collect(Collectors.toList())
                 .forEach(System.out::println);
     }
 
