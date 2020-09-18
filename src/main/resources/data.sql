@@ -11,8 +11,10 @@ INSERT INTO unit_of_measure (description) VALUES('Ounce');
 INSERT INTO unit_of_measure (description) VALUES('Gram');
 INSERT INTO unit_of_measure (description) VALUES('Kilogram');
 INSERT INTO unit_of_measure (description) VALUES('Liter');
-INSERT INTO unit_of_measure (description) VALUES('Deciliter');
-INSERT INTO unit_of_measure (description) VALUES('Centiliter');
+INSERT INTO unit_of_measure (description) VALUES('Decilitre');
+INSERT INTO unit_of_measure (description) VALUES('Centilitre');
+INSERT INTO unit_of_measure (description) VALUES('Millilitre');
+INSERT INTO unit_of_measure (description) VALUES('Units');
 
 
 INSERT INTO ingredient (description) VALUES ('Avocado');

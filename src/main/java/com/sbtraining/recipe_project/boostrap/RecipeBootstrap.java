@@ -1,5 +1,6 @@
 package com.sbtraining.recipe_project.boostrap;
 
+import com.sbtraining.recipe_project.model.Ingredient;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.model.RecipeIngredient;
 import com.sbtraining.recipe_project.repositories.IngredientRepository;
@@ -11,10 +12,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
 
 /**
  * Created by sousaJ on 18/09/2020
@@ -41,20 +43,15 @@ public class RecipeBootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        recipeService.createNewRecipe(createRecipe());
-        var recipe = new Recipe();
-        var recipe1 = new Recipe();
-        var recipe2 = new Recipe();
-        var recipe3 = new Recipe();
-        var recipe4 = new Recipe();
-        var recipe5 = new Recipe();
+
+
+        Recipe recipe = new Recipe();
+        recipe = addIngredientToRecipe(recipe, "Avocado", "Units", 2);
+        recipe = addIngredientToRecipe(recipe, "Salt", "Teaspoon", 2);
+        recipe = addIngredientToRecipe(recipe, "Lemon", "Millilitre", 5);
 
         recipeRepository.save(recipe);
-        recipeRepository.save(recipe1);
-        recipeRepository.save(recipe2);
-        recipeRepository.save(recipe3);
-        recipeRepository.save(recipe4);
-        recipeRepository.save(recipe5);
+
 
         StreamSupport.stream(recipeRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList())
@@ -62,22 +59,24 @@ public class RecipeBootstrap implements CommandLineRunner {
                     System.out.println("recipe1.toString() = " + x.getId().toString());
 
                 });
+
+        recipeIngredientRepository.getRecipeIngredientByRecipe_Id(1L).stream()
+                .flatMap(Collection::parallelStream)
+                .map(RecipeIngredient::getIngredient)
+                .map(Ingredient::getDescription)
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
     }
 
 
-    private Recipe createRecipe(Recipe recipe, String ingredientName, String unit, Integer quantity ){
+    private Recipe addIngredientToRecipe(Recipe recipe, String ingredientName, String unit, Integer quantity){
 
         RecipeIngredient ingredient = new RecipeIngredient();
-
         ingredient.setIngredient(ingredientRepository.findByDescription(ingredientName));
-
         ingredient.setQuantity(BigDecimal.valueOf(quantity));
         ingredient.setUom(unitOfMeasureRepository.findByDescription(unit).get());
-
-        Set<RecipeIngredient> ingredientsRecipe = new HashSet<>();
-        ingredientsRecipe.add(ingredient);
-
-        recipe.setIngredients(ingredientsRecipe);
+        ingredient.setRecipe(recipe);
+        recipe.getIngredients().add(ingredient);
 
         return recipe;
     }

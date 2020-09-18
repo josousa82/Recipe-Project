@@ -4,6 +4,7 @@ import com.sbtraining.recipe_project.model.RecipeIngredient;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -13,5 +14,5 @@ import java.util.Optional;
 @Repository
 public interface RecipeIngredientRepository extends PagingAndSortingRepository<RecipeIngredient, Long> {
 
-    Optional<RecipeIngredient> getRecipeIngredientByRecipe_Id(Long id);
+    Optional<List<RecipeIngredient>> getRecipeIngredientByRecipe_Id(Long id);
 }

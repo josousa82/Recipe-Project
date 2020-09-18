@@ -28,14 +28,14 @@ public class Recipe {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<RecipeIngredient> ingredients;
+    @OneToMany(targetEntity = RecipeIngredient.class, cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<RecipeIngredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -45,6 +45,7 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
 
     public Long getId() {
         return id;
@@ -120,7 +121,7 @@ public class Recipe {
 
 
     public Set<RecipeIngredient> getIngredients() {
-        return new HashSet<>(ingredients);
+        return ingredients;
     }
 
     public void setIngredients(Set<RecipeIngredient> ingredients) {
@@ -128,7 +129,7 @@ public class Recipe {
     }
 
     public Set<Category> getCategories() {
-        return new HashSet<>(categories);
+        return categories;
     }
 
     public void setCategories(Set<Category> categories) {

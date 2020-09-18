@@ -1,14 +1,18 @@
 package com.sbtraining.recipe_project.model;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Set;
+import lombok.ToString;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
 @Entity
+@ToString
 public class Ingredient {
 
     @Id
