@@ -2,8 +2,10 @@ package com.sbtraining.recipe_project.model;
 
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -118,7 +120,7 @@ public class Recipe {
 
 
     public Set<RecipeIngredient> getIngredients() {
-        return ingredients;
+        return new HashSet<>(ingredients);
     }
 
     public void setIngredients(Set<RecipeIngredient> ingredients) {
@@ -126,7 +128,7 @@ public class Recipe {
     }
 
     public Set<Category> getCategories() {
-        return categories;
+        return new HashSet<>(categories);
     }
 
     public void setCategories(Set<Category> categories) {
