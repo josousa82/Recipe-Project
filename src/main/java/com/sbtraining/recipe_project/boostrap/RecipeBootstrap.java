@@ -1,8 +1,10 @@
 package com.sbtraining.recipe_project.boostrap;
 
 import com.sbtraining.recipe_project.model.Ingredient;
+import com.sbtraining.recipe_project.model.Notes;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.model.RecipeIngredient;
+import com.sbtraining.recipe_project.model.enums.Difficulty;
 import com.sbtraining.recipe_project.repositories.IngredientRepository;
 import com.sbtraining.recipe_project.repositories.RecipeIngredientRepository;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -45,12 +46,13 @@ public class RecipeBootstrap implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Recipe recipe = new Recipe();
-        recipe = addIngredientToRecipe(recipe, "Avocado", "Units", 2);
-        recipe = addIngredientToRecipe(recipe, "Salt", "Teaspoon", 2);
-        recipe = addIngredientToRecipe(recipe, "Lemon", "Millilitre", 5);
+        Recipe guacaRecipe = getGuacaRecipe();
 
-        recipeRepository.save(recipe);
+        addIngredientToRecipe(guacaRecipe, "Avocado", "Units", 2);
+        addIngredientToRecipe(guacaRecipe, "Salt", "Teaspoon", 2);
+        addIngredientToRecipe(guacaRecipe, "Lemon", "Millilitre", 5);
+
+        recipeRepository.save(guacaRecipe);
 
 
         StreamSupport.stream(recipeRepository.findAll().spliterator(), false)
@@ -68,7 +70,45 @@ public class RecipeBootstrap implements CommandLineRunner {
     }
 
 
-    private Recipe addIngredientToRecipe(Recipe recipe, String ingredientName, String unit, Integer quantity){
+    private Recipe getGuacaRecipe() {
+        Recipe guacaRecipe = new Recipe();
+        guacaRecipe.setDescription("Guacamole Recipe");
+        guacaRecipe.setPrepTime(10);
+        guacaRecipe.setCookTime(0);
+        guacaRecipe.setServings(4);
+        guacaRecipe.setDifficulty(Difficulty.EASY);
+        guacaRecipe.setSource("simplyrecipes");
+        guacaRecipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacaRecipe.setDirections("1 Cut the avocado, remove flesh: " + "\n" +
+                        "Cut the avocados in half. Remove the pit. " + "\n" +
+                        "Score the inside of the avocado with a blunt " + "\n" +
+                        "knife and scoop out the flesh with a spoon. " + "\n" +
+                        "2 Mash with a fork: Using a fork, roughly mash the avocado. " + "\n" +
+                        "(Don't overdo it! The guacamole should be a little chunky.)." + "\n" +
+                        "3 Add salt, lime juice, and the rest: Sprinkle with salt and " + "\n" +
+                        "lime (or lemon) juice. The acid in the lime juice will provide " + "\n" +
+                        "some balance to the richness of the avocado and will help delay " + "\n" +
+                        "the avocados from turning brown. Add the chopped onion, cilantro," + "\n" +
+                        "black pepper, and chiles. Chili peppers vary individually in " + "\n" +
+                        "their hotness. So, start with a half of one chili pepper and add " + "\n" +
+                        "to the guacamole to your desired degree of hotness. Remember that " + "\n" +
+                        "much of this is done to taste because of the variability in the fresh " + "\n" +
+                        "ingredients. Start with this guacaRecipe and adjust to your taste. Chilling " + "\n" +
+                        "tomatoes hurts their flavor, so if you want to add chopped tomato to " + "\n" +
+                        "your guacamole, add it just before serving. 4 Serve: Serve immediately, " + "\n" +
+                        "or if making a few hours ahead, place plastic wrap on the surface of " + "\n" +
+                        "the guacamole and press down to cover it and to prevent air reaching it. " + "\n" +
+                        "The oxygen in the air causes oxidation which will turn the guacamole brown. " + "\n" +
+                        "Refrigerate until ready to serve.");
+        Notes guacaNotes = new Notes();
+        guacaNotes.setNotes("Be careful handling chiles if using. Wash your hands thoroughly after handling" +
+                "and do not touch your eyes or the area near your eyes with your hands for several hours.");
+        guacaRecipe.setNotes(guacaNotes);
+        return guacaRecipe;
+    }
+
+
+    private void addIngredientToRecipe(Recipe recipe, String ingredientName, String unit, Integer quantity){
 
         RecipeIngredient ingredient = new RecipeIngredient();
         ingredient.setIngredient(ingredientRepository.findByDescription(ingredientName));
@@ -76,7 +116,5 @@ public class RecipeBootstrap implements CommandLineRunner {
         ingredient.setUom(unitOfMeasureRepository.findByDescription(unit).get());
         ingredient.setRecipe(recipe);
         recipe.getIngredients().add(ingredient);
-
-        return recipe;
     }
 }
