@@ -16,13 +16,6 @@ public class Ingredient {
     private Long id;
     private String description;
 
-    private BigDecimal amount;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<UnitOfMeasure> uom;
-
-    @ManyToOne
-    private Recipe recipe;
 
     public Long getId() {
         return id;
@@ -38,29 +31,5 @@ public class Ingredient {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public Set<UnitOfMeasure> getUom() {
-        return uom;
-    }
-
-    public void setUom(Set<UnitOfMeasure> uom) {
-        this.uom = uom;
     }
 }

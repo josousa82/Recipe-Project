@@ -25,8 +25,9 @@ public class Recipe {
     private String directions;
 
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<RecipeIngredient> ingredients;
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
@@ -115,11 +116,12 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
-    public Set<Ingredient> getIngredients() {
+
+    public Set<RecipeIngredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
+    public void setIngredients(Set<RecipeIngredient> ingredients) {
         this.ingredients = ingredients;
     }
 
