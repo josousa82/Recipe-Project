@@ -44,9 +44,15 @@ public class RecipeBootstrap implements CommandLineRunner {
 
         Recipe guacaRecipe = getGuacaRecipe();
 
-        addIngredientToRecipe(guacaRecipe, "Avocado", "Units", 2);
-        addIngredientToRecipe(guacaRecipe, "Salt", "Teaspoon", 2);
-        addIngredientToRecipe(guacaRecipe, "Lemon", "Millilitre", 5);
+        addIngredientToRecipe(guacaRecipe, "Avocado", "Units", 2.0);
+        addIngredientToRecipe(guacaRecipe, "Salt", "Teaspoon", 0.25);
+        addIngredientToRecipe(guacaRecipe, "Lemon", "Millilitre", 2.0);
+        addIngredientToRecipe(guacaRecipe, "Chiles", "Units", 2.0);
+        addIngredientToRecipe(guacaRecipe, "Onion", "Cup", 0.25);
+        addIngredientToRecipe(guacaRecipe, "Cilantro", "Tablespoon", 2.0);
+        addIngredientToRecipe(guacaRecipe, "Black Pepper", "Units", 1.0);
+        addIngredientToRecipe(guacaRecipe, "Tomato", "Units", 2.0);
+
 
         recipeRepository.save(guacaRecipe);
 
@@ -107,7 +113,7 @@ public class RecipeBootstrap implements CommandLineRunner {
     }
 
 
-    private void addIngredientToRecipe(Recipe recipe, String ingredientName, String unit, Integer quantity){
+    private void addIngredientToRecipe(Recipe recipe, String ingredientName, String unit, Double quantity){
 
         RecipeIngredient ingredient = new RecipeIngredient();
         ingredient.setIngredient(ingredientRepository.findByDescription(ingredientName));
