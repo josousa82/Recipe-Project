@@ -42,7 +42,7 @@ public class RecipeBootstrap implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Recipe guacaRecipe = getGuacaRecipe();
+        Recipe guacaRecipe = new Recipe();
 
         addIngredientToRecipe(guacaRecipe, "Avocado", "Units", 2.0);
         addIngredientToRecipe(guacaRecipe, "Salt", "Teaspoon", 0.25);
@@ -53,9 +53,28 @@ public class RecipeBootstrap implements CommandLineRunner {
         addIngredientToRecipe(guacaRecipe, "Black Pepper", "Units", 1.0);
         addIngredientToRecipe(guacaRecipe, "Tomato", "Units", 2.0);
 
+        recipeService.createNewRecipe(getGuacaRecipe(guacaRecipe));
 
-        recipeRepository.save(guacaRecipe);
+        Recipe tacosRecipe = new Recipe();
 
+        addIngredientToRecipe(tacosRecipe, "Ancho chili powder", "Tablespoon", 2.0);
+        addIngredientToRecipe(tacosRecipe, "Dried oregano", "Teaspoon", 1.0);
+        addIngredientToRecipe(tacosRecipe, "Dried cumin", "Millilitre", 2.0);
+        addIngredientToRecipe(tacosRecipe, "Sugar", "Units", 2.0);
+        addIngredientToRecipe(tacosRecipe, "Salt", "Cup", 1.0);
+        addIngredientToRecipe(tacosRecipe, "Garlic", "Tablespoon", 2.0);
+        addIngredientToRecipe(tacosRecipe, "Orange Zest", "Units", 1.0);
+        addIngredientToRecipe(tacosRecipe, "Orange Juice", "Units", 2.0);
+        addIngredientToRecipe(tacosRecipe, "Olive Oil", "Units", 2.0);
+        addIngredientToRecipe(tacosRecipe, "Boneless Chicken Thighs", "Units", 2.0);
+
+        recipeService.createNewRecipe(getTacosRecipe(tacosRecipe));
+
+        System.out.println("Ingredients for recipe Guacamole");
+        recipeService.getRecipeIngredients(guacaRecipe).forEach(System.out::println);
+
+        System.out.println("\n\n\nIngredients for recipe Tacos");
+        recipeService.getRecipeIngredients(tacosRecipe).forEach(System.out::println);
 
         StreamSupport.stream(recipeRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList())
@@ -63,17 +82,11 @@ public class RecipeBootstrap implements CommandLineRunner {
                     System.out.println("recipe1.toString() = " + x.getId().toString());
 
                 });
-
-        recipeIngredientRepository.getRecipeIngredientByRecipe_Id(1L).stream()
-                .flatMap(Collection::parallelStream)
-                .map(RecipeIngredient::getIngredient)
-                .map(Ingredient::getDescription)
-                .forEach(System.out::println);
     }
 
 
-    private Recipe getGuacaRecipe() {
-        Recipe guacaRecipe = new Recipe();
+    private Recipe getGuacaRecipe(Recipe guacaRecipe) {
+
         guacaRecipe.setDescription("Guacamole Recipe");
         guacaRecipe.setPrepTime(10);
         guacaRecipe.setCookTime(0);
@@ -110,6 +123,31 @@ public class RecipeBootstrap implements CommandLineRunner {
 
         guacaRecipe.getCategories().add(categoryRepository.findByCategoryName("Mexican").get());
         return guacaRecipe;
+    }
+
+    private Recipe getTacosRecipe(Recipe tacosRecipe) {
+
+        tacosRecipe.setDescription("Guacamole Recipe");
+        tacosRecipe.setPrepTime(20);
+        tacosRecipe.setCookTime(15);
+        tacosRecipe.setServings(6);
+        tacosRecipe.setDifficulty(Difficulty.MODERATE);
+
+        tacosRecipe.setSource("simplyrecipes");
+        tacosRecipe.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
+        tacosRecipe.setDirections("1 Prepare a gas or charcoal grill for medium-high, direct heat." +
+                "2 Make the marinade and coat the chicken: " +
+                "3 Grill the chicken: " +
+                "4 Warm the tortillas: " +
+                "5 Assemble the tacos:");
+        Notes guacaNotes = new Notes();
+        guacaNotes.setNotes("Spicy grilled chicken tacos! Quick marinade, then grill. Ready in about 30 minutes. " +
+                "Great for a quick weeknight dinner, backyard cookouts, and tailgate parties.");
+        tacosRecipe.setNotes(guacaNotes);
+
+        tacosRecipe.getCategories().add(categoryRepository.findByCategoryName("Mexican").get());
+        return tacosRecipe;
+
     }
 
 

@@ -15,4 +15,5 @@ import java.util.Optional;
 public interface RecipeIngredientRepository extends PagingAndSortingRepository<RecipeIngredient, Long> {
 
     Optional<List<RecipeIngredient>> getRecipeIngredientByRecipe_Id(Long id);
+
 }

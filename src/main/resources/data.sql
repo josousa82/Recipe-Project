@@ -32,4 +32,14 @@ INSERT INTO ingredient (description) VALUES ('Red radishes');
 INSERT INTO ingredient (description) VALUES ('Jicama');
 INSERT INTO ingredient (description) VALUES ('Tortilla chips');
 
+INSERT INTO ingredient (description) VALUES ('Ancho chili powder');
+INSERT INTO ingredient (description) VALUES ('Dried oregano');
+INSERT INTO ingredient (description) VALUES ('Dried cumin');
+INSERT INTO ingredient (description) VALUES ('Sugar');
+INSERT INTO ingredient (description) VALUES ('Garlic');
+INSERT INTO ingredient (description) VALUES ('Orange Zest');
+INSERT INTO ingredient (description) VALUES ('Orange Juice');
+INSERT INTO ingredient (description) VALUES ('Olive Oil');
+INSERT INTO ingredient (description) VALUES ('Boneless Chicken Thighs');
+
 
