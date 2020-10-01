@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.repositories.CategoryRepository;
 import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
+import com.sbtraining.recipe_project.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,32 +18,15 @@ import java.util.stream.StreamSupport;
 @Controller
 public class IndexController {
 
-    private final CategoryRepository categoryRepository;
-    private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
-    @Autowired
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"", "/", "/index", "/index.html"})
     public String getIndexPage(Model model){
-
-        var optionalCategory = categoryRepository.findByDescription("Portuguese");
-        var optionalUnitOfMeasure = unitOfMeasureRepository.findByDescription("Tablespoon");
-
-        System.out.println("optionalUnitOfMeasure.get().getDescription() = " + optionalUnitOfMeasure.get().getDescription());
-        System.out.println("optionalCategory = " + optionalCategory.get().getDescription());
-
-        var categories = StreamSupport.stream(categoryRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        var unitOfMeasures =  StreamSupport.stream(unitOfMeasureRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-
-        model.addAttribute("categories", categories );
-        model.addAttribute("unitOfMeasures", unitOfMeasures);
-
+        model.addAttribute("recipes" ,recipeService.getRecipes());
         return "index";
     }
 }

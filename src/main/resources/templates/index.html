@@ -5,14 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+        <table border="0px">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
 
-        <div th:each="category : ${categories}">
-            <p th:text="${category.getDescription()}"></p>
-        </div>
-
-        <div th:each="unit : ${unitOfMeasures}">
-            <p th:text="${unit.getDescription()}"></p>
-        </div>
-
+        <tr th:each="recipe : ${recipes}">
+            <td th:text="${recipe.id}">Template ID</td>
+            <td th:text="${recipe.description}">Template ID</td>
+        </tr>
+        </table>
 </body>
 </html>
