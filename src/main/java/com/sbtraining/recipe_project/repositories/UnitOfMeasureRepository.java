@@ -1,10 +1,7 @@
 package com.sbtraining.recipe_project.repositories;
 
-import com.sbtraining.recipe_project.model.Category;
 import com.sbtraining.recipe_project.model.UnitOfMeasure;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
