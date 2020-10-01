@@ -14,7 +14,7 @@ import java.util.Set;
 @Service
 public class RecipeServiceImpl implements RecipeService{
 
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -24,6 +24,6 @@ public class RecipeServiceImpl implements RecipeService{
     public Set<Recipe> getRecipes() {
         Set<Recipe> recipeSet =new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
-        return null;
+        return recipeSet;
     }
 }
