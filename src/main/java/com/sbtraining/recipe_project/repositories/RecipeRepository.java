@@ -4,7 +4,6 @@ import com.sbtraining.recipe_project.model.Recipe;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.Set;
 
 /**
