@@ -1,7 +1,5 @@
 package com.sbtraining.recipe_project.controllers.views;
 
-import com.sbtraining.recipe_project.model.Category;
-import com.sbtraining.recipe_project.model.UnitOfMeasure;
 import com.sbtraining.recipe_project.repositories.CategoryRepository;
 import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
