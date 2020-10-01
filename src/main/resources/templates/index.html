@@ -7,7 +7,7 @@
 <body>
 
         <div th:each="category : ${categories}">
-            <p th:text="${category.getCategoryName()}"></p>
+            <p th:text="${category.getDescription()}"></p>
         </div>
 
         <div th:each="unit : ${unitOfMeasures}">
