@@ -29,11 +29,11 @@ public class IndexController {
     @RequestMapping({"", "/", "/index", "/index.html"})
     public String getIndexPage(Model model){
 
-        var optionalCategory = categoryRepository.findByCategoryName("Portuguese");
+        var optionalCategory = categoryRepository.findByDescription("Portuguese");
         var optionalUnitOfMeasure = unitOfMeasureRepository.findByDescription("Tablespoon");
 
         System.out.println("optionalUnitOfMeasure.get().getDescription() = " + optionalUnitOfMeasure.get().getDescription());
-        System.out.println("optionalCategory = " + optionalCategory.get().getCategoryName());
+        System.out.println("optionalCategory = " + optionalCategory.get().getDescription());
 
         var categories = StreamSupport.stream(categoryRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());

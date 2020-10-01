@@ -12,7 +12,5 @@ import java.util.Optional;
  **/
 @Repository
 public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> {
-    Optional<Category> findByCategoryName(String categoryName);
-
-
+    Optional<Category> findByDescription(String description);
 }
