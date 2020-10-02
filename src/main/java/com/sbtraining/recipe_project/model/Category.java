@@ -8,11 +8,11 @@ import java.util.Set;
  * in package - com.sbtraining.recipe_project.model
  **/
 @Entity
-public class Category {
+public class Category extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private String description;
 
 
