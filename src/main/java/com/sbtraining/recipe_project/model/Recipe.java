@@ -12,11 +12,11 @@ import java.util.Set;
  * in package - com.sbtraining.recipe_project.model
  **/
 @Entity
-public class Recipe {
+public class Recipe extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private String description;
     private Integer prepTime;

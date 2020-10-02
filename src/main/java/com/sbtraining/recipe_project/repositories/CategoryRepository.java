@@ -11,6 +11,6 @@ import java.util.Optional;
  * in package - com.sbtraining.recipe_project.repositories
  **/
 @Repository
-public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> {
+public interface CategoryRepository extends PagingAndSortingRepository<Category, Long>  {
     Optional<Category> findByDescription(String description);
 }
