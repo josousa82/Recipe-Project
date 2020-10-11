@@ -1,5 +1,7 @@
 package com.sbtraining.recipe_project.model;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

@@ -1,47 +1,37 @@
 package com.sbtraining.recipe_project.model;
 
-import javax.persistence.*;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
+@Data
 @Entity
 public class Category extends AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
     private String description;
-
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
-
-
-    public Long getId() {
-        return id;
+    public Long getId(){
+        return super.id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $id = this.id;
+        result = result * PRIME + ($id  == null ? 43 : $id.hashCode());
+        return result;
     }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String categoryName) {
-        this.description = categoryName;
-    }
 }

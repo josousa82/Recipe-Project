@@ -57,6 +57,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         //Yummy Guac
         Recipe guacRecipe = new Recipe();
+
         guacRecipe.setDescription("Perfect Guacamole");
         guacRecipe.setPrepTime(10);
         guacRecipe.setCookTime(0);
@@ -94,7 +95,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                     .addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom))
                     .addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
-        guacRecipe.getCategories().add(americanCategory);
+//        guacRecipe.getCategories().add(americanCategory);
         guacRecipe.getCategories().add(mexicanCategory);
 
         //add to return list
@@ -153,10 +154,22 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                     .addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cupsUom))
                     .addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom));
 
-        tacosRecipe.getCategories().add(americanCategory);
+//        tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
 
         recipes.add(tacosRecipe);
+        Category ct1 = new Category();
+        ct1.setDescription("testCt1");
+
+        Category ct2 = categoryRepository.findByDescription("Mexican").orElse(null);;
+        ct2.setDescription("testCt1");
+        Category ct3 = categoryRepository.findByDescription("American").orElse(null);
+        System.out.println("ct3.getId() = " + ct3.getId());
+        System.out.println("ct2.getId() = " + ct2.getId());
+        Boolean test = ct2.equals(ct3);
+        Boolean test2 = ct3.equals(ct3);
+        log.warn(test2.toString());
+        log.warn(test.toString());
         return recipes;
     }
 }
