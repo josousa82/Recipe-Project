@@ -102,4 +102,6 @@ public class Recipe {
         if (difficulty != recipe.difficulty) return false;
         return notes.equals(recipe.notes);
     }
+
+
 }
