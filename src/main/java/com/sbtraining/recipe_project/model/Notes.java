@@ -8,11 +8,11 @@ import javax.persistence.*;
  **/
 
 @Entity
-public class Notes extends AbstractEntity{
+public class Notes {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @OneToOne
     private Recipe recipe;

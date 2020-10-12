@@ -10,11 +10,11 @@ import javax.persistence.Id;
  * in package - com.sbtraining.recipe_project.model
  **/
 @Entity
-public class UnitOfMeasure extends AbstractEntity {
+public class UnitOfMeasure {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String description;
 

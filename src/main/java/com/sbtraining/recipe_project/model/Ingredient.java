@@ -8,11 +8,11 @@ import java.math.BigDecimal;
  * in package - com.sbtraining.recipe_project.model
  **/
 @Entity
-public class Ingredient extends AbstractEntity{
+public class Ingredient {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String description;
 
     private BigDecimal amount;

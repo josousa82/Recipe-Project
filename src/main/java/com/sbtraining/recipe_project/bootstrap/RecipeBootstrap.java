@@ -94,8 +94,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                     .addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom))
                     .addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
-        guacRecipe.getCategories().add(americanCategory);
-        guacRecipe.getCategories().add(mexicanCategory);
+        guacRecipe.addCategory(americanCategory);
+        guacRecipe.addCategory(mexicanCategory);
 
         //add to return list
         recipes.add(guacRecipe);
@@ -153,8 +153,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                     .addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cupsUom))
                     .addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom));
 
-        tacosRecipe.getCategories().add(americanCategory);
-        tacosRecipe.getCategories().add(mexicanCategory);
+        tacosRecipe.addCategory(mexicanCategory);
 
         recipes.add(tacosRecipe);
         return recipes;
