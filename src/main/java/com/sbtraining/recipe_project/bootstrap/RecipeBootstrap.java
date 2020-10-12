@@ -37,6 +37,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+//        testEqualRecipes();
     }
 
     private List<Recipe> getRecipes() {
@@ -170,6 +171,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Boolean test2 = ct3.equals(ct3);
         log.warn(test2.toString());
         log.warn(test.toString());
+
         return recipes;
     }
+
 }

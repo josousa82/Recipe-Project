@@ -2,17 +2,23 @@ package com.sbtraining.recipe_project.model;
 
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
-@Data
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 public class Recipe extends AbstractEntity{
 
@@ -63,6 +69,32 @@ public class Recipe extends AbstractEntity{
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+//    public Long getId(){
+//        return super.id;
+//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recipe)) return false;
+        if (!super.equals(o)) return false;
+        Recipe recipe = (Recipe) o;
+
+        if (!Objects.equals(description, recipe.description)) return false;
+        if (!Objects.equals(prepTime, recipe.prepTime)) return false;
+        if (!Objects.equals(cookTime, recipe.cookTime)) return false;
+        if (!Objects.equals(servings, recipe.servings)) return false;
+        if (!Objects.equals(source, recipe.source)) return false;
+        if (!Objects.equals(url, recipe.url)) return false;
+        if (!Objects.equals(directions, recipe.directions)) return false;
+        if (!Objects.equals(ingredients, recipe.ingredients)) return false;
+        if (!Objects.equals(categories, recipe.categories)) return false;
+//        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+//        if (!Arrays.equals(image, recipe.image)) return false;
+        if (difficulty != recipe.difficulty) return false;
+        return notes.equals(recipe.notes);
     }
 
 }

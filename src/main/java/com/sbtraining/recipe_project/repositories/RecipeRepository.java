@@ -13,4 +13,5 @@ import java.util.Set;
 @Repository
 public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Long> {
     Set<Recipe> findAll();
+    Recipe getByDescription(String description);
 }

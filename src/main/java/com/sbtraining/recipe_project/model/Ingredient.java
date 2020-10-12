@@ -1,12 +1,24 @@
 package com.sbtraining.recipe_project.model;
 
-import javax.persistence.*;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 public class Ingredient extends AbstractEntity{
 
@@ -23,8 +35,6 @@ public class Ingredient extends AbstractEntity{
     @ManyToOne
     private Recipe recipe;
 
-    public Ingredient() {
-    }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
@@ -33,12 +43,12 @@ public class Ingredient extends AbstractEntity{
 
     }
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-        this.recipe = recipe;
-    }
+//    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+//        this.description = description;
+//        this.amount = amount;
+//        this.uom = uom;
+//        this.recipe = recipe;
+//    }
 
 
 
@@ -73,12 +83,12 @@ public class Ingredient extends AbstractEntity{
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-
-    public UnitOfMeasure getUom() {
-        return uom;
-    }
-
-    public void setUom(UnitOfMeasure uom) {
-        this.uom = uom;
-    }
+//
+//    public UnitOfMeasure getUom() {
+//        return uom;
+//    }
+//
+//    public void setUom(UnitOfMeasure uom) {
+//        this.uom = uom;
+//    }
 }
