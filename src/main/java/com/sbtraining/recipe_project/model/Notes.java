@@ -1,12 +1,21 @@
 package com.sbtraining.recipe_project.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 public class Notes {
 
@@ -20,27 +29,16 @@ public class Notes {
     @Lob
     private String recipeNotes;
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Notes)) return false;
+
+        Notes notes = (Notes) o;
+
+        if (!Objects.equals(id, notes.id)) return false;
+        if (!Objects.equals(recipe, notes.recipe)) return false;
+        return recipeNotes.equals(notes.recipeNotes);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public String getRecipeNotes() {
-        return recipeNotes;
-    }
-
-    public void setRecipeNotes(String notes) {
-        this.recipeNotes = notes;
-    }
 }

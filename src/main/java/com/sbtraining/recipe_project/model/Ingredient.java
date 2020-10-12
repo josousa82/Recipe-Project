@@ -1,12 +1,22 @@
 package com.sbtraining.recipe_project.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Ingredient {
 
@@ -23,8 +33,6 @@ public class Ingredient {
     @ManyToOne
     private Recipe recipe;
 
-    public Ingredient() {
-    }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
@@ -40,45 +48,17 @@ public class Ingredient {
         this.recipe = recipe;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient)) return false;
 
+        Ingredient that = (Ingredient) o;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public UnitOfMeasure getUom() {
-        return uom;
-    }
-
-    public void setUom(UnitOfMeasure uom) {
-        this.uom = uom;
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(description, that.description)) return false;
+        if (!Objects.equals(amount, that.amount)) return false;
+        if (!Objects.equals(uom, that.uom)) return false;
+        return Objects.equals(recipe, that.recipe);
     }
 }

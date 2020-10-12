@@ -1,14 +1,24 @@
 package com.sbtraining.recipe_project.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 /**
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 public class UnitOfMeasure {
 
@@ -18,21 +28,14 @@ public class UnitOfMeasure {
 
     private String description;
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UnitOfMeasure)) return false;
+
+        UnitOfMeasure that = (UnitOfMeasure) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        return Objects.equals(description, that.description);
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String uom) {
-        this.description = uom;
-    }
-
-
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -68,16 +69,37 @@ public class Recipe {
     public void addCategory(Category category) {
         if(Objects.isNull(category)) {
             log.error("Category cannot be null");
-        }
-        else {
+            throw new IllegalArgumentException("Category cannot be null");
+        } else {
             this.categories.add(category);
         }
     }
 
     public void setNotes(Notes notes) {
         this.notes = notes;
-        notes.setRecipe(this);
+        notes.setId(this.id);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recipe)) return false;
 
+        Recipe recipe = (Recipe) o;
+
+        if (!Objects.equals(id, recipe.id)) return false;
+        if (!Objects.equals(description, recipe.description)) return false;
+        if (!Objects.equals(prepTime, recipe.prepTime)) return false;
+        if (!Objects.equals(cookTime, recipe.cookTime)) return false;
+        if (!Objects.equals(servings, recipe.servings)) return false;
+        if (!Objects.equals(source, recipe.source)) return false;
+        if (!Objects.equals(url, recipe.url)) return false;
+        if (!Objects.equals(directions, recipe.directions)) return false;
+        if (!Objects.equals(ingredients, recipe.ingredients)) return false;
+        if (!Objects.equals(categories, recipe.categories)) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        if (!Arrays.equals(image, recipe.image)) return false;
+        if (difficulty != recipe.difficulty) return false;
+        return notes.equals(recipe.notes);
+    }
 }

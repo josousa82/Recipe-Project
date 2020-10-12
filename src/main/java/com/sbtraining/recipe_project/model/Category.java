@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -28,6 +29,15 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if(Objects.isNull(o)) return false;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        if (!Objects.equals(this.id, category.id)) return false;
+        if (!Objects.equals(description, category.description)) return false;
+        return recipes.equals(category.recipes);
+    }
 
 }
