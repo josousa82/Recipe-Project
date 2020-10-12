@@ -3,6 +3,7 @@ package com.sbtraining.recipe_project.model;
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Slf4j
 @Builder
 @Entity
 public class Recipe extends AbstractEntity{
@@ -67,13 +69,15 @@ public class Recipe extends AbstractEntity{
         notes.setRecipe(this);
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public void addCategory(Category category) {
+        if (Objects.isNull(category)){
+            log.error("Category cannot be null");
+            throw new RuntimeException("Category cannot be null");
+        }else{
+            this.categories.add(category);
+        }
     }
 
-//    public Long getId(){
-//        return super.id;
-//    }
 
     @Override
     public boolean equals(Object o) {
