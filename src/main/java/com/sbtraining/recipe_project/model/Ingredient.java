@@ -61,4 +61,5 @@ public class Ingredient {
         if (!Objects.equals(uom, that.uom)) return false;
         return Objects.equals(recipe, that.recipe);
     }
+
 }

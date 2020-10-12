@@ -20,10 +20,10 @@ public class RecipeServiceImpl implements RecipeService{
         this.recipeRepository = recipeRepository;
     }
 
-    @Override
-    public Set<Recipe> getRecipes() {
-        Set<Recipe> recipeSet =new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
-        return recipeSet;
+
+    public Set<Recipe> getAllRecipes() {
+        Set<Recipe> recipes = new HashSet<>();
+        recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
+        return recipes;
     }
 }

@@ -2,10 +2,7 @@ package com.sbtraining.recipe_project.model;
 
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -31,31 +28,46 @@ public class Recipe {
     private Long id;
 
     private String description;
+
+    @ToString.Exclude
     private Integer prepTime;
+
+    @ToString.Exclude
     private Integer cookTime;
+
+    @ToString.Exclude
     private Integer servings;
+
+    @ToString.Exclude
     private String source;
+
+    @ToString.Exclude
     private String url;
 
+    @ToString.Exclude
     @Lob
     private String directions;
 
-
+    @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
 
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    @ToString.Exclude
     @Lob
     private Byte[] image;
 
+    @ToString.Exclude
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
+    @ToString.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 

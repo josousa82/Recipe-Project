@@ -9,5 +9,5 @@ import java.util.Set;
  * in package - com.sbtraining.recipe_project.services
  **/
 public interface RecipeService {
-     Set<Recipe> getRecipes();
+     Set<Recipe> getAllRecipes();
 }
