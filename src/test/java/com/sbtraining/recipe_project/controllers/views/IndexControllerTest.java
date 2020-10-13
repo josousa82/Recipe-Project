@@ -5,12 +5,12 @@ import com.sbtraining.recipe_project.services.RecipeServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.Arrays;
@@ -19,10 +19,10 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @Slf4j
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
 class IndexControllerTest {
 
     // Under Test
@@ -38,6 +38,16 @@ class IndexControllerTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         indexController = new IndexController(recipeService);
+    }
+
+    @Test
+    void testMockMVC() throws Exception {
+        // similar to mock server but unit testing without initializing spring context
+        // another method MockMvcBuilders.webAppContextSetup() to initialize with spring context.
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+
+        // attention with the static matchers imports
+        mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(status().isOk()).andExpect(view().name("index"));
     }
 
     @Test
