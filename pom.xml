@@ -68,11 +68,11 @@
 
         <!-- dependencies are needed for the client being generated -->
 
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-annotations-version}</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.swagger</groupId>-->
+        <!--            <artifactId>swagger-annotations</artifactId>-->
+        <!--            <version>${swagger-annotations-version}</version>-->
+        <!--        </dependency>-->
         <!--SpringFox dependencies -->
         <dependency>
             <groupId>io.springfox</groupId>
