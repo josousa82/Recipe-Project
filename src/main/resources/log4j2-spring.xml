@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="ALL">
+<Configuration>
 
     <!-- Define custom levels before using them for filtering below. -->
     <!--    <CustomLevels>-->
@@ -33,7 +33,7 @@
 
     <Loggers>
         <!-- LOG everything at INFO level -->
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
             <!--            <AppenderRef ref="Console" level="diag" />-->
@@ -41,7 +41,7 @@
         </Root>
 
 
-        <Logger name="com.sbtraining.recipe_project" level="debug"/>
+        <Logger name="com.sbtraining.recipe_project" level="info"/>
     </Loggers>
 
 </Configuration>
