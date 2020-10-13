@@ -1,7 +1,7 @@
 package com.sbtraining.recipe_project.repositories;
 
 import com.sbtraining.recipe_project.model.UnitOfMeasure;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -11,7 +11,7 @@ import java.util.Optional;
  * in package - com.sbtraining.recipe_project.repositories
  **/
 @Repository
-public interface UnitOfMeasureRepository extends PagingAndSortingRepository<UnitOfMeasure, Long> {
+public interface UnitOfMeasureRepository extends CrudRepository<UnitOfMeasure, Long> {
 
     Optional<UnitOfMeasure> findByDescription(String description);
 }
