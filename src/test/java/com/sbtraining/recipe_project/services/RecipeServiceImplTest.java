@@ -46,6 +46,7 @@ class RecipeServiceImplTest {
         Recipe recipe1 = Recipe.builder().id(1L).build();
         HashSet<Recipe> recipeHashSet = new HashSet<>();
         recipeHashSet.add(recipe1);
+
         Optional<Recipe> recipeOptional = Optional.of(recipe1);
 
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
