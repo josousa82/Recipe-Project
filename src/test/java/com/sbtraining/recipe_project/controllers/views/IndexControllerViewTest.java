@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class IndexControllerTest {
+class IndexControllerViewTest {
 
     // Under Test
     IndexController indexController;
@@ -47,8 +47,10 @@ class IndexControllerTest {
 
     @Test
     void testMockMVC() throws Exception {
+
         // similar to mock server but unit testing without initializing spring context
         // another method MockMvcBuilders.webAppContextSetup() to initialize with spring context.
+
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
         // attention with the static matchers imports
