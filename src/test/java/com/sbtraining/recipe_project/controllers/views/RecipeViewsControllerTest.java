@@ -48,6 +48,9 @@ class RecipeViewsControllerTest {
 
         when(recipeServiceMock.getRecipeById(anyLong())).thenReturn(recipe1);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1")).andExpect(status().isOk()).andExpect(MockMvcResultMatchers.view().name("recipe/show")).andExpect(model().attributeExists("recipe"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("recipe/show"))
+                .andExpect(model().attributeExists("recipe"));
     }
 }
