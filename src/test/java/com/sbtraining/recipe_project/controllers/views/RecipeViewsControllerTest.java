@@ -23,9 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class RecipeControllerTest {
+class RecipeViewsControllerTest {
 
-    RecipeController recipeControllerVictim;
+    RecipeViewsController recipeViewsControllerVictim;
 
     @Mock
     RecipeService recipeServiceMock;
@@ -36,16 +36,17 @@ class RecipeControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeControllerVictim = new RecipeController(recipeServiceMock);
+        recipeViewsControllerVictim = new RecipeViewsController(recipeServiceMock);
     }
 
     @Test
     void getRecipe() throws Exception {
+
         Recipe recipe1 = Recipe.builder().id(1L).build();
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeControllerVictim).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeViewsControllerVictim).build();
 
         when(recipeServiceMock.getRecipeById(anyLong())).thenReturn(recipe1);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/1")).andExpect(status().isOk()).andExpect(MockMvcResultMatchers.view().name("recipe/show"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1")).andExpect(status().isOk()).andExpect(MockMvcResultMatchers.view().name("recipe/show"));
     }
 }

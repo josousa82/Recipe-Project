@@ -75,30 +75,21 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvpiV9Sd");
 
         Notes guacNotes = new Notes();
-        guacNotes.setRecipeNotes("For a very quick guacamole just take a 1/4 cup of salsa and mix it in with your mashed avocados.\n" +
-                "Feel free to experiment! One classic Mexican guacamole has pomegranate seeds and chunks of peaches in it (a Diana Kennedy favorite). Try guacamole with added pineapple, mango, or strawberries.\n" +
-                "The simplest version of guacamole is just mashed avocados with salt. Don't let the lack of availability of other ingredients stop you from making guacamole.\n" +
-                "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.\n" +
-                "\n" +
-                "\n" +
-                "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws");
+        guacNotes.setRecipeNotes("For a very quick guacamole just take a 1/4 cup of salsa and mix it in with your mashed avocados.\n" + "Feel free to experiment! One classic Mexican guacamole has pomegranate seeds and chunks of peaches in it (a Diana Kennedy favorite). Try guacamole with added pineapple, mango, or strawberries.\n" + "The simplest version of guacamole is just mashed avocados with salt. Don't let the lack of availability of other ingredients stop you from making guacamole.\n" + "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.\n" + "\n" + "\n" + "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws");
         guacNotes.setRecipe(guacRecipe);
         guacRecipe.setNotes(guacNotes);
+        guacRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole");
+        guacRecipe.setServings(4);
+        guacRecipe.setSource("Simply Recipes");
 
-        guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom))
-                    .addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teapoonUom))
-                    .addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), tableSpoonUom))
-                    .addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tableSpoonUom))
-                    .addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom))
-                    .addIngredient(new Ingredient("Cilantro", new BigDecimal(2), tableSpoonUom))
-                    .addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom))
-                    .addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
+        guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom)).addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teapoonUom)).addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), tableSpoonUom)).addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tableSpoonUom)).addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom)).addIngredient(new Ingredient("Cilantro", new BigDecimal(2), tableSpoonUom)).addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom)).addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
         guacRecipe.addCategory(americanCategory);
         guacRecipe.addCategory(mexicanCategory);
 
         //add to return list
         recipes.add(guacRecipe);
+
 
         //Yummy Tacos
         Recipe tacosRecipe = new Recipe();
@@ -121,26 +112,14 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvtrAnNm");
 
         Notes tacoNotes = new Notes();
-        tacoNotes.setRecipeNotes("We have a family motto and it is this: Everything goes better in a tortilla.\n" +
-                "Any and every kind of leftover can go inside a warm tortilla, usually with a healthy dose of pickled jalapenos. I can always sniff out a late-night snacker when the aroma of tortillas heating in a hot pan on the stove comes wafting through the house.\n" +
-                "Today’s tacos are more purposeful – a deliberate meal instead of a secretive midnight snack!\n" +
-                "First, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings.\n" +
-                "Grill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!\n" +
-                "\n" +
-                "\n" +
-                "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
+        tacoNotes.setRecipeNotes("We have a family motto and it is this: Everything goes better in a tortilla.\n" + "Any and every kind of leftover can go inside a warm tortilla, usually with a healthy dose of pickled jalapenos. I can always sniff out a late-night snacker when the aroma of tortillas heating in a hot pan on the stove comes wafting through the house.\n" + "Today’s tacos are more purposeful – a deliberate meal instead of a secretive midnight snack!\n" + "First, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings.\n" + "Grill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!\n" + "\n" + "\n" + "Read more: http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/#ixzz4jvu7Q0MJ");
         tacoNotes.setRecipe(tacosRecipe);
         tacosRecipe.setNotes(tacoNotes);
+        tacosRecipe.setUrl("http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
+        tacosRecipe.setServings(6);
+        tacosRecipe.setSource("Simply Recipes");
 
-        tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoonUom))
-                    .addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teapoonUom))
-                    .addIngredient(new Ingredient("Dried Cumin", new BigDecimal(1), teapoonUom))
-                    .addIngredient(new Ingredient("Sugar", new BigDecimal(1), teapoonUom))
-                    .addIngredient(new Ingredient("Salt", new BigDecimal(".5"), teapoonUom))
-                    .addIngredient(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), eachUom))
-                    .addIngredient(new Ingredient("finely grated orange zestr", new BigDecimal(1), tableSpoonUom))
-                    .addIngredient(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), tableSpoonUom))
-                    .addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom, tacosRecipe))
+        tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoonUom)).addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teapoonUom)).addIngredient(new Ingredient("Dried Cumin", new BigDecimal(1), teapoonUom)).addIngredient(new Ingredient("Sugar", new BigDecimal(1), teapoonUom)).addIngredient(new Ingredient("Salt", new BigDecimal(".5"), teapoonUom)).addIngredient(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), eachUom)).addIngredient(new Ingredient("finely grated orange zestr", new BigDecimal(1), tableSpoonUom)).addIngredient(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), tableSpoonUom)).addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom, tacosRecipe))
                     .addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom, tacosRecipe))
                     .addIngredient(new Ingredient("boneless chicken thighs", new BigDecimal(4), tableSpoonUom))
                     .addIngredient(new Ingredient("small corn tortillasr", new BigDecimal(8), eachUom))
