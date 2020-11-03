@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
@@ -47,6 +48,6 @@ class RecipeViewsControllerTest {
 
         when(recipeServiceMock.getRecipeById(anyLong())).thenReturn(recipe1);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1")).andExpect(status().isOk()).andExpect(MockMvcResultMatchers.view().name("recipe/show"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1")).andExpect(status().isOk()).andExpect(MockMvcResultMatchers.view().name("recipe/show")).andExpect(model().attributeExists("recipe"));
     }
 }
