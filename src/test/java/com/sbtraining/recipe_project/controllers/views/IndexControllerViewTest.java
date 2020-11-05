@@ -61,8 +61,8 @@ class IndexControllerViewTest {
     void getIndexPage() {
         // given
         Set<Recipe> recipes = new HashSet<>();
-        recipes.add(new Recipe());
-        recipes.add(new Recipe());
+        recipes.add(Recipe.builder().id(1L).build());
+        recipes.add(Recipe.builder().id(2L).build());
 
         when(recipeService.getAllRecipes()).thenReturn(recipes);
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
