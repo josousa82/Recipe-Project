@@ -36,5 +36,4 @@ class UnitOfMeasureRepositoryTestIT {
         Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
         assertEquals("Cup", unitOfMeasure.get().getDescription());
     }
-
 }
