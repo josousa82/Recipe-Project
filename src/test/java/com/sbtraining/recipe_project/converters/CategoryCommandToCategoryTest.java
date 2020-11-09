@@ -44,6 +44,5 @@ class CategoryCommandToCategoryTest {
         assert categoryConverted != null;
         assertEquals(ID_VALUE, categoryConverted.getId());
         assertEquals(DESCRIPTION, categoryConverted.getDescription());
-
     }
 }

@@ -7,27 +7,25 @@ import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-
 /**
  * Created by sousaJ on 09/11/2020
  * in package - com.sbtraining.recipe_project.converters
  **/
 @Component
-public class CategoryCommandToCategory implements Converter<CategoryCommand, Category> {
+public class CategoryToCategoryCommand implements Converter<Category, CategoryCommand> {
 
     @Synchronized
     @Nullable
     @Override
-    public Category convert(CategoryCommand command) {
+    public CategoryCommand convert(Category category) {
 
-        if(command == null) return null;
+        if (category == null) return null;
 
-
-//        Objects.requireNonNull(command);
-
-        return Category.builder()
-                .id(command.getId())
-                .description(command.getDescription())
+        final var categoryCommand = CategoryCommand.builder()
+                .id(category.getId())
+                .description(category.getDescription())
                 .build();
+
+        return categoryCommand;
     }
 }
