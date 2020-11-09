@@ -4,8 +4,10 @@ import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class RecipeServiceImplTest {
 
     RecipeServiceImpl recipeService;

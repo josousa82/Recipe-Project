@@ -1,7 +1,9 @@
 package com.sbtraining.recipe_project.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -12,6 +14,7 @@ import java.util.Set;
  **/
 @Data
 @EqualsAndHashCode(exclude = {"recipes"})
+@NoArgsConstructor
 @Entity
 public class Category {
 
@@ -20,6 +23,11 @@ public class Category {
     private Long id;
     private String description;
 
+    @Builder
+    public Category(Long id, String description) {
+        this.id = id;
+        this.description = description;
+    }
 
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
