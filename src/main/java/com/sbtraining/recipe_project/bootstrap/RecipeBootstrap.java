@@ -39,10 +39,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        recipeRepository.saveAll(getRecipes());
+        recipeRepository.saveAll(getRecipesBoostrapData());
     }
 
-    private List<Recipe> getRecipes() {
+    private List<Recipe> getRecipesBoostrapData() {
 
         List<Recipe> recipes = new ArrayList<>(2);
 
@@ -82,14 +82,14 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         recipes.add(guacamoleRecipe);
 
-        guacamoleRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom))
-                .addIngredient(new Ingredient("Kosher salt", new BigDecimal(".5"), teaspoon))
-                .addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2), tableSpoonUom))
-                .addIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tableSpoonUom))
-                .addIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom))
-                .addIngredient(new Ingredient("Cilantro", new BigDecimal(2), tableSpoonUom))
-                .addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom))
-                .addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
+        guacamoleRecipe.addIngredient(Ingredient.builder().description("ripe avocados").amount(new BigDecimal(2)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("Kosher salt").amount(new BigDecimal(".5")).uom(teaspoon).build())
+                .addIngredient(Ingredient.builder().description("fresh lime juice or lemon juice").amount(new BigDecimal(2)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("minced red onion or thinly sliced green onion").amount(new BigDecimal(2)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("serrano chiles, stems and seeds removed, minced").amount(new BigDecimal(2)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("Cilantro").amount(new BigDecimal(2)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("freshly grated black pepper").amount(new BigDecimal(2)).uom(dashUom).build())
+                .addIngredient(Ingredient.builder().description("ripe tomato, seeds and pulp removed, chopped").amount(new BigDecimal(".5")).uom(eachUom).build());
 
         //Yummy Tacos
         Recipe tacosRecipe = Recipe.builder()
@@ -111,26 +111,25 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.setNotes(tacoNotes);
         tacosRecipe.addCategory(mexicanCategory);
 
-        tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoonUom))
-                .addIngredient(new Ingredient("Dried Oregano", new BigDecimal(1), teaspoon))
-                .addIngredient(new Ingredient("Dried Cumin", new BigDecimal(1), teaspoon))
-                .addIngredient(new Ingredient("Sugar", new BigDecimal(1), teaspoon))
-                .addIngredient(new Ingredient("Salt", new BigDecimal(".5"), teaspoon))
-                .addIngredient(new Ingredient("Clove of Garlic, Choppedr", new BigDecimal(1), eachUom))
-                .addIngredient(new Ingredient("finely grated orange zestr", new BigDecimal(1), tableSpoonUom))
-                .addIngredient(new Ingredient("fresh-squeezed orange juice", new BigDecimal(3), tableSpoonUom))
-                .addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom, tacosRecipe))
-                .addIngredient(new Ingredient("Olive Oil", new BigDecimal(2), tableSpoonUom, tacosRecipe))
-                .addIngredient(new Ingredient("boneless chicken thighs", new BigDecimal(4), tableSpoonUom))
-                .addIngredient(new Ingredient("small corn tortillasr", new BigDecimal(8), eachUom))
-                .addIngredient(new Ingredient("packed baby arugula", new BigDecimal(3), cupsUom))
-                .addIngredient(new Ingredient("medium ripe avocados, slic", new BigDecimal(2), eachUom))
-                .addIngredient(new Ingredient("radishes, thinly sliced", new BigDecimal(4), eachUom))
-                .addIngredient(new Ingredient("cherry tomatoes, halved", new BigDecimal(".5"), pintUom))
-                .addIngredient(new Ingredient("red onion, thinly sliced", new BigDecimal(".25"), eachUom))
-                .addIngredient(new Ingredient("Roughly chopped cilantro", new BigDecimal(4), eachUom))
-                .addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cupsUom))
-                .addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom));
+        tacosRecipe.addIngredient(Ingredient.builder().description("Ancho Chili Powder").amount(new BigDecimal(2)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("Dried Oregano").amount(new BigDecimal(1)).uom(teaspoon).build())
+                .addIngredient(Ingredient.builder().description("Dried Cumin").amount(new BigDecimal(1)).uom(teaspoon).build())
+                .addIngredient(Ingredient.builder().description("Sugar").amount( new BigDecimal(1)).uom( teaspoon).build())
+                .addIngredient(Ingredient.builder().description("Salt").amount(new BigDecimal(".5")).uom(teaspoon).build())
+                .addIngredient(Ingredient.builder().description("Clove of Garlic, Choppedr").amount(new BigDecimal("1")).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("finely grated orange zestr").amount(new BigDecimal(1)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("fresh-squeezed orange juice").amount(new BigDecimal(3)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("Olive Oil").amount(new BigDecimal(2)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("boneless chicken thighs").amount(new BigDecimal(4)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("small corn tortillasr").amount(new BigDecimal(8)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("packed baby arugula").amount(new BigDecimal(3)).uom(cupsUom).build())
+                .addIngredient(Ingredient.builder().description("medium ripe avocados, slice").amount(new BigDecimal(2)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("radishes, thinly sliced").amount(new BigDecimal(4)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("cherry tomatoes, halved").amount(new BigDecimal(".5")).uom(pintUom).build())
+                .addIngredient(Ingredient.builder().description("red onion, thinly sliced").amount(new BigDecimal(".25")).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("Roughly chopped cilantro").amount(new BigDecimal(4)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("cup sour cream thinned with 1/4 cup milk").amount(new BigDecimal(4)).uom(cupsUom).build())
+                .addIngredient(Ingredient.builder().description("lime, cut into wedges").amount(new BigDecimal(4)).uom(eachUom).build());
 
         recipes.add(tacosRecipe);
 

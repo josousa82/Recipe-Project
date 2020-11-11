@@ -1,8 +1,6 @@
 package com.sbtraining.recipe_project.commands;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -13,6 +11,8 @@ import java.math.BigDecimal;
 
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class IngredientCommand {
 
@@ -21,6 +21,5 @@ public class IngredientCommand {
     private String description;
     private BigDecimal amount;
     private UnitOfMeasureCommand uomc;
-
 
 }
