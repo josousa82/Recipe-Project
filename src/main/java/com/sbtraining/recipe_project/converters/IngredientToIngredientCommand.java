@@ -3,6 +3,7 @@ package com.sbtraining.recipe_project.converters;
 import com.sbtraining.recipe_project.commands.IngredientCommand;
 import com.sbtraining.recipe_project.model.Ingredient;
 import com.sun.istack.Nullable;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
  * in package - com.sbtraining.recipe_project.converters
  **/
 @Builder
+@AllArgsConstructor
 @Component
 public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand> {
 
