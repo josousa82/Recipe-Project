@@ -2,9 +2,7 @@ package com.sbtraining.recipe_project.model;
 
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -16,7 +14,10 @@ import java.util.Set;
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
-@Data
+
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @Slf4j
 @Entity
@@ -60,7 +61,7 @@ public class Recipe {
     private Notes notes;
 
     @Builder
-    public Recipe(Long id, String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url, String directions, Difficulty difficulty) {
+    public Recipe(Long id, String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url, String directions, Difficulty difficulty, Notes notes) {
         this.description = description;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
@@ -70,6 +71,7 @@ public class Recipe {
         this.directions = directions;
         this.difficulty = difficulty;
         this.id = id;
+        this.notes = notes;
     }
 
     public Recipe addIngredient(Ingredient ingredient){

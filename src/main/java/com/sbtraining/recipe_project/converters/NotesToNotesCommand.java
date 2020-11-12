@@ -2,6 +2,8 @@ package com.sbtraining.recipe_project.converters;
 
 import com.sbtraining.recipe_project.commands.NotesCommand;
 import com.sbtraining.recipe_project.model.Notes;
+import com.sun.istack.Nullable;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class NotesToNotesCommand implements Converter<Notes, NotesCommand> {
 
+    @Synchronized
+    @Nullable
     @Override
     public NotesCommand convert(Notes notes) {
 
