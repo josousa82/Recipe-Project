@@ -8,7 +8,8 @@ import javax.persistence.*;
  * Created by sousaJ on 16/09/2020
  * in package - com.sbtraining.recipe_project.model
  **/
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

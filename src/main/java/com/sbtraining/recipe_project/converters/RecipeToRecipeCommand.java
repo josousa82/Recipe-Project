@@ -1,7 +1,6 @@
 package com.sbtraining.recipe_project.converters;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
-import com.sbtraining.recipe_project.model.Category;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sun.istack.Nullable;
 import lombok.Builder;
@@ -34,27 +33,27 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
     public RecipeCommand convert(Recipe recipe) {
         if(recipe == null) return null;
 
-        final RecipeCommand recipeCommand = RecipeCommand.builder()
-                .id(recipe.getId())
-                .description(recipe.getDescription())
-                .prepTime(recipe.getPrepTime())
-                .cookTime(recipe.getCookTime())
-                .servings(recipe.getServings())
-                .source(recipe.getSource())
-                .url(recipe.getUrl())
-                .directions(recipe.getDirections())
-                .difficulty(recipe.getDifficulty())
-                .notesC(notesToNotesCommand.convert(recipe.getNotes()))
-                .build();
+      final var recipeCommand = new RecipeCommand();
 
-//        if(CollectionUtils.isNotEmpty(recipe.getIngredients())){
-//            recipe.getIngredients().stream()
-//                    .forEach((Ingredient ingredient) -> recipeCommand.getIngredientsC().add(ingredientToIngredientCommand.convert(ingredient)));
-//        }
+        recipeCommand.setId(recipe.getId())
+                .setDescription(recipe.getDescription())
+                .setPrepTime(recipe.getPrepTime())
+                .setCookTime(recipe.getCookTime())
+                .setServings(recipe.getServings())
+                .setSource(recipe.getSource())
+                .setUrl(recipe.getUrl())
+                .setDirections(recipe.getDirections())
+                .setDifficulty(recipe.getDifficulty())
+                .setNotesC(notesToNotesCommand.convert(recipe.getNotes()));
+
+        if(CollectionUtils.isNotEmpty(recipe.getIngredients())){
+            recipe.getIngredients().
+                    forEach(ingredient -> recipeCommand.getIngredientsC().add(ingredientToIngredientCommand.convert(ingredient)));
+        }
 
         if(CollectionUtils.isNotEmpty(recipe.getCategories())){
             recipe.getCategories()
-                    .forEach((Category category) -> recipeCommand.getCategoriesC().add(categoryToCategoryCommand.convert(category)));
+                    .forEach(category -> recipeCommand.getCategoriesC().add(categoryToCategoryCommand.convert(category)));
         }
 
         return recipeCommand;
