@@ -2,7 +2,10 @@ package com.sbtraining.recipe_project.model;
 
 
 import com.sbtraining.recipe_project.model.enums.Difficulty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -15,11 +18,10 @@ import java.util.Set;
  * in package - com.sbtraining.recipe_project.model
  **/
 
-
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Slf4j
 @Entity
 public class Recipe {
@@ -43,9 +45,11 @@ public class Recipe {
     @Lob
     private String directions;
 
+    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
@@ -60,20 +64,6 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
-
-    @Builder
-    public Recipe(Long id, String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url, String directions, Difficulty difficulty, Notes notes) {
-        this.description = description;
-        this.prepTime = prepTime;
-        this.cookTime = cookTime;
-        this.servings = servings;
-        this.source = source;
-        this.url = url;
-        this.directions = directions;
-        this.difficulty = difficulty;
-        this.id = id;
-        this.notes = notes;
-    }
 
     public Recipe addIngredient(Ingredient ingredient){
         ingredient.setRecipe(this);
