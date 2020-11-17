@@ -31,29 +31,30 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
     @Nullable
     @Override
     public RecipeCommand convert(Recipe recipe) {
+
         if(recipe == null) return null;
 
-      final var recipeCommand = new RecipeCommand();
-
-        recipeCommand.setId(recipe.getId())
-                .setDescription(recipe.getDescription())
-                .setPrepTime(recipe.getPrepTime())
-                .setCookTime(recipe.getCookTime())
-                .setServings(recipe.getServings())
-                .setSource(recipe.getSource())
-                .setUrl(recipe.getUrl())
-                .setDirections(recipe.getDirections())
-                .setDifficulty(recipe.getDifficulty())
-                .setNotesC(notesToNotesCommand.convert(recipe.getNotes()));
+       final RecipeCommand recipeCommand = RecipeCommand.builder()
+                .id(recipe.getId())
+                .description(recipe.getDescription())
+                .prepTime(recipe.getPrepTime())
+                .cookTime(recipe.getCookTime())
+                .servings(recipe.getServings())
+                .source(recipe.getSource())
+                .url(recipe.getUrl())
+                .directions(recipe.getDirections())
+                .difficulty(recipe.getDifficulty())
+                .notesC(notesToNotesCommand.convert(recipe.getNotes()))
+                .build();
 
         if(CollectionUtils.isNotEmpty(recipe.getIngredients())){
             recipe.getIngredients().
-                    forEach(ingredient -> recipeCommand.getIngredientsC().add(ingredientToIngredientCommand.convert(ingredient)));
+                    forEach(ingredient -> recipeCommand.addIngredientCommand(ingredientToIngredientCommand.convert(ingredient)));
         }
 
         if(CollectionUtils.isNotEmpty(recipe.getCategories())){
             recipe.getCategories()
-                    .forEach(category -> recipeCommand.getCategoriesC().add(categoryToCategoryCommand.convert(category)));
+                    .forEach(category -> recipeCommand.addCategoryCommand(categoryToCategoryCommand.convert(category)));
         }
 
         return recipeCommand;
