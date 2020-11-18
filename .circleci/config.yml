@@ -17,8 +17,8 @@ jobs:
         keys:
         - v1-dependencies-{{ checksum "pom.xml"}}
         - v1-dependencies
-    - run: mvn install -DskipTests
-
+    - run: mvn install
+    
     - run: mvn dependency:go-offline
 
     - save-cache:
