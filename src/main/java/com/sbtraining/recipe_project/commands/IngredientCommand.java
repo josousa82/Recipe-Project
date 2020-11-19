@@ -20,6 +20,6 @@ public class IngredientCommand {
     private Long recipeId;
     private String description;
     private BigDecimal amount;
-    private UnitOfMeasureCommand uomc;
+    private UnitOfMeasureCommand uom;
 
 }

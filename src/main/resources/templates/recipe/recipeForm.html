@@ -17,8 +17,10 @@
 
 
 <body>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Notes"*/-->
 <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
 <!--/*@thymesVar id="category" type="com.sbtraining.recipe_project.model.Category"*/-->
+
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -102,7 +104,7 @@
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:each="ingredient : ${recipe.ingredients}"
-                                            th:text="${(ingredient.getAmount() + ' ' +
+                                            th:text="${(ingredient.amount + ' ' +
                                              ingredient.uom.description + ' - ' +
                                              ingredient.description)}">1 Teaspoon of sugar
                                         </li>
@@ -134,7 +136,8 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <textarea class="form-control text" rows="3" th:field="*{notes.getRecipeNotes()}"></textarea>
+                                    <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Notes"*/-->
+                                    <textarea class="form-control text" rows="3" th:field="*{notes.recipesNotes}"></textarea>
                                 </div>
                             </div>
                         </div>

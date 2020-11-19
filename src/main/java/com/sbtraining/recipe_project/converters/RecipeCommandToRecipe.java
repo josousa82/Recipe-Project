@@ -49,17 +49,17 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
                 .url(recipeCommand.getUrl())
                 .directions(recipeCommand.getDirections())
                 .difficulty(recipeCommand.getDifficulty())
-                .notes(notesCommandToNotes.convert(recipeCommand.getNotesC())).build();
+                .notes(notesCommandToNotes.convert(recipeCommand.getNotes())).build();
 
-        if (CollectionUtils.isNotEmpty(recipeCommand.getIngredientsC()))
+        if (CollectionUtils.isNotEmpty(recipeCommand.getIngredients()))
         {
-            recipeCommand.getIngredientsC().forEach(ingredientCommand ->
+            recipeCommand.getIngredients().forEach(ingredientCommand ->
                     recipe.addIngredient(Objects.requireNonNull(ingredientCommandToIngredient.convert(ingredientCommand))));
         }
 
-        if (CollectionUtils.isNotEmpty(recipeCommand.getCategoriesC()))
+        if (CollectionUtils.isNotEmpty(recipeCommand.getCategories()))
         {
-            recipeCommand.getCategoriesC().forEach(categoryCommand ->
+            recipeCommand.getCategories().forEach(categoryCommand ->
                     recipe.addCategory(Objects.requireNonNull(categoryCommandToCategory.convert(categoryCommand))) );
         }
 

@@ -32,8 +32,8 @@
                         </div>
                         <div class="col-md-10">
                             <ul id="categoryList" style="list-style: none; display: grid; ">
-                                <li th:each="category : ${recipe.getCategories()}"
-                                    th:text="${#strings.capitalize(category.getDescription())}">Cat one
+                                <li th:each="category : ${recipe.categories}"
+                                    th:text="${#strings.capitalize(category.description)}">Cat one
                                 </li>
                             </ul>
                         </div>
@@ -44,14 +44,14 @@
                             <div>Prep Time:</div>
                         </div>
                         <div class="col-md-3">
-                            <div th:text="${(recipe.getPrepTime()) + ' Min'}">30 min</div>
+                            <div th:text="${(recipe.prepTime) + ' Min'}">30 min</div>
                         </div>
 
                         <div class="col-md-2">
                             <div>Difficulty</div>
                         </div>
                         <div class="col-md-5">
-                            <div th:text="${#strings.capitalize(recipe.getDifficulty().name().toLowerCase())}">Easy
+                            <div th:text="${recipe.difficulty}">Easy
                             </div>
                         </div>
                     </div>
@@ -61,14 +61,14 @@
                             <div>Cooktime:</div>
                         </div>
                         <div class="col-md-3">
-                            <div th:text="${recipe.getCookTime()}">30 min</div>
+                            <div th:text="${recipe.cookTime}">30 min</div>
                         </div>
 
                         <div class="col-md-2">
                             <div>Servings:</div>
                         </div>
                         <div class="col-md-5">
-                            <div th:text="${recipe.getServings()}">Easy</div>
+                            <div th:text="${recipe.servings}">Easy</div>
                         </div>
                     </div>
 
@@ -77,14 +77,14 @@
                             <div>Source:</div>
                         </div>
                         <div class="col-md-3">
-                            <div th:text="${recipe.getSource()}">30 min</div>
+                            <div th:text="${recipe.source}">30 min</div>
                         </div>
 
                         <div class="col-md-2">
                             <div>URL:</div>
                         </div>
                         <div class="col-md-5">
-                            <a th:href="${recipe.getUrl()}" th:text="${recipe.getUrl()}">Easy</a>
+                            <a th:href="${recipe.url}" th:text="${recipe.url}">Easy</a>
                         </div>
                     </div>
                 </div>
@@ -98,10 +98,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ul style="list-style: none;">
-                                <li th:each="ingredient : ${recipe.getIngredients()}"
-                                    th:text="${ingredient.getAmount()}
-                                    + '  ' + ${#strings.capitalize(ingredient.getUom().getDescription())}
-                                    + ' - ' + ${#strings.capitalize(ingredient.getDescription())}">1 Cup of milk
+                                <li th:each="ingredient : ${recipe.ingredients}"
+                                    th:text="${ingredient.amount}
+                                    + '  ' + ${#strings.capitalize(ingredient.uom.description)}
+                                    + ' - ' + ${#strings.capitalize(ingredient.description)}">1 Cup of milk
                                 </li>
                             </ul>
                         </div>
@@ -116,7 +116,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p th:text="${recipe.getDirections()}">
+                            <p th:text="${recipe.directions}">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere lectus quis
                                 tempor tincidunt. Aenean placerat gravida odio ac accumsan. Quisque nulla diam,
                                 condimentum id laoreet nec, commodo pharetra lectus. In mattis nulla urna, sed pulvinar
@@ -140,7 +140,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p th:text="${recipe.getNotes().getRecipeNotes()}">
+                            <p th:text="${recipe.notes.recipeNotes}">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere lectus quis
                                 tempor tincidunt. Aenean placerat gravida odio ac accumsan. Quisque nulla diam,
                                 condimentum id laoreet nec, commodo pharetra lectus. In mattis nulla urna, sed pulvinar

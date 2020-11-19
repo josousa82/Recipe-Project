@@ -44,7 +44,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
                 .url(recipe.getUrl())
                 .directions(recipe.getDirections())
                 .difficulty(recipe.getDifficulty())
-                .notesC(notesToNotesCommand.convert(recipe.getNotes()))
+                .notes(notesToNotesCommand.convert(recipe.getNotes()))
                 .build();
 
         if(CollectionUtils.isNotEmpty(recipe.getIngredients())){

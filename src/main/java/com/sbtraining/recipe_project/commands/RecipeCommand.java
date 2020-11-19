@@ -32,15 +32,15 @@ public class RecipeCommand {
     private String directions;
 
     @Builder.Default
-    private Set<IngredientCommand> ingredientsC = new HashSet<>();
+    private Set<IngredientCommand> ingredients = new HashSet<>();
 
 
     private Byte[] image;
     private Difficulty difficulty;
-    private NotesCommand notesC;
+    private NotesCommand notes;
 
     @Builder.Default
-    private Set<CategoryCommand> categoriesC = new HashSet<>();
+    private Set<CategoryCommand> categories = new HashSet<>();
 
     public RecipeCommand addIngredientCommand(IngredientCommand ingredientCommand){
         if(Objects.isNull(ingredientCommand)) {
@@ -48,7 +48,7 @@ public class RecipeCommand {
             throw new IllegalArgumentException("IngredientCommand cannot be null");
         } else {
             ingredientCommand.setRecipeId(this.id);
-            this.ingredientsC.add(ingredientCommand);
+            this.ingredients.add(ingredientCommand);
             return this;
         }
     }
@@ -58,7 +58,7 @@ public class RecipeCommand {
             log.error("CategoryCommand cannot be null");
             throw new IllegalArgumentException("CategoryCommand cannot be null");
         } else {
-            this.categoriesC.add(categoryCommand);
+            this.categories.add(categoryCommand);
             return this;
         }
     }

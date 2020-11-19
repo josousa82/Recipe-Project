@@ -33,7 +33,7 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
                 .id(ingredientCommand.getId())
                 .id(ingredientCommand.getId())
                 .description(ingredientCommand.getDescription())
-                .uom(uomConverter.convert(ingredientCommand.getUomc()))
+                .uom(uomConverter.convert(ingredientCommand.getUom()))
                 .amount(ingredientCommand.getAmount())
                 .build();
 
