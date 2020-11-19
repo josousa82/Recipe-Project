@@ -45,14 +45,14 @@ class RecipeCommandToRecipeTest {
                 .url(RECIPE_URL)
                 .directions(RECIPE_DIRECTIONS)
                 .difficulty(RECIPE_DIFFICULTY)
-                .notesC(notesCommand)
+                .notes(notesCommand)
                 .build();
 
 
         recipeCommandToConvert.addIngredientCommand(IngredientCommand.builder().id(INGREDIENT_ID_1)
-                .uomc(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_1).build()).build());
+                .uom(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_1).build()).build());
         recipeCommandToConvert.addIngredientCommand(IngredientCommand.builder().id(INGREDIENT_ID_1)
-                .uomc(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_2).build()).build());
+                .uom(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_2).build()).build());
 
         recipeCommandToConvert.addCategoryCommand(CategoryCommand.builder().id(CAT_ID_1).build());
         recipeCommandToConvert.addCategoryCommand(CategoryCommand.builder().id(CAT_ID_2).build());
@@ -71,7 +71,7 @@ class RecipeCommandToRecipeTest {
     }
 
     @Test
-    void testEmptyObject() throws Exception {
+    void testEmptyObject() {
         assertNotNull(converter.convert(new RecipeCommand()));
     }
 

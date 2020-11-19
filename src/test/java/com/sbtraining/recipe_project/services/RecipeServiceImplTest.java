@@ -56,7 +56,7 @@ class RecipeServiceImplTest {
     RecipeRepository recipeRepository;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
 
         var notesCommand = NotesCommand.builder()
                 .id(NOTES_ID_1)
@@ -72,14 +72,14 @@ class RecipeServiceImplTest {
                 .url(RECIPE_URL)
                 .directions(RECIPE_DIRECTIONS)
                 .difficulty(RECIPE_DIFFICULTY)
-                .notesC(notesCommand)
+                .notes(notesCommand)
                 .build();
 
 
         recipeCommand.addIngredientCommand(IngredientCommand.builder().id(INGREDIENT_ID_1)
-                .uomc(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_1).build()).build());
+                .uom(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_1).build()).build());
         recipeCommand.addIngredientCommand(IngredientCommand.builder().id(INGREDIENT_ID_1)
-                .uomc(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_2).build()).build());
+                .uom(UnitOfMeasureCommand.builder().id(INGREDIENT_ID_2).build()).build());
 
         recipeCommand.addCategoryCommand(CategoryCommand.builder().id(CAT_ID_1).build());
         recipeCommand.addCategoryCommand(CategoryCommand.builder().id(CAT_ID_2).build());
@@ -116,7 +116,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    void getAllRecipes() throws Exception {
+    void getAllRecipes() {
         Recipe recipe1 = Recipe.builder().id(1L).build();
         Set<Recipe> recipesData = new HashSet<>();
         recipesData.add(recipe1);
@@ -165,9 +165,9 @@ class RecipeServiceImplTest {
         assertEquals(RECIPE_URL, savedRecipeCommand.getUrl());
         assertEquals(RECIPE_DIRECTIONS, savedRecipeCommand.getDirections());
         assertEquals(RECIPE_DIFFICULTY, savedRecipeCommand.getDifficulty());
-        assertEquals(NOTES_ID_1, savedRecipeCommand.getNotesC().getId());
-        assertEquals(2, savedRecipeCommand.getCategoriesC().size());
-        assertEquals(2, savedRecipeCommand.getIngredientsC().size());
+        assertEquals(NOTES_ID_1, savedRecipeCommand.getNotes().getId());
+        assertEquals(2, savedRecipeCommand.getCategories().size());
+        assertEquals(2, savedRecipeCommand.getIngredients().size());
 
     }
 }

@@ -71,7 +71,7 @@ class RecipeToRecipeCommandTest {
     }
 
     @Test
-    void testEmptyObject() throws Exception {
+    void testEmptyObject() {
         assertNotNull(converter.convert(new Recipe()));
     }
 
@@ -94,9 +94,9 @@ class RecipeToRecipeCommandTest {
         assertEquals(RECIPE_URL, command.getUrl());
         assertEquals(RECIPE_DIRECTIONS, command.getDirections());
         assertEquals(RECIPE_DIFFICULTY, command.getDifficulty());
-        assertEquals(NOTES_ID_1, command.getNotesC().getId());
-        assertEquals(2, command.getCategoriesC().size());
-        assertEquals(2, command.getIngredientsC().size());
+        assertEquals(NOTES_ID_1, command.getNotes().getId());
+        assertEquals(2, command.getCategories().size());
+        assertEquals(2, command.getIngredients().size());
 
     }
 }

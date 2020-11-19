@@ -32,7 +32,7 @@ class IngredientCommandToIngredientTest {
                 .id(ID_VALUE)
                 .description(DESCRIPTION)
                 .amount(AMOUNT)
-                .uomc(uomCommand)
+                .uom(uomCommand)
                 .recipeId(RECIPE.getId())
                 .build();
 
@@ -49,10 +49,11 @@ class IngredientCommandToIngredientTest {
 
     @Test
     void testConvertNullUomc() {
-        ingredientCommandToConvert.setUomc(null);
+        ingredientCommandToConvert.setUom(null);
 
         var ingredientConverted = converter.convert(ingredientCommandToConvert);
 
+        assert ingredientConverted != null;
         assertNull(ingredientConverted.getUom());
         assertNotNull(ingredientConverted);
         assertEquals(ID_VALUE, ingredientConverted.getId());

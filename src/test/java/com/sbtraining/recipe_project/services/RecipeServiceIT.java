@@ -45,6 +45,7 @@ class RecipeServiceIT {
 
         // when
 
+        assert testRecipeCommand != null;
         testRecipeCommand.setDescription(NEW_DESCRIPTION);
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(testRecipeCommand);
 
@@ -52,7 +53,7 @@ class RecipeServiceIT {
 
         assertEquals(NEW_DESCRIPTION, savedRecipeCommand.getDescription());
         assertEquals(testRecipe.getId(), savedRecipeCommand.getId());
-        assertEquals(testRecipe.getCategories().size(), savedRecipeCommand.getCategoriesC().size());
-        assertEquals(testRecipe.getIngredients().size(), savedRecipeCommand.getIngredientsC().size());
+        assertEquals(testRecipe.getCategories().size(), savedRecipeCommand.getCategories().size());
+        assertEquals(testRecipe.getIngredients().size(), savedRecipeCommand.getIngredients().size());
     }
 }

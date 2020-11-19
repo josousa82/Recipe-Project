@@ -50,12 +50,12 @@ class IngredientToIngredientCommandTest {
     }
 
     @Test
-    void testEmptyObject() throws Exception {
+    void testEmptyObject() {
         assertNotNull(converter.convert(new Ingredient()));
     }
 
     @Test
-    void testConvertNullUom() throws Exception{
+    void testConvertNullUom() {
 
         ingredientToConvert.setUom(null);
 
@@ -63,7 +63,8 @@ class IngredientToIngredientCommandTest {
         var ingredientCommand = converter.convert(ingredientToConvert);
 
         // then
-        assertNull(ingredientCommand.getUomc());
+        assert ingredientCommand != null;
+        assertNull(ingredientCommand.getUom());
         assertNotNull(ingredientCommand);
         assertEquals(ID_VALUE, ingredientCommand.getId());
         assertEquals(AMOUNT, ingredientCommand.getAmount());
@@ -80,6 +81,6 @@ class IngredientToIngredientCommandTest {
         assertEquals(ID_VALUE, ingredientCommandConverted.getId());
         assertEquals(AMOUNT, ingredientCommandConverted.getAmount());
         assertEquals(DESCRIPTION, ingredientCommandConverted.getDescription());
-        assertEquals(UOM_ID, ingredientCommandConverted.getUomc().getId());
+        assertEquals(UOM_ID, ingredientCommandConverted.getUom().getId());
     }
 }
