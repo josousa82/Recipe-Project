@@ -1,0 +1,12 @@
+
+/*@direction: none;*/
+
+/*.resizable(@direction: both) {*/
+/*  // Options: horizontal, vertical, both*/
+
+/*}*/
+
+textarea.text{
+  resize: none !important;
+  /*overflow: hidden !important;*/
+}
