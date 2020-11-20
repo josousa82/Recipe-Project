@@ -51,6 +51,6 @@ class NotesToNotesCommandTest {
         // then
         assertNotNull(notesCommandConverted);
         assertEquals(ID_VALUE, notesCommandConverted.getId());
-        assertEquals(NOTES, notesCommandConverted.getRecipesNotes());
+        assertEquals(NOTES, notesCommandConverted.getRecipeNotes());
     }
 }

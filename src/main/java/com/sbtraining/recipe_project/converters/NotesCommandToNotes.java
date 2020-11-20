@@ -24,7 +24,7 @@ public class NotesCommandToNotes implements Converter<NotesCommand, Notes> {
 
         return Notes.builder()
                 .id(notesCommand.getId())
-                .recipeNotes(notesCommand.getRecipesNotes())
+                .recipeNotes(notesCommand.getRecipeNotes())
                 .build();
     }
 }

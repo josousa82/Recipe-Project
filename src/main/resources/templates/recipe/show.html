@@ -18,7 +18,7 @@
 <div class="container-fluid" style="margin-top: 20px">
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
                 <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
                 <!--/*@thymesVar id="category" type="com.sbtraining.recipe_project.model.Category"*/-->
@@ -28,7 +28,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <div>Categories:</div>
+                            <div class="">Categories:</div>
                         </div>
                         <div class="col-md-10">
                             <ul id="categoryList" style="list-style: none; display: grid; ">
@@ -84,7 +84,7 @@
                             <div>URL:</div>
                         </div>
                         <div class="col-md-5">
-                            <a th:href="${recipe.url}" th:text="${recipe.url}">Easy</a>
+                            <a th:href="${recipe.url}" th:text="${recipe.url}">http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/</a>
                         </div>
                     </div>
                 </div>

@@ -10,3 +10,7 @@ textarea.text{
   resize: none !important;
   /*overflow: hidden !important;*/
 }
+
+button.btn-primary {
+  width: 75px !important;
+}

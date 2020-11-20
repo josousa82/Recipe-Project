@@ -23,13 +23,13 @@
 
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             <form th:action="@{/recipe}" th:object="${recipe}">
                 <input th:field="*{id}" type="hidden">
                 <div class="panel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Edit Recipe Information</h1>
+                            <h4 class="panel-title">Edit Recipe Information</h4>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -90,16 +90,13 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <h1>Ingredients</h1>
-                                </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-default" href="#" role="button">Edit</button>
+                                    <h4>Ingredients</h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body form-group">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 ">
                                     <ul class="list-unstyled">
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:remove="all">1 Cup of milk</li>
@@ -111,18 +108,22 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="divider"></div>
+                            <div class="row-no-gutters col-md-12">
+                                <button id="edit_btn" class="btn btn-primary pull-right btn_custom_size" href="#" role="button">Edit</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="panel panel-primary">
+                    <div class="panel panel-primary form-group">
                         <div class="panel-heading">
                                 <div class="panel-title">
-                                    <h1>Directions</h1>
+                                    <h4>Directions</h4>
                                 </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                   <textarea class="form-control text" rows="3" th:field="*{directions}"></textarea>
+                                   <textarea class="form-control text" rows="8" th:field="*{directions}"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -130,20 +131,23 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <h1>Notes</h1>
+                                <h4>Notes</h4>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
                                     <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Notes"*/-->
-                                    <textarea class="form-control text" rows="3" th:field="*{notes.recipesNotes}"></textarea>
+                                    <textarea class="form-control text" rows="8" th:field="*{notes.recipeNotes}"></textarea>
                                 </div>
                             </div>
+                            <div class="row-no-gutters col-md-12 ">
+                                <button id="submit_btn" type="submit" class="btn btn-primary pull-right btn_custom_size ">Submit</button>
+                            </div>
                         </div>
+
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>

@@ -20,7 +20,7 @@ class NotesCommandToNotesTest {
     void setUp() {
         notesToConvert = NotesCommand.builder()
                 .id(ID_VALUE)
-                .recipesNotes(NOTES)
+                .recipeNotes(NOTES)
                 .build();
 
         converter = new NotesCommandToNotes();
