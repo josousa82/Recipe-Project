@@ -170,4 +170,12 @@ class RecipeServiceImplTest {
         assertEquals(2, savedRecipeCommand.getIngredients().size());
 
     }
+
+    @Test
+    void testDeleteRecipeById() {
+        recipeService.deleteRecipeById(2L);
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+    }
+
+
 }
