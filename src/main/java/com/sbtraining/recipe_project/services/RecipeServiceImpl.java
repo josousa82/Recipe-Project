@@ -5,6 +5,7 @@ import com.sbtraining.recipe_project.converters.RecipeCommandToRecipe;
 import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -40,10 +41,10 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public Recipe getRecipeById(Long id) {
+    public Recipe getRecipeById(Long id) throws NotFoundException {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
         if (recipeOptional.isEmpty()) {
-            throw new RuntimeException("Recipe not found");
+            throw new NotFoundException("Recipe not found");
         }
         return recipeOptional.get();
     }
@@ -61,7 +62,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     @Transactional
-    public RecipeCommand findCommandById(Long id) {
+    public RecipeCommand findCommandById(Long id) throws NotFoundException {
         return recipeToRecipeCommand.convert(getRecipeById(id));
     }
 

@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.services;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.model.Recipe;
+import javassist.NotFoundException;
 
 import java.util.Set;
 
@@ -13,11 +14,11 @@ public interface RecipeService {
 
      Set<Recipe> getAllRecipes();
 
-     Recipe getRecipeById(Long id);
+     Recipe getRecipeById(Long id) throws NotFoundException;
 
      RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
 
-     RecipeCommand findCommandById(Long id);
+     RecipeCommand findCommandById(Long id) throws NotFoundException;
 
      void deleteRecipeById(Long id);
 }

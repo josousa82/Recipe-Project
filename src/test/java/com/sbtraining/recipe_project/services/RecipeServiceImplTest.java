@@ -6,6 +6,7 @@ import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
 import com.sbtraining.recipe_project.model.*;
 import com.sbtraining.recipe_project.model.enums.Difficulty;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -129,7 +130,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    void getRecipeById() {
+    void getRecipeById() throws NotFoundException {
         Recipe recipe1 = Recipe.builder().id(1L).build();
         HashSet<Recipe> recipeHashSet = new HashSet<>();
         recipeHashSet.add(recipe1);
