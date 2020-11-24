@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.services.RecipeService;
+import javassist.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,26 +18,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RecipeViewsController {
 
     private final RecipeService recipeService;
+    private String recipe = "recipe";
 
     public RecipeViewsController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
     @GetMapping("/recipe/{id}/show/")
-    public String getRecipe(@PathVariable String id, Model model) {
-        model.addAttribute("recipe", recipeService.getRecipeById(Long.valueOf(id)));
+    public String getRecipe(@PathVariable String id, Model model) throws NotFoundException {
+        model.addAttribute(recipe, recipeService.getRecipeById(Long.valueOf(id)));
         return "recipe/show";
     }
 
     @GetMapping("recipe/new")
     public String newRecipe(Model model){
-        model.addAttribute("recipe", new RecipeCommand());
+        model.addAttribute(recipe, new RecipeCommand());
         return "recipe/recipeForm";
     }
 
     @GetMapping("recipe/{id}/update")
-    public String updateRecipe(@PathVariable String id, Model model){
-        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+    public String updateRecipe(@PathVariable String id, Model model) throws NotFoundException {
+        model.addAttribute(recipe, recipeService.findCommandById(Long.valueOf(id)));
         return "recipe/recipeForm";
     }
 

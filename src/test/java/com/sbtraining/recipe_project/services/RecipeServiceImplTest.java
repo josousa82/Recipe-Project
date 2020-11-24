@@ -18,8 +18,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -123,7 +122,7 @@ class RecipeServiceImplTest {
         recipesData.add(recipe1);
         when(recipeRepository.findAll()).thenReturn(recipesData);
         Set<Recipe> recipeSet = recipeService.getAllRecipes();
-        assertEquals(recipeSet.size(), 1);
+        assertEquals(1, recipeSet.size());
 
         // BDD test
         verify(recipeRepository, times(1)).findAll();
@@ -141,10 +140,19 @@ class RecipeServiceImplTest {
 
         Recipe recipeReturned = recipeService.getRecipeById(1L);
 
-        assertNotNull(recipeReturned, "Null recipe returned");
+        assertNotNull(recipeReturned);
 
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    void getRecipeByIdThrowsExceptionIfIsNotFound()  {
+
+        when(recipeRepository.findById(anyLong())).thenReturn(Optional.empty());
+        Throwable exception = assertThrows(NotFoundException.class, () -> recipeService.getRecipeById(anyLong()));
+        assertEquals("Recipe not found", exception.getMessage());
+
     }
 
     @Test

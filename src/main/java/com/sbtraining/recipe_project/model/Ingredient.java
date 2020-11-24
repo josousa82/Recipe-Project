@@ -1,9 +1,6 @@
 package com.sbtraining.recipe_project.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,8 +10,10 @@ import java.math.BigDecimal;
  * in package - com.sbtraining.recipe_project.model
  **/
 @Data
+@Builder
 @EqualsAndHashCode(exclude = {"recipe"})
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Ingredient {
 
@@ -30,16 +29,6 @@ public class Ingredient {
 
 
     @ManyToOne
-    private Recipe recipe;
-
-
-    @Builder
-    public Ingredient(Long id, String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
-        this.description = description;
-        this.amount = amount;
-        this.uom = uom;
-        this.recipe = recipe;
-        this.id = id;
-    }
-
+    @Builder.Default
+    private Recipe recipe = new Recipe();
 }

@@ -63,7 +63,6 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     @Transactional
     public IngredientCommand findIngredientCommandById(Long id) throws NotFoundException {
-
         return ingredientToIngredientCommand.convert(getIngredientById(id));
     }
 }
