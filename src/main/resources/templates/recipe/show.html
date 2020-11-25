@@ -5,23 +5,24 @@
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}" rel="stylesheet">
+          rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
 
     <!-- Optional theme -->
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
-          th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}" rel="stylesheet">
+          rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
 
 </head>
 
 
 <body>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+<!--/*@thymesVar id="category" type="com.sbtraining.recipe_project.model.Category"*/-->
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Ingredient"*/-->
 <div class="container-fluid" style="margin-top: 20px">
-
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-primary">
-                <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
-                <!--/*@thymesVar id="category" type="com.sbtraining.recipe_project.model.Category"*/-->
+
                 <div class="panel-heading">
                     <h1 class="panel-title" th:text="${recipe.description}">Recipe description here</h1>
                 </div>
@@ -104,6 +105,9 @@
                                     + ' - ' + ${#strings.capitalize(ingredient.description)}">1 Cup of milk
                                 </li>
                             </ul>
+                            <div class="row-no-gutters col-md-12">
+                                <a class="btn btn-primary pull-right btn_custom_size" href="#" id="view_btn" role="button" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" >View</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,7 +163,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
