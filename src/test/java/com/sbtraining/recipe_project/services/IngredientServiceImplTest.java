@@ -7,8 +7,10 @@ import com.sbtraining.recipe_project.converters.IngredientToIngredientCommand;
 import com.sbtraining.recipe_project.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.sbtraining.recipe_project.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.sbtraining.recipe_project.model.Ingredient;
+import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.model.UnitOfMeasure;
 import com.sbtraining.recipe_project.repositories.IngredientRepository;
+import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -37,15 +40,15 @@ class IngredientServiceImplTest {
     private final Long UOM_ID = 1L;
 
 
-
     @Mock
     private IngredientRepository ingredientRepository;
 
-    @Mock
     private IngredientCommandToIngredient ingredientCommandToIngredient;
 
-    @Mock
     private IngredientToIngredientCommand ingredientToIngredientCommand;
+
+    @Mock
+    private RecipeRepository recipeRepository;
 
 
     private UnitOfMeasureCommandToUnitOfMeasure uomConverter;
@@ -66,31 +69,14 @@ class IngredientServiceImplTest {
 
         MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientRepository,
-                ingredientCommandToIngredient, ingredientToIngredientCommand);
+        ingredientService = new IngredientServiceImpl(ingredientRepository, ingredientCommandToIngredient, ingredientToIngredientCommand, recipeRepository);
 
-        ingredient1 = Ingredient.builder()
-                .id(INGREDIENT_ID)
-                .description(INGREDIENT_DESCRIPTION)
-                .amount(INGREDIENT_AMOUNT)
-                .uom(UnitOfMeasure.builder()
-                        .id(UOM_ID)
-                        .description(UOM_DESCRIPTION)
-                        .build())
-                .build();
+        ingredient1 = Ingredient.builder().id(INGREDIENT_ID).description(INGREDIENT_DESCRIPTION).amount(INGREDIENT_AMOUNT).uom(UnitOfMeasure.builder().id(UOM_ID).description(UOM_DESCRIPTION).build()).build();
 
         ingredientSet = new HashSet<>();
         ingredientSet.add(ingredient1);
 
-        command = IngredientCommand.builder()
-                .id(INGREDIENT_ID)
-                .description(INGREDIENT_DESCRIPTION)
-                .amount(INGREDIENT_AMOUNT)
-                .uom(UnitOfMeasureCommand.builder()
-                        .id(UOM_ID)
-                        .description(UOM_DESCRIPTION)
-                        .build())
-                .build();
+        command = IngredientCommand.builder().id(INGREDIENT_ID).description(INGREDIENT_DESCRIPTION).amount(INGREDIENT_AMOUNT).uom(UnitOfMeasureCommand.builder().id(UOM_ID).description(UOM_DESCRIPTION).build()).build();
 
     }
 
@@ -124,8 +110,7 @@ class IngredientServiceImplTest {
 
         when(ingredientRepository.findById(any())).thenReturn(Optional.empty());
 
-        Throwable exception = assertThrows(NotFoundException.class,
-                () -> ingredientService.getIngredientById(anyLong()));
+        Throwable exception = assertThrows(NotFoundException.class, () -> ingredientService.getIngredientById(anyLong()));
 
         assertEquals("Ingredient not found", exception.getMessage());
     }
@@ -140,8 +125,6 @@ class IngredientServiceImplTest {
     void testSaveIngredientCommand() {
 
         when(ingredientRepository.save(ingredient1)).thenReturn(ingredient1);
-        when(ingredientCommandToIngredient.convert(command)).thenReturn(ingredient1);
-        when(ingredientToIngredientCommand.convert(ingredient1)).thenReturn(command);
 
         IngredientCommand savedIngredientCommand = ingredientService.saveIngredientCommand(command);
 
@@ -159,7 +142,7 @@ class IngredientServiceImplTest {
     void findIngredientCommandById() throws NotFoundException {
 
         when(ingredientRepository.findById(anyLong())).thenReturn(Optional.of(ingredient1));
-        when(ingredientToIngredientCommand.convert(ingredient1)).thenReturn(command);
+//        when(ingredientToIngredientCommand.convert(ingredient1)).thenReturn(command);
 
         IngredientCommand resultIngredientCommand = ingredientService.findIngredientCommandById(1L);
 
@@ -169,5 +152,30 @@ class IngredientServiceImplTest {
         assertEquals(INGREDIENT_AMOUNT, resultIngredientCommand.getAmount());
         assertEquals(UOM_ID, resultIngredientCommand.getUom().getId());
         assertEquals(UOM_DESCRIPTION, resultIngredientCommand.getUom().getDescription());
+    }
+
+
+    @Test
+    @Transactional
+    void findRecipeIdAndRecipeIdPath() throws Exception {
+        // given
+        Recipe recipe = Recipe.builder().id(3L).build();
+        Ingredient ingredient2 = Ingredient.builder().id(INGREDIENT_ID).description(INGREDIENT_DESCRIPTION).amount(INGREDIENT_AMOUNT).uom(UnitOfMeasure.builder().id(UOM_ID).description(UOM_DESCRIPTION).build()).build();
+
+        recipe.addIngredient(ingredient2);
+
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        // when
+
+        IngredientCommand ingredientCommand = ingredientService.findByRecipeIdAndIngredientId(3L, 1L);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        //then
+        assertEquals(1L, ingredientCommand.getId());
+        assertEquals(1L, ingredientCommand.getRecipeId());
+
+
+
     }
 }

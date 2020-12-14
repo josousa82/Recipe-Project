@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.services;
 
 import com.sbtraining.recipe_project.commands.IngredientCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.Ingredient;
 import javassist.NotFoundException;
 
@@ -19,4 +20,6 @@ public interface IngredientService {
 
     IngredientCommand saveIngredientCommand(IngredientCommand command);
     IngredientCommand findIngredientCommandById(Long id) throws NotFoundException;
+    IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) throws NotFoundException, RecipeNotFoundException;
+
 }

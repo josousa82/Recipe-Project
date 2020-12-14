@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.repositories;
 
 import com.sbtraining.recipe_project.model.Ingredient;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +22,8 @@ public interface IngredientRepository extends CrudRepository<Ingredient, Long> {
 
     @Override
     void deleteById(Long aLong);
+
+    @Query
+    Ingredient findByRecipeIdAndId(Long recipeId, Long ingredientId);
 
 }

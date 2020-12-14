@@ -32,7 +32,7 @@
                             <div class="">Categories:</div>
                         </div>
                         <div class="col-md-10">
-                            <ul id="categoryList" style="list-style: none; display: grid; ">
+                            <ul id="categoryList" style="list-style: none; display: grid;margin-left: -4rem;">
                                 <li th:each="category : ${recipe.categories}"
                                     th:text="${#strings.capitalize(category.description)}">Cat one
                                 </li>

@@ -44,15 +44,14 @@ public class Recipe {
     @Lob
     private String directions;
 
-    @Builder.Default
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @Builder.Default
     private Set<Ingredient> ingredients = new HashSet<>();
 
-    @Builder.Default
+
     @ManyToMany
-    @JoinTable(name = "recipe_category",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
     @Lob
@@ -64,14 +63,15 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    public Recipe addIngredient(Ingredient ingredient){
+    public Recipe addIngredient(Ingredient ingredient) {
+        if (this.ingredients == null) ingredients = new HashSet<>();
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;
     }
 
     public Recipe addCategory(Category category) {
-        if(Objects.isNull(category)) {
+        if (Objects.isNull(category)) {
             log.error("Category cannot be null");
             throw new IllegalArgumentException("Category cannot be null");
         } else {
@@ -81,7 +81,7 @@ public class Recipe {
     }
 
     public void setNotes(Notes notes) {
-        if(Objects.nonNull(notes)){
+        if (Objects.nonNull(notes)) {
             this.notes = notes;
             notes.setRecipe(this);
 //            notes.setId(this.id);

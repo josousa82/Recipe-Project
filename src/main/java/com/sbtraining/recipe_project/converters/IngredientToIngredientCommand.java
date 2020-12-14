@@ -2,11 +2,11 @@ package com.sbtraining.recipe_project.converters;
 
 import com.sbtraining.recipe_project.commands.IngredientCommand;
 import com.sbtraining.recipe_project.model.Ingredient;
-import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,9 +25,10 @@ public class IngredientToIngredientCommand implements Converter<Ingredient, Ingr
     @Override
     public IngredientCommand convert(Ingredient ingredient) {
 
+        // review this null check  and solve it in other way
         if(ingredient == null) return null;
 
-        var ingredientCommand =  IngredientCommand.builder()
+        IngredientCommand ingredientCommand =  IngredientCommand.builder()
                 .id(ingredient.getId())
                 .amount(ingredient.getAmount())
                 .description(ingredient.getDescription())
