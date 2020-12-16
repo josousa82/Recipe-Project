@@ -60,10 +60,6 @@ public class IngredientController {
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String ingredientId,
                                          Model model) throws NotFoundException, RecipeNotFoundException {
-//        log.info("Ingredient id {}", ingredientId);
-//        log.info("Recipe id {}", recipeId);
-//        log.info(" recipe form service id {}", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)).getRecipeId());
-//        log.info(" Ingredient form service id {}", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)).getId());
 
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
