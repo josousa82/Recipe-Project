@@ -160,9 +160,8 @@ class IngredientServiceImplTest {
     void findRecipeIdAndRecipeIdPath() throws Exception {
         // given
         Recipe recipe = Recipe.builder().id(3L).build();
-        Ingredient ingredient2 = Ingredient.builder().id(INGREDIENT_ID).description(INGREDIENT_DESCRIPTION).amount(INGREDIENT_AMOUNT).uom(UnitOfMeasure.builder().id(UOM_ID).description(UOM_DESCRIPTION).build()).build();
 
-        recipe.addIngredient(ingredient2);
+        recipe.addIngredient(ingredient1);
 
         Optional<Recipe> recipeOptional = Optional.of(recipe);
 
@@ -173,9 +172,6 @@ class IngredientServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         //then
         assertEquals(1L, ingredientCommand.getId());
-        assertEquals(1L, ingredientCommand.getRecipeId());
-
-
-
+        assertEquals(3L, ingredientCommand.getRecipeId());
     }
 }
