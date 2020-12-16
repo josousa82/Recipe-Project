@@ -23,8 +23,7 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService{
     @Override
     public List<UnitOfMeasure> listAllUoms() {
         List<UnitOfMeasure> uomList = new ArrayList<>();
-        Iterable<UnitOfMeasure> unitOfMeasures =  unitOfMeasureRepository.findAll();
-        unitOfMeasures.iterator().forEachRemaining(uomList::add);
+        unitOfMeasureRepository.findAll().iterator().forEachRemaining(uomList::add);
         return uomList;
     }
 }
