@@ -3,6 +3,7 @@ package com.sbtraining.recipe_project.controllers.views;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.services.IngredientService;
 import com.sbtraining.recipe_project.services.RecipeService;
+import com.sbtraining.recipe_project.services.UnitOfMeasureService;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,13 @@ public class IngredientController {
 
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
+    private final UnitOfMeasureService unitOfMeasureService;
 
 
-    public IngredientController(RecipeService recipeService1, IngredientService ingredientService) {
+    public IngredientController(RecipeService recipeService1, IngredientService ingredientService, UnitOfMeasureService unitOfMeasureService) {
         this.recipeService = recipeService1;
         this.ingredientService = ingredientService;
+        this.unitOfMeasureService = unitOfMeasureService;
     }
 
     @GetMapping("/recipe/{id}/ingredients")
@@ -51,6 +54,21 @@ public class IngredientController {
             e.printStackTrace();
         }
         return "recipe/ingredients/show";
+    }
+
+    @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}/update")
+    public String updateRecipeIngredient(@PathVariable String recipeId,
+                                         @PathVariable String ingredientId,
+                                         Model model) throws NotFoundException, RecipeNotFoundException {
+//        log.info("Ingredient id {}", ingredientId);
+//        log.info("Recipe id {}", recipeId);
+//        log.info(" recipe form service id {}", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)).getRecipeId());
+//        log.info(" Ingredient form service id {}", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)).getId());
+
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
+        model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredients/update";
     }
 
 }

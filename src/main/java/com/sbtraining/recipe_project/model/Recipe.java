@@ -64,7 +64,14 @@ public class Recipe {
     private Notes notes;
 
     public Recipe addIngredient(Ingredient ingredient) {
+
+        if (Objects.isNull(ingredient)) {
+            log.error("ingredient cannot be null");
+            throw new IllegalArgumentException("ingredient cannot be null");
+        }
+
         if (this.ingredients == null) ingredients = new HashSet<>();
+
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;

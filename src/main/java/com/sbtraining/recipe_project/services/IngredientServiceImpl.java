@@ -73,7 +73,6 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    @Transactional
     public IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) throws RecipeNotFoundException, NotFoundException {
 
        Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(
