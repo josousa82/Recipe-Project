@@ -1,11 +1,13 @@
 package com.sbtraining.recipe_project.services;
 
-import com.sbtraining.recipe_project.model.UnitOfMeasure;
+import com.sbtraining.recipe_project.commands.UnitOfMeasureCommand;
+import com.sbtraining.recipe_project.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by sousaJ on 16/12/2020
@@ -15,15 +17,19 @@ import java.util.List;
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService{
 
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final UnitOfMeasureToUnitOfMeasureCommand uomconverter;
 
-    public UnitOfMeasureServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository) {
+    public UnitOfMeasureServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureToUnitOfMeasureCommand uomconverter) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.uomconverter = uomconverter;
     }
 
     @Override
-    public List<UnitOfMeasure> listAllUoms() {
-        List<UnitOfMeasure> uomList = new ArrayList<>();
-        unitOfMeasureRepository.findAll().iterator().forEachRemaining(uomList::add);
-        return uomList;
+    public Set<UnitOfMeasureCommand> listAllUoms() {
+        return StreamSupport.stream(unitOfMeasureRepository.findAll()
+                .spliterator(), false)
+                .map(uomconverter::convert)
+                .collect(Collectors.toSet());
+
     }
 }

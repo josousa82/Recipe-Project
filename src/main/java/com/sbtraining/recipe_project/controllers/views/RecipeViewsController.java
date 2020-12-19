@@ -42,7 +42,6 @@ public class RecipeViewsController {
         return "recipe/recipeForm";
     }
 
-//    @PostMapping
     @PostMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
@@ -54,4 +53,6 @@ public class RecipeViewsController {
         recipeService.deleteRecipeById(Long.valueOf(id));
         return "redirect:/";
     }
+
+
 }

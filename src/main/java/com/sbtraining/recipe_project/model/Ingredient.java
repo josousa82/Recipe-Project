@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.model;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(exclude = {"recipe"})
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 @Entity
 public class Ingredient {
 

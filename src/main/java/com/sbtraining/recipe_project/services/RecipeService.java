@@ -16,6 +16,8 @@ public interface RecipeService {
 
      Recipe getRecipeById(Long id) throws NotFoundException;
 
+     Recipe saveRecipe(Recipe recipe);
+
      RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
 
      RecipeCommand findCommandById(Long id) throws NotFoundException;

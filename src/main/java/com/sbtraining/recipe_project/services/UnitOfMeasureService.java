@@ -1,13 +1,13 @@
 package com.sbtraining.recipe_project.services;
 
-import com.sbtraining.recipe_project.model.UnitOfMeasure;
+import com.sbtraining.recipe_project.commands.UnitOfMeasureCommand;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sousaJ on 16/12/2020
  * in package - com.sbtraining.recipe_project.services
  **/
 public interface UnitOfMeasureService {
-    List<UnitOfMeasure> listAllUoms();
+    Set<UnitOfMeasureCommand> listAllUoms();
 }
