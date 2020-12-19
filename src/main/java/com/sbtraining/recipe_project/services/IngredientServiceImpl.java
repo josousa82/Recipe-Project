@@ -73,6 +73,7 @@ public class IngredientServiceImpl implements IngredientService {
         Optional<Recipe> recipeOptional =  recipeRepository.findById(command.getRecipeId());
 
         if(recipeOptional.isEmpty()){
+            //TODO error if not found
             log.error("Recipe not found for id: {}", command.getRecipeId());
             return new IngredientCommand();
         }else {
@@ -89,6 +90,7 @@ public class IngredientServiceImpl implements IngredientService {
                         .setUom(uomRepository.findById(command.getUom().getId())
                                 .orElseThrow(() -> {
                                     log.error("Unit of measure not found to ingredient with id {}", ingredientFound.getId());
+                                    //TODO deal with error
                                     return new UnitOfMeasureNotFoundException("Unit Of Measure not found, when saving ingredient.");
                                 }))
                         .setAmount(command.getAmount());
@@ -103,6 +105,7 @@ public class IngredientServiceImpl implements IngredientService {
                                                                     .filter(ingredient -> ingredient.getId().equals(command.getId()))
                                                                     .findFirst()
                                                                     .orElseThrow(() -> {
+                                    //TODO deal with error
                 log.error("Ingredient with id {} not found in recipe with id {}.", command.getId(), recipe.getId());
                 return new IngredientNotFoundException("Ingredient not found. Ingredient saveOrUpdate method.");
             }));

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -21,9 +22,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+//@Slf4j
+//@ExtendWith(SpringExtension.class)
+//@SpringBootTest
 class IngredientControllerTest {
 
     public static final Long ID_VALUE = 1L;
@@ -117,16 +121,27 @@ class IngredientControllerTest {
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uomList"));
 
-        assertEquals(unitOfMeasureService.listAllUoms().size(), 2);
-        verify(unitOfMeasureService, times(2)).listAllUoms();
+        assertEquals(2, unitOfMeasureService.listAllUoms().size());
 
+        verify(unitOfMeasureService, times(2)).listAllUoms();
         verify(ingredientService, times(1)).findByRecipeIdAndIngredientId(anyLong(), anyLong());
 
 
     }
 
     @Test
-    void saveOrUpdate() {
+    void saveOrUpdate() throws Exception {
+        command.setId(3L)
+               .setRecipeId(2L);
+        when(ingredientService.saveIngredientCommand(any())).thenReturn(command);
+
+        mockMvc.perform(post("/recipe/2/ingredient")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("description", "some string")
+        )
+               .andExpect(status().is3xxRedirection())
+               .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
 
     }
 }

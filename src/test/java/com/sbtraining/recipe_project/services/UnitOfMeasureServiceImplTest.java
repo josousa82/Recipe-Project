@@ -48,7 +48,6 @@ class UnitOfMeasureServiceImplTest {
 
     @Test
     void listAllUoms() {
-
         Set<UnitOfMeasure> uomSet = Set.of(unitOfMeasure1, unitOfMeasure2);
         when(repository.findAll()).thenReturn(uomSet);
 
@@ -56,6 +55,5 @@ class UnitOfMeasureServiceImplTest {
 
         assertEquals(2, commands.size());
         verify(repository, times(1)).findAll();
-
     }
 }
