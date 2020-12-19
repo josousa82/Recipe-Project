@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by sousaJ on 19/09/2020
@@ -47,16 +46,16 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         List<Recipe> recipes = new ArrayList<>(2);
 
         //get UOMs
-        UnitOfMeasure eachUom = Optional.ofNullable(unitOfMeasureRepository.findByDescription("Each")).orElseThrow(IllegalArgumentException::new).get();
-        UnitOfMeasure tableSpoonUom = Optional.ofNullable(unitOfMeasureRepository.findByDescription("Tablespoon")).orElseThrow(IllegalArgumentException::new).get();
-        UnitOfMeasure teaspoon = Optional.ofNullable(unitOfMeasureRepository.findByDescription("Teaspoon")).orElseThrow(IllegalArgumentException::new).get();
-        UnitOfMeasure dashUom = Optional.ofNullable(unitOfMeasureRepository.findByDescription("Dash")).orElseThrow(IllegalArgumentException::new).get();
-        UnitOfMeasure pintUom = Optional.ofNullable(unitOfMeasureRepository.findByDescription("Pint")).orElseThrow(IllegalArgumentException::new).get();
-        UnitOfMeasure cupsUom = Optional.ofNullable(unitOfMeasureRepository.findByDescription("Cup")).orElseThrow(IllegalArgumentException::new).get();
+        UnitOfMeasure eachUom = unitOfMeasureRepository.findByDescription("Each").orElse(new UnitOfMeasure());
+        UnitOfMeasure tableSpoonUom = unitOfMeasureRepository.findByDescription("Tablespoon").orElse(new UnitOfMeasure());
+        UnitOfMeasure teaspoon = unitOfMeasureRepository.findByDescription("Teaspoon").orElse(new UnitOfMeasure());
+        UnitOfMeasure dashUom = unitOfMeasureRepository.findByDescription("Dash").orElse(new UnitOfMeasure());
+        UnitOfMeasure pintUom = unitOfMeasureRepository.findByDescription("Pint").orElse(new UnitOfMeasure());
+        UnitOfMeasure cupsUom = unitOfMeasureRepository.findByDescription("Cup").orElse(new UnitOfMeasure());
 
         //get Categories
-        Category americanCategory = Optional.ofNullable(categoryRepository.findByDescription("American")).orElseThrow(IllegalArgumentException::new).get();
-        Category mexicanCategory = Optional.ofNullable(categoryRepository.findByDescription("Mexican")).orElseThrow(IllegalArgumentException::new).get();
+        Category americanCategory = categoryRepository.findByDescription("American").orElse(new Category());
+        Category mexicanCategory = categoryRepository.findByDescription("Mexican").orElse(new Category());
 
         //Yummy Guacamole
         Recipe guacamoleRecipe = Recipe.builder()
@@ -116,12 +115,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 .addIngredient(Ingredient.builder().description("Dried Cumin").amount(new BigDecimal(1)).uom(teaspoon).build())
                 .addIngredient(Ingredient.builder().description("Sugar").amount( new BigDecimal(1)).uom( teaspoon).build())
                 .addIngredient(Ingredient.builder().description("Salt").amount(new BigDecimal(".5")).uom(teaspoon).build())
-                .addIngredient(Ingredient.builder().description("Clove of Garlic, Choppedr").amount(new BigDecimal("1")).uom(eachUom).build())
-                .addIngredient(Ingredient.builder().description("finely grated orange zestr").amount(new BigDecimal(1)).uom(tableSpoonUom).build())
+                .addIngredient(Ingredient.builder().description("Clove of Garlic, Chopped").amount(new BigDecimal("1")).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("finely grated orange zest").amount(new BigDecimal(1)).uom(tableSpoonUom).build())
                 .addIngredient(Ingredient.builder().description("fresh-squeezed orange juice").amount(new BigDecimal(3)).uom(tableSpoonUom).build())
                 .addIngredient(Ingredient.builder().description("Olive Oil").amount(new BigDecimal(2)).uom(tableSpoonUom).build())
                 .addIngredient(Ingredient.builder().description("boneless chicken thighs").amount(new BigDecimal(4)).uom(tableSpoonUom).build())
-                .addIngredient(Ingredient.builder().description("small corn tortillasr").amount(new BigDecimal(8)).uom(eachUom).build())
+                .addIngredient(Ingredient.builder().description("small corn tortillas").amount(new BigDecimal(8)).uom(eachUom).build())
                 .addIngredient(Ingredient.builder().description("packed baby arugula").amount(new BigDecimal(3)).uom(cupsUom).build())
                 .addIngredient(Ingredient.builder().description("medium ripe avocados, slice").amount(new BigDecimal(2)).uom(eachUom).build())
                 .addIngredient(Ingredient.builder().description("radishes, thinly sliced").amount(new BigDecimal(4)).uom(eachUom).build())

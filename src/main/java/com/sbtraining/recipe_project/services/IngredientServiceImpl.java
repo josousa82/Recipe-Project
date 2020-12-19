@@ -66,7 +66,9 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     @Transactional
     public IngredientCommand saveIngredientCommand(IngredientCommand command) throws UnitOfMeasureNotFoundException, IngredientNotFoundException {
+
         Optional<Recipe> recipeOptional =  recipeRepository.findById(command.getRecipeId());
+
         if(recipeOptional.isEmpty()){
             log.error("Recipe not found for id: {}", command.getRecipeId());
             return new IngredientCommand();
@@ -76,7 +78,9 @@ public class IngredientServiceImpl implements IngredientService {
                     .stream()
                     .filter(ingredient -> ingredient.getId().equals(command.getId()))
                     .findFirst();
+
             if (ingredientOptional.isPresent()){
+
                 Ingredient ingredientFound = ingredientOptional.get();
                 ingredientFound.setDescription(command.getDescription())
                         .setUom(uomRepository.findById(command.getUom().getId())
@@ -85,10 +89,13 @@ public class IngredientServiceImpl implements IngredientService {
                                     return new UnitOfMeasureNotFoundException("Unit Of Measure not found, when saving ingredient.");
                                 }))
                         .setAmount(command.getAmount());
+
             }else {
                 recipe.addIngredient(ingredientCommandToIngredient.convert(command));
             }
+
             Recipe savedRecipe = recipeRepository.save(recipe);
+
             return ingredientToIngredientCommand.convert(savedRecipe.getIngredients().stream()
                                                                     .filter(ingredient -> ingredient.getId().equals(command.getId()))
                                                                     .findFirst()
