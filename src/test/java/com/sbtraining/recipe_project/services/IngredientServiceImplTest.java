@@ -65,8 +65,6 @@ class IngredientServiceImplTest {
     @Mock
     private UnitOfMeasureRepository uomRepository;
 
-    @Mock
-    RecipeService recipeService;
 
     private UnitOfMeasureCommandToUnitOfMeasure unitOfMeasureCommandToUnitOfMeasure;
     private UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
@@ -91,7 +89,7 @@ class IngredientServiceImplTest {
 
 
         ingredientService = new IngredientServiceImpl(ingredientRepository, ingredientCommandToIngredient,
-                                                      ingredientToIngredientCommand, recipeRepository, recipeService, uomRepository);
+                                                      ingredientToIngredientCommand, recipeRepository, uomRepository);
 
         uom = UnitOfMeasure.builder()
                 .id(UOM_ID)

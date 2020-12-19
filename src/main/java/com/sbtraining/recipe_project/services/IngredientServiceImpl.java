@@ -32,15 +32,18 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final RecipeRepository recipeRepository;
-    private final RecipeService recipeService;
     private final UnitOfMeasureRepository uomRepository;
 
-    public IngredientServiceImpl(IngredientRepository ingredientRepository, IngredientCommandToIngredient ingredientCommandToIngredient, IngredientToIngredientCommand ingredientToIngredientCommand, RecipeRepository recipeRepository, RecipeService recipeService, UnitOfMeasureRepository uomRepository) {
+    public IngredientServiceImpl(IngredientRepository ingredientRepository,
+                                 IngredientCommandToIngredient ingredientCommandToIngredient,
+                                 IngredientToIngredientCommand ingredientToIngredientCommand,
+                                 RecipeRepository recipeRepository,
+                                 UnitOfMeasureRepository uomRepository) {
+
         this.ingredientRepository = ingredientRepository;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
         this.recipeRepository = recipeRepository;
-        this.recipeService = recipeService;
         this.uomRepository = uomRepository;
     }
 
