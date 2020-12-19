@@ -1,6 +1,9 @@
 package com.sbtraining.recipe_project.controllers.views;
 
+import com.sbtraining.recipe_project.commands.IngredientCommand;
+import com.sbtraining.recipe_project.exceptions.IngredientNotFoundException;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
+import com.sbtraining.recipe_project.exceptions.UnitOfMeasureNotFoundException;
 import com.sbtraining.recipe_project.services.IngredientService;
 import com.sbtraining.recipe_project.services.RecipeService;
 import com.sbtraining.recipe_project.services.UnitOfMeasureService;
@@ -8,8 +11,7 @@ import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by sousaJ on 21/11/2020
@@ -49,6 +51,8 @@ public class IngredientController {
         try {
             model.addAttribute("ingredient", ingredientService
                     .findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
+//            model.addAttribute("ingredient", recipeService
+//                    .findCommandById(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         } catch (NotFoundException | RecipeNotFoundException  e) {
             log.error("Ingredient with id {} for recipe with id {} not found {} ", recipeId, ingredientId, e.getMessage());
             e.printStackTrace();
@@ -65,6 +69,18 @@ public class IngredientController {
         model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
 
         return "recipe/ingredients/update";
+    }
+
+    @PostMapping
+    @RequestMapping("recipe/{recipeId}/ingredient")
+    public String saveOrUpdate(@ModelAttribute IngredientCommand command) throws UnitOfMeasureNotFoundException, IngredientNotFoundException {
+
+        IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
+
+        log.info("Saved recipe with id {}", savedCommand.getRecipeId());
+        log.info("Saved ingredient with id {}", savedCommand.getId());
+
+        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
     }
 
 }

@@ -1,7 +1,9 @@
 package com.sbtraining.recipe_project.services;
 
 import com.sbtraining.recipe_project.commands.IngredientCommand;
+import com.sbtraining.recipe_project.exceptions.IngredientNotFoundException;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
+import com.sbtraining.recipe_project.exceptions.UnitOfMeasureNotFoundException;
 import com.sbtraining.recipe_project.model.Ingredient;
 import javassist.NotFoundException;
 
@@ -18,7 +20,7 @@ public interface IngredientService {
     Ingredient getIngredientById(Long id) throws NotFoundException;
     void deleteIngredientById(Long id);
 
-    IngredientCommand saveIngredientCommand(IngredientCommand command);
+    IngredientCommand saveIngredientCommand(IngredientCommand command) throws UnitOfMeasureNotFoundException, IngredientNotFoundException;
     IngredientCommand findIngredientCommandById(Long id) throws NotFoundException;
     IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) throws NotFoundException, RecipeNotFoundException;
 

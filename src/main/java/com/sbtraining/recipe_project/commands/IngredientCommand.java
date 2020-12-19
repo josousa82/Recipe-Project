@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.commands;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @Getter
 @Builder
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientCommand {

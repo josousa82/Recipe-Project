@@ -4,7 +4,6 @@ import com.sbtraining.recipe_project.commands.IngredientCommand;
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.commands.UnitOfMeasureCommand;
 import com.sbtraining.recipe_project.model.Recipe;
-import com.sbtraining.recipe_project.model.UnitOfMeasure;
 import com.sbtraining.recipe_project.services.IngredientService;
 import com.sbtraining.recipe_project.services.RecipeService;
 import com.sbtraining.recipe_project.services.UnitOfMeasureService;
@@ -16,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -110,7 +109,7 @@ class IngredientControllerTest {
 
         when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(command);
         when(unitOfMeasureService.listAllUoms()).thenReturn(
-                List.of(UnitOfMeasure.builder().id(1L).build(), UnitOfMeasure.builder().id(2L).build()));
+                Set.of(UnitOfMeasureCommand.builder().id(1L).build(), UnitOfMeasureCommand.builder().id(2L).build()));
 
         mockMvc.perform(get("/recipe/1/ingredient/2/update"))
                 .andExpect(status().isOk())
@@ -123,6 +122,11 @@ class IngredientControllerTest {
 
         verify(ingredientService, times(1)).findByRecipeIdAndIngredientId(anyLong(), anyLong());
 
+
+    }
+
+    @Test
+    void saveOrUpdate() {
 
     }
 }

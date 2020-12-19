@@ -5,10 +5,12 @@ import com.sbtraining.recipe_project.converters.IngredientCommandToIngredient;
 import com.sbtraining.recipe_project.converters.IngredientToIngredientCommand;
 import com.sbtraining.recipe_project.exceptions.IngredientNotFoundException;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
+import com.sbtraining.recipe_project.exceptions.UnitOfMeasureNotFoundException;
 import com.sbtraining.recipe_project.model.Ingredient;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.IngredientRepository;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -31,12 +32,16 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final RecipeRepository recipeRepository;
+    private final RecipeService recipeService;
+    private final UnitOfMeasureRepository uomRepository;
 
-    public IngredientServiceImpl(IngredientRepository ingredientRepository, IngredientCommandToIngredient ingredientCommandToIngredient, IngredientToIngredientCommand ingredientToIngredientCommand, RecipeRepository recipeRepository) {
+    public IngredientServiceImpl(IngredientRepository ingredientRepository, IngredientCommandToIngredient ingredientCommandToIngredient, IngredientToIngredientCommand ingredientToIngredientCommand, RecipeRepository recipeRepository, RecipeService recipeService, UnitOfMeasureRepository uomRepository) {
         this.ingredientRepository = ingredientRepository;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
         this.recipeRepository = recipeRepository;
+        this.recipeService = recipeService;
+        this.uomRepository = uomRepository;
     }
 
     @Override
@@ -60,10 +65,38 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional
-    public IngredientCommand saveIngredientCommand(IngredientCommand command) {
-        Ingredient detachedIngredient = ingredientCommandToIngredient.convert(command);
-        Ingredient savedIngredient = ingredientRepository.save(Objects.requireNonNull(detachedIngredient));
-        return ingredientToIngredientCommand.convert(savedIngredient);
+    public IngredientCommand saveIngredientCommand(IngredientCommand command) throws UnitOfMeasureNotFoundException, IngredientNotFoundException {
+        Optional<Recipe> recipeOptional =  recipeRepository.findById(command.getRecipeId());
+        if(recipeOptional.isEmpty()){
+            log.error("Recipe not found for id: {}", command.getRecipeId());
+            return new IngredientCommand();
+        }else {
+            Recipe recipe = recipeOptional.get();
+            Optional<Ingredient> ingredientOptional = recipe.getIngredients()
+                    .stream()
+                    .filter(ingredient -> ingredient.getId().equals(command.getId()))
+                    .findFirst();
+            if (ingredientOptional.isPresent()){
+                Ingredient ingredientFound = ingredientOptional.get();
+                ingredientFound.setDescription(command.getDescription())
+                        .setUom(uomRepository.findById(command.getUom().getId())
+                                .orElseThrow(() -> {
+                                    log.error("Unit of measure not found to ingredient with id {}", ingredientFound.getId());
+                                    return new UnitOfMeasureNotFoundException("Unit Of Measure not found, when saving ingredient.");
+                                }))
+                        .setAmount(command.getAmount());
+            }else {
+                recipe.addIngredient(ingredientCommandToIngredient.convert(command));
+            }
+            Recipe savedRecipe = recipeRepository.save(recipe);
+            return ingredientToIngredientCommand.convert(savedRecipe.getIngredients().stream()
+                                                                    .filter(ingredient -> ingredient.getId().equals(command.getId()))
+                                                                    .findFirst()
+                                                                    .orElseThrow(() -> {
+                log.error("Ingredient with id {} not found in recipe with id {}.", command.getId(), recipe.getId());
+                return new IngredientNotFoundException("Ingredient not found. Ingredient saveOrUpdate method.");
+            }));
+        }
     }
 
     @Override
