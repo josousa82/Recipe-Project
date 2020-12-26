@@ -16,11 +16,13 @@ import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -133,12 +135,13 @@ class IngredientServiceImplTest {
     @Test
     void testGetAllIngredients() {
 
-        when(ingredientRepository.findAll()).thenReturn(ingredientSet);
-        List<Ingredient> result = ingredientService.getAllIngredients();
+        when(ingredientRepository.findAllByRecipeId(1L, Sort.by("id"))).thenReturn(ingredientSet);
+
+        List<IngredientCommand> result = ingredientService.findAllRecipeIngredientsByRecipeId(1L);
         assertEquals(1, result.size());
 
         // BDD test
-        verify(ingredientRepository, times(1)).findAll();
+        verify(ingredientRepository, times(1)).findAllByRecipeId(1L, Sort.by("id"));
     }
 
     @Test
@@ -187,6 +190,39 @@ class IngredientServiceImplTest {
         assertNotNull(savedIngredientCommand);
 
         assertEquals(3L, savedIngredientCommand.getId());
+        assertEquals("Avocado", savedIngredientCommand.getDescription());
+        assertEquals(new BigDecimal(20), savedIngredientCommand.getAmount());
+        assertEquals(UOM_ID, savedIngredientCommand.getUom().getId());
+        assertEquals(UOM_DESCRIPTION, savedIngredientCommand.getUom().getDescription());
+        assertEquals(RECIPE_ID, savedIngredientCommand.getRecipeId());
+
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, times(1)).save(any());
+
+    }
+
+    @Test
+    @DisplayName("Test create new ingredient")
+    void createNewIngredient() throws UnitOfMeasureNotFoundException, IngredientNotFoundException {
+
+        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
+
+        recipe.getIngredients().removeIf(ingredient -> ingredient.getDescription().equalsIgnoreCase("rice"));
+
+        when(recipeRepository.save(any())).thenReturn(recipe);
+
+        IngredientCommand command2 = IngredientCommand.builder()
+               .amount(new BigDecimal(20))
+               .description("Avocado")
+               .uom(unitOfMeasureToUnitOfMeasureCommand.convert(uom))
+               .recipeId(1L)
+               .build();
+
+        IngredientCommand savedIngredientCommand = ingredientService.saveIngredientCommand(command2);
+
+        assertNotNull(savedIngredientCommand);
+
+        assertEquals(null, savedIngredientCommand.getId());
         assertEquals("Avocado", savedIngredientCommand.getDescription());
         assertEquals(new BigDecimal(20), savedIngredientCommand.getAmount());
         assertEquals(UOM_ID, savedIngredientCommand.getUom().getId());

@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,9 +27,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//@Slf4j
-//@ExtendWith(SpringExtension.class)
-//@SpringBootTest
 class IngredientControllerTest {
 
     public static final Long ID_VALUE = 1L;
@@ -52,6 +51,7 @@ class IngredientControllerTest {
     IngredientCommand command;
 
     UnitOfMeasureCommand uomCommand;
+
 
     @BeforeEach
     void setUp() {
@@ -78,18 +78,30 @@ class IngredientControllerTest {
     void testListIngredients() throws Exception {
 
         //given
-        when(recipeService.findCommandById(anyLong())).thenReturn(RecipeCommand.builder()
-                .id(1L)
-                .build());
+        List<IngredientCommand> ingredientCommandList = List.of(
+                IngredientCommand.builder()
+                                 .id(1L)
+                                 .build(),
+
+                IngredientCommand.builder()
+                                 .id(2L)
+                                 .build()
+        );
+        when(ingredientService.findAllRecipeIngredientsByRecipeId(anyLong())).thenReturn(ingredientCommandList);
+
+
 
         //when
 
         mockMvc.perform(get("/recipe/1/ingredients"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredients/list"))
-                .andExpect(model().attributeExists("recipe"));
+                .andExpect(model().attributeExists("recipeIngredients"))
+                .andExpect(model().attributeExists("recipeId"))
+                .andExpect(model().size(2));
+
         //then
-        verify(recipeService, times(1)).findCommandById(anyLong());
+        verify(ingredientService, times(1)).findAllRecipeIngredientsByRecipeId(anyLong());
     }
 
 
@@ -117,7 +129,7 @@ class IngredientControllerTest {
 
         mockMvc.perform(get("/recipe/1/ingredient/2/update"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("recipe/ingredients/update"))
+                .andExpect(view().name("recipe/ingredients/ingredientForm"))
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uomList"));
 
@@ -143,5 +155,22 @@ class IngredientControllerTest {
                .andExpect(status().is3xxRedirection())
                .andExpect(view().name("redirect:/recipe/2/ingredient/3/show"));
 
+    }
+
+    @Test
+    void createNewIngredient() throws Exception {
+        RecipeCommand recipeCommand = RecipeCommand.builder()
+                .id(1L)
+                .build();
+
+        when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
+        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+
+        mockMvc.perform(get("/recipe/1/ingredient/new"))
+               .andExpect(status().isOk())
+               .andExpect(view().name("recipe/ingredients/ingredientForm"))
+               .andExpect(model().attributeExists("ingredient"))
+               .andExpect(model().attributeExists("uomList"));
+        verify(recipeService, times(1)).findCommandById(anyLong());
     }
 }

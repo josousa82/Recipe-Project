@@ -1,6 +1,8 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.IngredientCommand;
+import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.commands.UnitOfMeasureCommand;
 import com.sbtraining.recipe_project.exceptions.IngredientNotFoundException;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.exceptions.UnitOfMeasureNotFoundException;
@@ -12,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by sousaJ on 21/11/2020
@@ -35,9 +39,12 @@ public class IngredientController {
     @GetMapping("/recipe/{id}/ingredients")
     public String listIngredients(@PathVariable String id, Model model){
         log.debug("Getting the ingredient list for recipe id : ${}", id);
+
         try {
-            model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
-        } catch (NotFoundException e) {
+            List<IngredientCommand> recipeIngredients = ingredientService.findAllRecipeIngredientsByRecipeId(Long.valueOf(id));
+            model.addAttribute("recipeIngredients", recipeIngredients);
+            model.addAttribute("recipeId", id);
+        } catch (Exception e) {
             log.error("Ingredients for requested recipe not found {} ", e.getMessage());
             e.printStackTrace();
         }
@@ -51,8 +58,7 @@ public class IngredientController {
         try {
             model.addAttribute("ingredient", ingredientService
                     .findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
-//            model.addAttribute("ingredient", recipeService
-//                    .findCommandById(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
+
         } catch (NotFoundException | RecipeNotFoundException  e) {
             log.error("Ingredient with id {} for recipe with id {} not found {} ", recipeId, ingredientId, e.getMessage());
             e.printStackTrace();
@@ -68,7 +74,7 @@ public class IngredientController {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
 
-        return "recipe/ingredients/update";
+        return "recipe/ingredients/ingredientForm";
     }
 
     @PostMapping
@@ -81,6 +87,21 @@ public class IngredientController {
         log.info("Saved ingredient with id {}", savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
+    public String createNewIngredient(@PathVariable String recipeId, Model model) throws NotFoundException {
+            //TODO raise exception if null
+            RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+            IngredientCommand ingredientCommand = IngredientCommand.builder()
+                    .recipeId(Long.valueOf(recipeId))
+                    .uom(new UnitOfMeasureCommand())
+                    .build();
+            model.addAttribute("ingredient", ingredientCommand);
+            model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        return "recipe/ingredients/ingredientForm";
     }
 
 }
