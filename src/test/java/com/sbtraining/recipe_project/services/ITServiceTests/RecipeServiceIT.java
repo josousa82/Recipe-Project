@@ -1,10 +1,11 @@
-package com.sbtraining.recipe_project.services;
+package com.sbtraining.recipe_project.services.ITServiceTests;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.converters.RecipeCommandToRecipe;
 import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import com.sbtraining.recipe_project.services.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

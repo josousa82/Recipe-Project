@@ -269,4 +269,12 @@ class IngredientServiceImplTest {
         assertEquals(1L, ingredientCommand.getId());
         assertEquals(3L, ingredientCommand.getRecipeId());
     }
+
+    @Test
+    @Transactional
+    void deleteIngredientById() throws Exception {
+        // given
+      ingredientService.deleteIngredientById(2L);
+      verify(ingredientRepository, times(1)).deleteById(anyLong());
+    }
 }

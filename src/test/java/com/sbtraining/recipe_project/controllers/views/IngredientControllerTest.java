@@ -89,10 +89,7 @@ class IngredientControllerTest {
         );
         when(ingredientService.findAllRecipeIngredientsByRecipeId(anyLong())).thenReturn(ingredientCommandList);
 
-
-
         //when
-
         mockMvc.perform(get("/recipe/1/ingredients"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredients/list"))
@@ -137,8 +134,6 @@ class IngredientControllerTest {
 
         verify(unitOfMeasureService, times(2)).listAllUoms();
         verify(ingredientService, times(1)).findByRecipeIdAndIngredientId(anyLong(), anyLong());
-
-
     }
 
     @Test
@@ -172,5 +167,21 @@ class IngredientControllerTest {
                .andExpect(model().attributeExists("ingredient"))
                .andExpect(model().attributeExists("uomList"));
         verify(recipeService, times(1)).findCommandById(anyLong());
+    }
+
+
+    @Test
+    void deleteIngredient() throws Exception {
+
+        //when
+        mockMvc.perform(get("/recipe/1/ingredients/2/delete"))
+               .andExpect(status().is3xxRedirection())
+               .andExpect(view().name("redirect:/recipe/ingredients/list"))
+               .andExpect(model().attributeExists("recipeIngredients"))
+               .andExpect(model().attributeExists("recipeId"))
+               .andExpect(model().size(2));
+
+        //then
+        verify(ingredientService, times(1)).deleteIngredientById(anyLong());
     }
 }
