@@ -11,6 +11,8 @@
     <!-- Optional theme -->
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
           rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
+
+    <link href="../../static/css/style.css" rel="stylesheet/css" th:href="@{/static/css/style.css}" type="text/css" />
 </head>
 
 
@@ -51,11 +53,14 @@
                             </div>
                         </div>
                         <div class="panel-footer text-right" style="background-color: white;">
+                            <a type="button" class="btn btn-primary " id="btn_new" th:href="@{'/recipe/' + ${ingredient.recipeId} + '/ingredients/' }">Back To Ingredients</a>
+
                             <button type="submit" class="btn btn-primary ">Submit</button>
                         </div>
                     </div>
                 </div>
             </form>
+
         </div>
 
     </div>

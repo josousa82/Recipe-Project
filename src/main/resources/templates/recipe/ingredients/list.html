@@ -10,15 +10,13 @@
     <!-- Optional theme -->
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
           rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
+
+    <link href="../../../static/css/style.css" rel="stylesheet/css" th:href="@{/static/css/style.css}" type="text/css" />
 </head>
 
 
 <body>
-<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Ingredient"*/-->
-<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
 <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.commands.IngredientCommand"*/-->
-<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.commands.RecipeCommand"*/-->
-<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.commands.UnitOfMeasureCommand"*/-->
 <div class="container-fluid" style="margin-top: 20px">
 
     <div class="row">
@@ -30,7 +28,8 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipe.ingredients)}">
+                    <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipeIngredients)}">
                         <table class="table table-hover">
                             <thead class="thead-inverse ">
 
@@ -63,19 +62,23 @@
                                 <td><a href="#">Delete</a></td>
 
                             </tr>
-                            <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Ingredient"*/-->
 
-                            <tr th:each="ingredient : ${recipe.ingredients}">
+                            <tr th:each="ingredient : ${recipeIngredients}">
 
                                 <td th:text="${ingredient.id}">334</td>
                                 <td th:text="${ingredient.amount} + ' ' + ${ingredient.uom.description} ">Ingredient quantity</td>
                                 <td th:text="${#strings.capitalize(ingredient.description)}">Tasty Goodness 3</td>
 
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/show/' }">View</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update/' }">Update</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete/' }">Delete</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipeId} + '/ingredient/' + ${ingredient.id} + '/show/' }">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipeId} + '/ingredient/' + ${ingredient.id} + '/update/' }">Update</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipeId} + '/ingredient/' + ${ingredient.id} + '/delete/' }">Delete</a></td>
                             </tr>
                         </table>
+
+                        <div class="row-no-gutters d-block text-right">
+                            <a type="button" class="btn btn-primary" id="btn_back" th:href="@{'/recipe/' + ${recipeId} + '/show/' }">Back To Recipe</a>
+                            <a type="button" class="btn btn-primary" id="btn_new" th:href="@{'/recipe/' + ${recipeId} + '/ingredient/new/' }">New Ingredient</a>
+                        </div>
                     </div>
                 </div>
             </div>

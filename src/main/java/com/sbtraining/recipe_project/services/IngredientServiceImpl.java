@@ -13,11 +13,13 @@ import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -51,6 +53,16 @@ public class IngredientServiceImpl implements IngredientService {
     public List<Ingredient> getAllIngredients() {
         var ingredientsList = new ArrayList<Ingredient>();
         ingredientRepository.findAll().iterator().forEachRemaining(ingredientsList::add);
+
+        return ingredientsList;
+    }
+
+    @Override
+    public List<IngredientCommand> findAllRecipeIngredientsByRecipeId(Long recipeId) {
+        var ingredientsList = new ArrayList<IngredientCommand>();
+        ingredientRepository.findAllByRecipeId(recipeId, Sort.by("id"))
+                            .iterator()
+                            .forEachRemaining(e -> ingredientsList.add(ingredientToIngredientCommand.convert(e)));
         return ingredientsList;
     }
 
@@ -65,6 +77,12 @@ public class IngredientServiceImpl implements IngredientService {
     public void deleteIngredientById(Long id) {
         ingredientRepository.deleteById(id);
     }
+
+    @Override
+    public List<Ingredient> findAllByRecipeId(Long recipeId) {
+        return findAllByRecipeId(recipeId);
+    }
+
 
     @Override
     @Transactional
@@ -84,7 +102,6 @@ public class IngredientServiceImpl implements IngredientService {
                     .findFirst();
 
             if (ingredientOptional.isPresent()){
-
                 Ingredient ingredientFound = ingredientOptional.get();
                 ingredientFound.setDescription(command.getDescription())
                         .setUom(uomRepository.findById(command.getUom().getId())
@@ -96,15 +113,36 @@ public class IngredientServiceImpl implements IngredientService {
                         .setAmount(command.getAmount());
 
             }else {
-                recipe.addIngredient(ingredientCommandToIngredient.convert(command));
+                // TODO Refactor method, extract save to one method and update to another
+                // add new ingredient
+                Ingredient ingredient = ingredientCommandToIngredient.convert(command);
+                assert ingredient != null;
+                ingredient.setRecipe(recipe);
+                recipe.addIngredient(ingredient);
             }
 
             Recipe savedRecipe = recipeRepository.save(recipe);
 
-            return ingredientToIngredientCommand.convert(savedRecipe.getIngredients().stream()
-                                                                    .filter(ingredient -> ingredient.getId().equals(command.getId()))
-                                                                    .findFirst()
-                                                                    .orElseThrow(() -> {
+            Optional<Ingredient> savedIngredientOptional = savedRecipe.getIngredients().stream()
+                    .filter(recipeIngredient -> {
+                        if(Objects.nonNull(recipeIngredient.getId()) && Objects.nonNull(command.getId())){
+                            return recipeIngredient.getId().equals(command.getId());
+                        }else {
+                            return false;
+                        }
+                    })
+                    .findFirst();
+
+            // TODO Refactor method, extract piece (checking if ingredient was saved on the recipe code smell, don't like it)
+            if(savedIngredientOptional.isEmpty()){
+                savedIngredientOptional = savedRecipe.getIngredients().stream()
+                        .filter(ingredient -> ingredient.getDescription().equalsIgnoreCase(command.getDescription()))
+                        .filter(ingredient -> ingredient.getAmount().equals(command.getAmount()))
+                        .filter(ingredient -> ingredient.getUom().getId().equals(command.getUom().getId()))
+                        .findFirst();
+            }
+
+            return ingredientToIngredientCommand.convert(savedIngredientOptional.orElseThrow(() -> {
                                     //TODO deal with error
                 log.error("Ingredient with id {} not found in recipe with id {}.", command.getId(), recipe.getId());
                 return new IngredientNotFoundException("Ingredient not found. Ingredient saveOrUpdate method.");

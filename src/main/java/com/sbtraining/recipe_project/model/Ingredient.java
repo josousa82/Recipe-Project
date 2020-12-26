@@ -33,4 +33,6 @@ public class Ingredient {
     @ManyToOne
     @Builder.Default
     private Recipe recipe = new Recipe();
+
+
 }
