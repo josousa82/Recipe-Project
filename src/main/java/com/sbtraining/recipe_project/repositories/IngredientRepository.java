@@ -1,10 +1,12 @@
 package com.sbtraining.recipe_project.repositories;
 
 import com.sbtraining.recipe_project.model.Ingredient;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,10 +14,10 @@ import java.util.Optional;
  * in package - com.sbtraining.recipe_project.repositories
  **/
 @Repository
-public interface IngredientRepository extends CrudRepository<Ingredient, Long> {
+public interface IngredientRepository extends PagingAndSortingRepository<Ingredient, Long> {
 
     @Override
-    Iterable<Ingredient> findAll();
+    List<Ingredient> findAll(Sort sort);
 
     @Override
     Optional<Ingredient> findById(Long aLong);
@@ -25,5 +27,7 @@ public interface IngredientRepository extends CrudRepository<Ingredient, Long> {
 
     @Query
     Ingredient findByRecipeIdAndId(Long recipeId, Long ingredientId);
+
+    Iterable<Ingredient> findAllByRecipeId(Long recipeId, Sort sort);
 
 }

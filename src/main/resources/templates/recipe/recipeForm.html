@@ -54,8 +54,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Prep Time:</label>
-                                    <input class="form-control" th:field="*{prepTime}" type="text">
+                                    <label for="prepTime">Prep Time:</label>
+                                    <input id="prepTime" class="form-control" th:field="*{prepTime}" type="text" >
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Cook Time:</label>
@@ -145,6 +145,7 @@
                                 <button class="btn btn-primary pull-right btn_custom_size " id="submit_btn" type="submit">Submit</button>
                             </div>
                         </div>
+                        <!-- /.panel-footer -->
 
                     </div>
 

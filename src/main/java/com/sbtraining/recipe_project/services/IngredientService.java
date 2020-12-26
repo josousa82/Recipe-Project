@@ -20,6 +20,10 @@ public interface IngredientService {
     Ingredient getIngredientById(Long id) throws NotFoundException;
     void deleteIngredientById(Long id);
 
+    List<Ingredient> findAllByRecipeId(Long recipeId);
+
+    List<IngredientCommand> findAllRecipeIngredientsByRecipeId(Long recipeId);
+
     IngredientCommand saveIngredientCommand(IngredientCommand command) throws UnitOfMeasureNotFoundException, IngredientNotFoundException;
     IngredientCommand findIngredientCommandById(Long id) throws NotFoundException;
     IngredientCommand findByRecipeIdAndIngredientId(Long recipeId, Long ingredientId) throws NotFoundException, RecipeNotFoundException;

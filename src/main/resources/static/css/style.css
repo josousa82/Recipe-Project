@@ -14,3 +14,6 @@ textarea.text{
 button.btn-primary {
   width: 75px !important;
 }
+.btn_custom_size {
+  margin-right: 1rem !important;
+}
