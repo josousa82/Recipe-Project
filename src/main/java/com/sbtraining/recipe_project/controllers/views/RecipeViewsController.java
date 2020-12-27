@@ -1,8 +1,10 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.services.RecipeService;
 import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Created by sousaJ on 02/11/2020
  * in package - com.sbtraining.recipe_project.controllers.views
  **/
+@Slf4j
 @Controller
 public class RecipeViewsController {
 
@@ -43,7 +46,7 @@ public class RecipeViewsController {
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command){
+    public String saveOrUpdate(@ModelAttribute RecipeCommand command) throws RecipeNotFoundException {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
         return ("redirect:/recipe/" + savedCommand.getId() + "/show/") ;
     }

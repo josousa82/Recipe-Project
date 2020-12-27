@@ -21,7 +21,7 @@ public interface IngredientService {
 
     void deleteIngredientById(Long id);
 
-    void deleteByRecipeIdAndId(Long recipeId, Long id);
+    void deleteByRecipeIdAndId(Long recipeId, Long id) throws RecipeNotFoundException, IngredientNotFoundException;
 
     List<Ingredient> findAllByRecipeId(Long recipeId);
 

@@ -2,6 +2,8 @@ package com.sbtraining.recipe_project.services.ITServiceTests;
 
 import com.sbtraining.recipe_project.converters.IngredientCommandToIngredient;
 import com.sbtraining.recipe_project.converters.IngredientToIngredientCommand;
+import com.sbtraining.recipe_project.exceptions.IngredientNotFoundException;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.Ingredient;
 import com.sbtraining.recipe_project.repositories.IngredientRepository;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
@@ -111,7 +113,7 @@ public class IngredientServiceIT {
 
     @Test
     @Transactional
-    void deleteByRecipeIdAndId()  {
+    void deleteByRecipeIdAndId() throws IngredientNotFoundException, RecipeNotFoundException {
         List<Ingredient> ingredients = ingredientRepository.findAll(Sort.by("id"));
 
         Ingredient ingredientToDelete = ingredients.iterator().next();
@@ -124,7 +126,6 @@ public class IngredientServiceIT {
         Integer resultListSize = ingredientsResult.size();
 
         assertEquals(initialListSize - 1, resultListSize);
-
     }
 
 

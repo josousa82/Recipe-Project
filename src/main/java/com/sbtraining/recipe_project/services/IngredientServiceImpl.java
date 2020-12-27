@@ -82,8 +82,16 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional
-    public void deleteByRecipeIdAndId(Long recipeId, Long id) {
-        ingredientRepository.deleteByRecipeIdAndId(recipeId, id);
+    public void deleteByRecipeIdAndId(Long recipeId, Long id) throws RecipeNotFoundException, IngredientNotFoundException {
+        if(Objects.nonNull(recipeId)) {
+            if (Objects.nonNull(id)) {
+                ingredientRepository.deleteByRecipeIdAndId(recipeId, id);
+            }else {
+                throw new IngredientNotFoundException("Ingredient with id " + id +" not found");
+            }
+        }else {
+            throw new RecipeNotFoundException("Recipe with id " + recipeId +" not found");
+        }
     }
 
     @Override

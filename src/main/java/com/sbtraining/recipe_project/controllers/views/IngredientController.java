@@ -106,7 +106,7 @@ public class IngredientController {
 
     @GetMapping("/recipe/{recipeId}/ingredient/{ingredientId}/delete")
     public String deleteRecipeIngredient(@PathVariable String recipeId,
-                                         @PathVariable String ingredientId){
+                                         @PathVariable String ingredientId) throws IngredientNotFoundException, RecipeNotFoundException {
         ingredientService.deleteByRecipeIdAndId(Long.valueOf(recipeId), Long.valueOf(ingredientId));
         log.info("Deleted ingredient with id {} from recipe with id {}", ingredientId, recipeId);
         return "redirect:/recipe/" + recipeId + "/ingredients";

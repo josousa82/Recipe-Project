@@ -3,6 +3,7 @@ package com.sbtraining.recipe_project.services;
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.converters.RecipeCommandToRecipe;
 import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import javassist.NotFoundException;
@@ -51,9 +52,11 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     @Transactional
-    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) throws RecipeNotFoundException {
 
         Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
+
+        if (detachedRecipe == null) throw new RecipeNotFoundException("");
 
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
         log.debug("Recipe save with id {}", savedRecipe.getId());

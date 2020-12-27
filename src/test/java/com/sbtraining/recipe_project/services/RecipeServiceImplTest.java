@@ -3,6 +3,7 @@ package com.sbtraining.recipe_project.services;
 import com.sbtraining.recipe_project.commands.*;
 import com.sbtraining.recipe_project.converters.RecipeCommandToRecipe;
 import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.*;
 import com.sbtraining.recipe_project.model.enums.Difficulty;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
@@ -116,7 +117,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    void getAllRecipes() {
+    void testGetAllRecipes() {
         Recipe recipe1 = Recipe.builder().id(1L).build();
         Set<Recipe> recipesData = new HashSet<>();
         recipesData.add(recipe1);
@@ -129,7 +130,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    void getRecipeById() throws NotFoundException {
+    void testGetRecipeById() throws NotFoundException {
         Recipe recipe1 = Recipe.builder().id(1L).build();
         HashSet<Recipe> recipeHashSet = new HashSet<>();
         recipeHashSet.add(recipe1);
@@ -156,7 +157,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    void saveRecipeCommandTest() {
+    void testSaveRecipeCommand() throws RecipeNotFoundException {
 
         when(recipeRepository.save(recipe)).thenReturn(recipe);
         when(recipeCommandToRecipe.convert(recipeCommand)).thenReturn(recipe);
@@ -186,5 +187,13 @@ class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 
+    @Test
+    void testSaveRecipe() {
+    }
+
+
+    @Test
+    void testFindCommandById() {
+    }
 
 }
