@@ -3,6 +3,7 @@ package com.sbtraining.recipe_project.services.ITServiceTests;
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.converters.RecipeCommandToRecipe;
 import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import com.sbtraining.recipe_project.services.RecipeService;
@@ -36,7 +37,7 @@ class RecipeServiceIT {
 
     @Transactional
     @Test
-    void testSaveOfDescription() {
+    void testSaveOfDescription() throws RecipeNotFoundException {
 
         // given
 

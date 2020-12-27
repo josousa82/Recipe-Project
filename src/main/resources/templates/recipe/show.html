@@ -10,7 +10,7 @@
     <!-- Optional theme -->
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
           rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
-
+    <link href="../../static/css/style.css" rel="stylesheet/css" th:href="@{/static/css/style.css}" type="text/css" />
 </head>
 
 
@@ -85,7 +85,7 @@
                             <div>URL:</div>
                         </div>
                         <div class="col-md-5">
-                            <a th:href="${recipe.url}" th:text="${recipe.url}">http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/</a>
+                            <a  th:href="${recipe.url}" th:text="${recipe.url}">http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/</a>
                         </div>
                     </div>
                 </div>

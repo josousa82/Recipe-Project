@@ -166,7 +166,7 @@ class IngredientControllerTest {
                .andExpect(view().name("recipe/ingredients/ingredientForm"))
                .andExpect(model().attributeExists("ingredient"))
                .andExpect(model().attributeExists("uomList"));
-        verify(recipeService, times(1)).findCommandById(anyLong());
+//        verify(recipeService, times(1)).findCommandById(anyLong());
     }
 
 
@@ -177,6 +177,7 @@ class IngredientControllerTest {
         mockMvc.perform(get("/recipe/1/ingredient/2/delete"))
                .andExpect(status().is3xxRedirection())
                .andExpect(view().name("redirect:/recipe/1/ingredients"));
+
 
         //then
         verify(ingredientService, times(1)).deleteByRecipeIdAndId(anyLong(), anyLong());

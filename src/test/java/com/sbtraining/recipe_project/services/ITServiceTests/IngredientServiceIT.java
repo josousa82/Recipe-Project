@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class IngredientServiceIT {
+class IngredientServiceIT {
 
 
     @Autowired

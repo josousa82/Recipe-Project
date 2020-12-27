@@ -1,7 +1,6 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.IngredientCommand;
-import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.commands.UnitOfMeasureCommand;
 import com.sbtraining.recipe_project.exceptions.IngredientNotFoundException;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
@@ -24,6 +23,8 @@ import java.util.List;
 @Slf4j
 @Controller
 public class IngredientController {
+
+    private String INGREDIENT_MODEL = "ingredient";
 
     private final RecipeService recipeService;
     private final IngredientService ingredientService;
@@ -56,7 +57,7 @@ public class IngredientController {
                                        @PathVariable String ingredientId,
                                        Model model){
         try {
-            model.addAttribute("ingredient", ingredientService
+            model.addAttribute(INGREDIENT_MODEL, ingredientService
                     .findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
 
         } catch (NotFoundException | RecipeNotFoundException  e) {
@@ -71,7 +72,7 @@ public class IngredientController {
                                          @PathVariable String ingredientId,
                                          Model model) throws NotFoundException, RecipeNotFoundException {
 
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
+        model.addAttribute(INGREDIENT_MODEL, ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
 
         return "recipe/ingredients/ingredientForm";
@@ -93,13 +94,13 @@ public class IngredientController {
     @GetMapping("/recipe/{recipeId}/ingredient/new")
     public String createNewIngredient(@PathVariable String recipeId, Model model) throws NotFoundException {
             //TODO raise exception if null
-            RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+//            RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
 
             IngredientCommand ingredientCommand = IngredientCommand.builder()
                     .recipeId(Long.valueOf(recipeId))
                     .uom(new UnitOfMeasureCommand())
                     .build();
-            model.addAttribute("ingredient", ingredientCommand);
+            model.addAttribute(INGREDIENT_MODEL, ingredientCommand);
             model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
         return "recipe/ingredients/ingredientForm";
     }

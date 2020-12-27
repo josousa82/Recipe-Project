@@ -24,7 +24,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <form th:action="@{/recipe}" th:object="${recipe}">
+            <form th:action="@{/recipe}" th:object="${recipe}" method="post">
                 <input th:field="*{id}" type="hidden">
                 <div class="panel-group">
                     <div class="panel panel-primary">
@@ -61,14 +61,24 @@
                                     <label>Cook Time:</label>
                                     <input class="form-control" th:field="*{cookTime}" type="text">
                                 </div>
+
+
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="difficultyValue : ${T(com.sbtraining.recipe_project.model.enums.Difficulty).values()}"
+                                        th:value="${difficultyValue.name()}"
+                                        th:text="${difficultyValue.name()}">val</option>
+                                    </select>
+
+                                    <select class="form-control" th:remove="all">
                                         <option>Easy</option>
                                         <option>Medium</option>
                                         <option>Hard</option>
                                     </select>
                                 </div>
+
+
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">

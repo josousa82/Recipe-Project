@@ -22,13 +22,13 @@ class UnitOfMeasureRepositoryTestIT {
 
     @Test               // with this annotation, the context will be restarted for the next test
     @DirtiesContext    // (will clean interactions of this test)
-    public void findByDescriptionITest() {
+    void findByDescriptionITest() {
         Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon");
         assertEquals("Teaspoon", unitOfMeasure.get().getDescription());
     }
 
     @Test
-    public void findByDescriptionCupITest() {
+    void findByDescriptionCupITest() {
         Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
         assertEquals("Cup", unitOfMeasure.get().getDescription());
     }
