@@ -25,6 +25,8 @@ public interface IngredientRepository extends PagingAndSortingRepository<Ingredi
     @Override
     void deleteById(Long aLong);
 
+    void deleteByRecipeIdAndId(Long recipeId, Long id);
+
     @Query
     Ingredient findByRecipeIdAndId(Long recipeId, Long ingredientId);
 

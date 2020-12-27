@@ -18,7 +18,10 @@ public interface IngredientService {
 
     List<Ingredient> getAllIngredients();
     Ingredient getIngredientById(Long id) throws NotFoundException;
+
     void deleteIngredientById(Long id);
+
+    void deleteByRecipeIdAndId(Long recipeId, Long id);
 
     List<Ingredient> findAllByRecipeId(Long recipeId);
 
