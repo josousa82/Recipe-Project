@@ -109,6 +109,22 @@ public class IngredientServiceIT {
 
     }
 
+    @Test
+    @Transactional
+    void deleteByRecipeIdAndId()  {
+        List<Ingredient> ingredients = ingredientRepository.findAll(Sort.by("id"));
+        Ingredient ingredientToDelete = ingredients.iterator().next();
+        Integer initialListSize = ingredients.size();
+
+        assert  ingredientToDelete != null;
+        ingredientService.deleteByRecipeIdAndId(ingredientToDelete.getRecipe().getId(), ingredientToDelete.getId());
+        List<Ingredient> ingredientsResult = ingredientRepository.findAll(Sort.by("id"));
+        Integer resultListSize = ingredientsResult.size();
+
+        assertEquals(initialListSize - 1, resultListSize);
+
+    }
+
 
 
 
