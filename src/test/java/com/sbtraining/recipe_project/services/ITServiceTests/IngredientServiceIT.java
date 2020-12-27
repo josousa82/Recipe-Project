@@ -113,7 +113,9 @@ public class IngredientServiceIT {
     @Transactional
     void deleteByRecipeIdAndId()  {
         List<Ingredient> ingredients = ingredientRepository.findAll(Sort.by("id"));
+
         Ingredient ingredientToDelete = ingredients.iterator().next();
+
         Integer initialListSize = ingredients.size();
 
         assert  ingredientToDelete != null;
