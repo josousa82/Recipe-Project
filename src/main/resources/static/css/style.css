@@ -27,3 +27,28 @@ button.btn-primary {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/*  LAYOUT  */
+
+.masthead {
+  /*background-image:url("/img/home-header.jpg");*/
+  background-image:url(' + @{/img/home-header.jpg} +');
+}
+
+
+/* HOME PAGE CARDS */
+
+#card_row {
+  padding: 0px;
+  padding-right: 0rem;
+  padding-left: 0;
+  text-align: center;
+}
+
+.crop-text-1 {
+  -webkit-line-clamp: 1;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}

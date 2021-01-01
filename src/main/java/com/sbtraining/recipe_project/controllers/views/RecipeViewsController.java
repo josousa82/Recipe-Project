@@ -27,6 +27,12 @@ public class RecipeViewsController {
         this.recipeService = recipeService;
     }
 
+    @GetMapping("/")
+    public String getHomePage(Model model){
+        model.addAttribute("recipes" ,recipeService.getAllRecipes());
+        return "recipe/index";
+    }
+
     @GetMapping("/recipe/{id}/show/")
     public String getRecipe(@PathVariable String id, Model model) throws NotFoundException {
         model.addAttribute(recipe, recipeService.getRecipeById(Long.valueOf(id)));

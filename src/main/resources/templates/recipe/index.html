@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::body}, 'home')}">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Recipes</title>
+</head>
+<body>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 col-xl-12 mx-auto">
+            <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>View</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:remove="all">
+                        <td>1</td>
+                        <td>Tasty Goodness 1</td>
+                        <td><a href="#">View</a></td>
+                        <td><a href="#">Update</a></td>
+                        <td><a href="#">Delete</a></td>
+                    </tr>
+                    <tr th:remove="all">
+                        <td>2</td>
+                        <td>Tasty Goodness 2</td>
+                        <td><a href="#">View</a></td>
+                        <td><a href="#">Update</a></td>
+                        <td><a href="#">Delete</a></td>
+                    </tr>
+
+                    <tr th:each="recipe : ${recipes}">
+                        <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+                        <td th:text="${recipe.id}">334</td>
+                        <td th:text="${recipe.description}">Tasty Goodness 3</td>
+                        <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/show/' }">View</a></td>
+                        <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/update/' }">Update</a></td>
+                        <td><a href="#" th:href="@{'recipe/' + ${recipe.id} + '/delete/' }">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="font-family: 'Open Sans', sans-serif;color: rgb(52,55,57);">
+    <div id="card_row" class="row text-center d-xl-flex flex-grow-1 flex-shrink-1 justify-content-center align-items-center" >
+        <div class="col-12 col-md-12 col-lg-9 col-xl-12 text-left align-self-center">
+            <section class="py-5">
+                <div class="container">
+                    <h1 class="display-4 d-table-row d-xl-flex justify-content-xl-center text-center mb-4">Recipes</h1>
+                    <div class="filtr-controls text-center lead text-uppercase mb-3"><span class="active d-inline-block mx-3 py-1 position-relative" data-filter="all">all </span><span class="d-inline-block mx-3 py-1 position-relative" data-filter="1">CATEGORY 1&nbsp;</span><span class="d-inline-block mx-3 py-1 position-relative"
+                                                                                                                                                                                                                                                                                        data-filter="2">category 2 </span><span class="d-inline-block mx-3 py-1 position-relative" data-filter="3">category 3 </span></div>
+                    <div class="row filtr-container" th:if="${not #lists.isEmpty(recipes)}">
+
+                        <th:block th:each="recipe : ${recipes}">
+                            <div class="col-md-6 col-lg-4 filtr-item"  data-category="2,3">
+                                <div class="card border-dark">
+                                    <div class="card-header bg-dark text-light">
+                                        <h5 class="m-0" th:text="${recipe.description}">Recipe Title</h5>
+                                    </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-01.jpg" th:src="@{/img/th-01.jpg}">
+                                    <div class="card-body">
+                                        <p  class="card-text text-truncate" th:text="${recipe.notes.recipeNotes}">Recipe short description&nbsp;</p>
+                                    </div>
+                                    <div class="d-flex card-footer">
+                                        <button class="btn btn-dark btn-sm card-btn" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
+                                </div>
+                            </div>
+                        </th:block>
+
+                        <div class="col-md-6 col-lg-4 filtr-item" data-category="1,3">
+                            <div class="card border-dark">
+                                <div class="card-header bg-dark text-light">
+                                    <h5 class="m-0">Lorem Ipsum</h5>
+                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-02.jpg" th:src="@{/img/th-02.jpg}">
+                                <div class="card-body">
+                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.&nbsp;Peiores principem Constantium cautela sed cetera et nimia graves cetera modi in titulo causarum infudisset plagas apud sed ut siquid. Invadere tabescebat
+                                        egressus ullo flagitii per parans per egressus edictus.<br></p>
+                                </div>
+                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 filtr-item" data-category="2,3">
+                            <div class="card border-dark">
+                                <div class="card-header bg-dark text-light">
+                                    <h5 class="m-0">Lorem Ipsum</h5>
+                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-03.jpg" th:src="@{/img/th-03.jpg}">
+                                <div class="card-body">
+                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Observantes habitu ignoti conspiratione poterant homines formido cognita malorum conpluribus peragranter divites fingerent poterant peragranter.<br></p>
+                                </div>
+                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 filtr-item" data-category="3">
+                            <div class="card border-dark">
+                                <div class="card-header bg-dark text-light">
+                                    <h5 class="m-0">Lorem Ipsum</h5>
+                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-06.jpg" th:src="@{/img/th-06.jpg}">
+                                <div class="card-body">
+                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.&nbsp;Populique et auctoritate cum sint partes regina canities et circumspectum certamina suffragiorum reverenda et set circumspectum temporis auctoritate certamina
+                                        verecundum quotquot domina per et sint auctoritate sunt omnes ubique redierit.<br></p>
+                                </div>
+                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
