@@ -27,3 +27,8 @@ button.btn-primary {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+div.img_btn_row {
+  margin-top: 1rem !important;
+  /*padding-top: 1rem;*/
+}

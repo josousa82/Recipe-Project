@@ -56,6 +56,4 @@ public class RecipeViewsController {
         recipeService.deleteRecipeById(Long.valueOf(id));
         return "redirect:/";
     }
-
-
 }

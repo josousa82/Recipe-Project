@@ -10,7 +10,7 @@
     <!-- Optional theme -->
     <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
           rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
-    <link href="../../static/css/style.css" rel="stylesheet/css" th:href="@{/static/css/style.css}" type="text/css" />
+    <link href="../../static/css/style.css" rel="stylesheet/css" th:href="@{/css/style.css}" type="text/css" />
 </head>
 
 
@@ -84,9 +84,15 @@
                         <div class="col-md-2">
                             <div>URL:</div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 pb-4">
                             <a  th:href="${recipe.url}" th:text="${recipe.url}">http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/</a>
                         </div>
+
+                    </div>
+
+                    <div class="row-no-gutters d-block text-right">
+                        <a type="button" class="btn btn-primary" id="btn_back" th:href="@{'/' }">Back To Recipes</a>
+                        <a type="button" class="btn btn-primary" id="btn_new" th:href="@{'/recipe/' + ${recipeId} + '/uploadImg/update/' }">Update Image</a>
                     </div>
                 </div>
             </div>
@@ -105,7 +111,7 @@
                                     + ' - ' + ${#strings.capitalize(ingredient.description)}">1 Cup of milk
                                 </li>
                             </ul>
-                            <div class="row-no-gutters col-md-12">
+                            <div class="row-no-gutters col-md-12 img_btn_row">
                                 <a class="btn btn-primary pull-right btn_custom_size" href="#" id="view_btn" role="button" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" >View</a>
                             </div>
                         </div>
