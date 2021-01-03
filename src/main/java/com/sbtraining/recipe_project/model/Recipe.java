@@ -54,8 +54,8 @@ public class Recipe {
     @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
-    @Lob
-    private Byte[] image;
+    @OneToOne
+    private ImageModel image;
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
