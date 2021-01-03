@@ -13,7 +13,6 @@
     <link href="../../static/css/style.css" rel="stylesheet/css" th:href="@{/css/style.css}" type="text/css" />
 </head>
 
-
 <body>
 <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
 <div class="container-fluid" style="margin-top: 20px">
@@ -21,44 +20,38 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel-group">
                 <div class="panel panel-primary">
-
                     <div class="panel-heading">
                         <h1 class="panel-title" >Upload a new Image</h1>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <form action="http:\\localhost" method="post" enctype="multipart/form-data"
-                                th:action="@{'/recipe' + ${recipe.getId()} + 'image'}">
-                                    <div class="form-group">
-                                        <label for="image_file">Select File</label>
-                                        <div class="input-group">
-                                            <input type="file" id="image_file" name="image_file" style="display: none">
-                                            <input type="text" class="form-control" id="image_file1" readonly>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button" id="browse_btn">Browse...</button>
-                                            </span>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 mx-auto">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div th:text="${message}" th:if="${message ne null}" class="alert alert-danger" role="alert">test</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                        <form enctype="multipart/form-data" method="post"
+                                               th:action="@{'/recipe/' + ${recipe.getId()} + '/image/uploadImage'}">
+                                        <div class="form-group">
+                                            <label class="control-label">Select File</label>
+                                            <input type="file" th:name="image"  class="form-control-file">
+                                        </div>
+                                            <div class="row-no-gutters d-block">
+                                                <a type="button" class="btn btn-primary" id="btn_back" th:href="@{'/recipe/' + ${recipe.getId()} + '/show/' }">Back To Recipe</a>
+                                                <button type="submit" class="btn btn-primary" id="btn_submit_img" >Submit</button>
+                                            </div>
+                                        </form>
+                                </div>
                             </div>
-
                         </div>
-
-                        <div class="row-no-gutters d-block text-right">
-                            <a type="button" class="btn btn-primary" id="btn_back" th:href="@{'/recipe/' + ${recipeId} + '/show/' }">Back To Recipe</a>
-                            <a type="button" class="btn btn-primary" id="btn_new">Submit</a>
-                        </div>
-
                     </div>
                 </div>
-
-        </div>
-        </div>
+            </div>
+         </div>
     </div>
 </div>
-
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"

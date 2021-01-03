@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +133,9 @@ public class IngredientServiceImpl implements IngredientService {
                 // TODO Refactor method, extract save to one method and update to another
                 // add new ingredient
                 Ingredient ingredient = ingredientCommandToIngredient.convert(command);
-                assert ingredient != null;
+
+                Assert.notNull(ingredient, "Ingredient cannot be null.");
+//                assert ingredient != null;
                 ingredient.setRecipe(recipe);
                 recipe.addIngredient(ingredient);
             }

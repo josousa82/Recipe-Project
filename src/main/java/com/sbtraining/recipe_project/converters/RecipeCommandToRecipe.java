@@ -41,6 +41,7 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
          final Recipe recipe = Recipe.builder()
                 .id(recipeCommand.getId())
+                .image(recipeCommand.getImage())
                 .description(recipeCommand.getDescription())
                 .prepTime(recipeCommand.getPrepTime())
                 .cookTime(recipeCommand.getCookTime())
