@@ -28,7 +28,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row col-md-12">
-                        <img src="../../static/img/pexels-photo-4191620.jpeg" th:src="@{/img/pexels-photo-4191620.jpeg}" width="auto" height="200">
+                        <img src="../../static/img/pexels-photo-4191620.jpeg" th:src="@{'/recipe/' + ${recipe.getId()} + '/get/image/'}" width="auto" height="200">
                     </div>
                     <div class="row">
                         <div class="col-md-2">
@@ -97,7 +97,7 @@
 
                     <div class="row-no-gutters d-block text-right">
                         <a type="button" class="btn btn-primary" id="btn_back" th:href="@{'/' }">Back To Recipes</a>
-                        <a type="button" class="btn btn-primary" id="btn_new" th:href="@{'/recipe/' + ${recipe.getId()} + '/image/uploadForm' }">Update Image</a>
+                        <a type="button" class="btn btn-primary" id="btn_new" th:href="@{'/recipe/' + ${recipe.getId()} + '/image/uploadImage' }">Update Image</a>
                     </div>
                 </div>
             </div>
