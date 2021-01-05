@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.services;
 
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
+import com.sbtraining.recipe_project.model.ImageModel;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class ImageServiceImpl implements ImageService {
             for (byte b: file.getBytes()){
                 byteObjects[i++] = b;
             }
-            recipe.setImage(byteObjects);
+            recipe.setImage(new ImageModel());
             recipeRepository.save(recipe);
         }catch (RecipeNotFoundException | IOException e){
             log.error("Recipe not found with id {}", recipeId);

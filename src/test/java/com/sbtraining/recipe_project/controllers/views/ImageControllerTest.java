@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.model.ImageModel;
 import com.sbtraining.recipe_project.services.ImageService;
 import com.sbtraining.recipe_project.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -79,7 +80,7 @@ class ImageControllerTest {
             bytesFromDB[i++] = prymByte;
         }
 
-        command.setImage(bytesFromDB);
+        command.setImage(new ImageModel());
 
         when(recipeService.findCommandById(anyLong())).thenReturn(command);
 

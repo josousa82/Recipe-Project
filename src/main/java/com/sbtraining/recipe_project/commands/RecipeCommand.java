@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.commands;
 
 
+import com.sbtraining.recipe_project.model.ImageModel;
 import com.sbtraining.recipe_project.model.enums.Difficulty;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class RecipeCommand {
     private Set<IngredientCommand> ingredients = new HashSet<>();
 
 
-    private Byte[] image;
+    private ImageModel image;
     private Difficulty difficulty;
     private NotesCommand notes;
 
