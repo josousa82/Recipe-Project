@@ -66,7 +66,9 @@ public class ImageController {
     public void getImageFromDB(@PathVariable String id, HttpServletResponse response){
         try {
             var recipeCommand = recipeService.findCommandById(Long.valueOf(id));
-            if(!Objects.isNull(recipeCommand.getImage())){
+            if(Objects.isNull(recipeCommand.getImage())){
+                recipeCommand.setImage(new Byte[0]);
+            }else{
                 byte[] byteArray = new byte[recipeCommand.getImage().length];
                 int i = 0;
 
@@ -77,8 +79,7 @@ public class ImageController {
                 response.setContentType("image/jpeg");
                 InputStream inputStream = new ByteArrayInputStream(byteArray);
                 IOUtils.copy(inputStream, response.getOutputStream());
-            }else{
-                recipeCommand.setImage(new Byte[0]);
+
             }
         } catch (NotFoundException | IOException e) {
             e.printStackTrace();
