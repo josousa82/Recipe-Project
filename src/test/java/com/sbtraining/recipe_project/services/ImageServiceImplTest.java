@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.services;
 
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import com.sbtraining.recipe_project.services.helper.ImageUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -22,6 +23,9 @@ class ImageServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    ImageUtils imageUtils;
+
     ImageService imageService;
 
     Recipe recipe;
@@ -32,7 +36,7 @@ class ImageServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        imageService = new ImageServiceImpl(recipeRepository);
+        imageService = new ImageServiceImpl(recipeRepository, imageUtils);
 
         recipe = Recipe.builder()
                 .id(RECIPE_ID)
@@ -46,6 +50,8 @@ class ImageServiceImplTest {
     void saveImageFile() throws IOException {
         Optional<Recipe> recipeOptional = Optional.of(recipe);
         when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+//        when(imageUtils.compressBytes(multipartFile.getBytes())).then(invocation -> {
+//        });
 
         ArgumentCaptor<Recipe> argumentCaptor = ArgumentCaptor.forClass(Recipe.class);
 
