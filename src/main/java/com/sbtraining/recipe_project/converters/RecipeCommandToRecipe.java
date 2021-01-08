@@ -39,7 +39,7 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
         if(recipeCommand == null) return null;
 
-         final Recipe recipe = Recipe.builder()
+          Recipe recipe = Recipe.builder()
                 .id(recipeCommand.getId())
                 .image(recipeCommand.getImage())
                 .description(recipeCommand.getDescription())
@@ -66,4 +66,6 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
         return recipe;
     }
+
+
 }

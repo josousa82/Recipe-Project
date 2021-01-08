@@ -66,17 +66,21 @@ public class ImageController {
     public void getImageFromDB(@PathVariable String id, HttpServletResponse response){
         try {
             var recipeCommand = recipeService.findCommandById(Long.valueOf(id));
-            byte[] byteArray = new byte[recipeCommand.getImage().length];
-            int i = 0;
+            if(Objects.isNull(recipeCommand.getImage())){
+                recipeCommand.setImage(new Byte[0]);
+            }else{
+                byte[] byteArray = new byte[recipeCommand.getImage().length];
+                int i = 0;
 
-            for (Byte b: recipeCommand.getImage()){
-                byteArray[i++] = b;
+                for (Byte b: recipeCommand.getImage()){
+                    byteArray[i++] = b;
+                }
+
+                response.setContentType("image/jpeg");
+                InputStream inputStream = new ByteArrayInputStream(byteArray);
+                IOUtils.copy(inputStream, response.getOutputStream());
+
             }
-
-            response.setContentType("image/jpeg");
-            InputStream inputStream = new ByteArrayInputStream(byteArray);
-            IOUtils.copy(inputStream, response.getOutputStream());
-
         } catch (NotFoundException | IOException e) {
             e.printStackTrace();
         }
