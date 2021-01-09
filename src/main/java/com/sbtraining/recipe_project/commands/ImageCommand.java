@@ -18,5 +18,5 @@ public class ImageCommand {
     private Long recipeId;
     private String name;
     private String type;
-    private Byte[] imageBytes;
+    private byte[] imageBytes;
 }

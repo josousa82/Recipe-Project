@@ -1,9 +1,11 @@
 package com.sbtraining.recipe_project.services;
 
+import com.sbtraining.recipe_project.commands.ImageCommand;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.ImageModel;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import com.sbtraining.recipe_project.services.helper.ImageUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +22,11 @@ import java.io.IOException;
 public class ImageServiceImpl implements ImageService {
 
     private final RecipeRepository recipeRepository;
+    private  final  ImageUtils imageUtils;
 
-    public ImageServiceImpl(RecipeRepository recipeRepository) {
+    public ImageServiceImpl(RecipeRepository recipeRepository, ImageUtils imageUtils) {
         this.recipeRepository = recipeRepository;
+        this.imageUtils = imageUtils;
     }
 
     @Override
@@ -47,6 +51,16 @@ public class ImageServiceImpl implements ImageService {
             log.error("Recipe not found with id {}", recipeId);
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public ImageCommand saveImageCommand(ImageCommand imageCommand) {
+        return null;
+    }
+
+    @Override
+    public ImageCommand findImageCommandById(Long id) {
+        return null;
     }
 
 }

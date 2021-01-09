@@ -66,6 +66,7 @@ public class ImageController {
     public void getImageFromDB(@PathVariable String id, HttpServletResponse response){
         try {
             var recipeCommand = recipeService.findCommandById(Long.valueOf(id));
+
             byte[] byteArray = new byte[recipeCommand.getImage().getImageBytes().length];
             int i = 0;
 

@@ -26,7 +26,7 @@ public class ImageModel {
 
     private String type;
 
-    private Byte[] imageBytes;
+    private byte[] imageBytes;
 
     @OneToOne
     private Recipe recipe;
