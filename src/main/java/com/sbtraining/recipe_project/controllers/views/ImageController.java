@@ -39,7 +39,7 @@ public class ImageController {
     }
 
     @GetMapping("/recipe/{recipeId}/image/uploadImage")
-    public String getUploadForm(@PathVariable String recipeId, Model model) throws NotFoundException, RecipeNotFoundException {
+    public String getUploadForm(@PathVariable String recipeId, Model model) throws NotFoundException {
         RecipeCommand command = recipeService.findCommandById(Long.parseLong(recipeId));
         model.addAttribute("recipe", command);
         String some = (String) model.asMap().get("message");
