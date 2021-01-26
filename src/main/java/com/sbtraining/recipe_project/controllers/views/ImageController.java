@@ -32,6 +32,7 @@ public class ImageController {
 
     private final RecipeService recipeService;
     private final ImageService imageService;
+    private final String MODEL_MSG = "message" ;
 
     public ImageController(RecipeService recipeService, ImageService imageService) {
         this.recipeService = recipeService;
@@ -42,23 +43,22 @@ public class ImageController {
     public String getUploadForm(@PathVariable String recipeId, Model model) throws NotFoundException {
         RecipeCommand command = recipeService.findCommandById(Long.parseLong(recipeId));
         model.addAttribute("recipe", command);
-        String some = (String) model.asMap().get("message");
-        model.addAttribute("message", some);
+        String some = (String) model.asMap().get(MODEL_MSG);
+        model.addAttribute(MODEL_MSG, some);
         log.info("Recipe to upload image wit id = {}", command.getId());
         return "recipe/imageUploadform";
     }
 
     @PostMapping("/recipe/{id}/image/uploadImage")
     public String saveImage(@RequestParam("image") MultipartFile image, RedirectAttributes attributes, @PathVariable String id) {
-//        Assert.notNull(image, "File cannot be null");
         if (Objects.isNull(image)) {
-            attributes.addFlashAttribute("message", "Please select a file to upload.");
+            attributes.addFlashAttribute(MODEL_MSG, "Please select a file to upload.");
             return "redirect:/recipe/" + id + "/image/uploadForm/";
         } else {
             imageService.saveImageFile(Long.valueOf(id), image);
             log.info("You successfully uploaded " + image.getName() + '!');
             log.info("Image length {}", image.getSize());
-            attributes.addFlashAttribute("message", "You successfully uploaded " + image.getOriginalFilename() + '!');
+            attributes.addFlashAttribute(MODEL_MSG, "You successfully uploaded " + image.getOriginalFilename() + '!');
             return "redirect:/recipe/" + id + "/show/";
         }
     }
