@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.converters.*;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.*;
 import com.sbtraining.recipe_project.model.enums.Difficulty;
 import com.sbtraining.recipe_project.services.RecipeService;
@@ -107,7 +108,7 @@ class RecipeViewsControllerTest {
     }
 
     @Test
-    void getRecipe() throws Exception {
+    void getRecipeTest() throws Exception {
 
         when(recipeServiceMock.getRecipeById(anyLong())).thenReturn(recipe1);
 
@@ -115,6 +116,13 @@ class RecipeViewsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    void getRecipeTestRecipeNotFoundException() throws Exception {
+        when(recipeServiceMock.getRecipeById(anyLong())).thenThrow(RecipeNotFoundException.class);
+        mockMvc.perform(get("/recipe/1/show/"))
+               .andExpect(status().isNotFound());
     }
 
     @Test

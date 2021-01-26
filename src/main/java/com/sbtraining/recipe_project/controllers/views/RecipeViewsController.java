@@ -1,7 +1,6 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
-import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.services.RecipeService;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +45,7 @@ public class RecipeViewsController {
     }
 
     @PostMapping("recipe")
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command) throws RecipeNotFoundException {
+    public String saveOrUpdate(@ModelAttribute RecipeCommand command)  {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
         return ("redirect:/recipe/" + savedCommand.getId() + "/show/") ;
     }

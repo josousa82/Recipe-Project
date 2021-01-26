@@ -15,13 +15,13 @@ public interface RecipeService {
 
      Set<Recipe> getAllRecipes();
 
-     Recipe getRecipeById(Long id) throws NotFoundException;
+     Recipe getRecipeById(Long id) throws NotFoundException, RecipeNotFoundException;
 
      Recipe saveRecipe(Recipe recipe);
 
      RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) throws RecipeNotFoundException;
 
-     RecipeCommand findCommandById(Long id) throws NotFoundException;
+     RecipeCommand findCommandById(Long id) throws NotFoundException, RecipeNotFoundException;
 
      void deleteRecipeById(Long id);
 }

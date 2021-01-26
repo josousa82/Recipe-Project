@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.services.ImageService;
 import com.sbtraining.recipe_project.services.RecipeService;
 import javassist.NotFoundException;
@@ -38,7 +39,7 @@ public class ImageController {
     }
 
     @GetMapping("/recipe/{recipeId}/image/uploadImage")
-    public String getUploadForm(@PathVariable String recipeId, Model model) throws NotFoundException {
+    public String getUploadForm(@PathVariable String recipeId, Model model) throws NotFoundException, RecipeNotFoundException {
         RecipeCommand command = recipeService.findCommandById(Long.parseLong(recipeId));
         model.addAttribute("recipe", command);
         String some = (String) model.asMap().get("message");
@@ -81,7 +82,7 @@ public class ImageController {
                 IOUtils.copy(inputStream, response.getOutputStream());
 
             }
-        } catch (NotFoundException | IOException e) {
+        } catch (NotFoundException | IOException | RecipeNotFoundException e) {
             e.printStackTrace();
         }
     }

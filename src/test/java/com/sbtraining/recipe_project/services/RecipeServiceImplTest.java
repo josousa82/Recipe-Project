@@ -7,7 +7,6 @@ import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.*;
 import com.sbtraining.recipe_project.model.enums.Difficulty;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
-import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,6 +54,8 @@ class RecipeServiceImplTest {
 
     @Mock
     RecipeRepository recipeRepository;
+
+    String expectedMsg = "Recipe not found";
 
     @BeforeEach
     void setUp() {
@@ -130,7 +131,7 @@ class RecipeServiceImplTest {
     }
 
     @Test
-    void testGetRecipeById() throws NotFoundException {
+    void testGetRecipeById() throws RecipeNotFoundException {
         Recipe recipe1 = Recipe.builder().id(1L).build();
         HashSet<Recipe> recipeHashSet = new HashSet<>();
         recipeHashSet.add(recipe1);
@@ -147,13 +148,12 @@ class RecipeServiceImplTest {
         verify(recipeRepository, never()).findAll();
     }
 
+
     @Test
     void getRecipeByIdThrowsExceptionIfIsNotFound()  {
-
         when(recipeRepository.findById(anyLong())).thenReturn(Optional.empty());
-        Throwable exception = assertThrows(NotFoundException.class, () -> recipeService.getRecipeById(anyLong()));
-        assertEquals("Recipe not found", exception.getMessage());
-
+        Throwable exception = assertThrows(RecipeNotFoundException.class, () -> recipeService.getRecipeById(1L));
+        assertTrue(expectedMsg.contains(exception.getMessage()));
     }
 
     @Test
