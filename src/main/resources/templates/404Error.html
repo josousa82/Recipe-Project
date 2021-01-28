@@ -13,11 +13,19 @@
     <link href="/static/css/error404.css" rel="stylesheet/css" th:href="@{/css/error404.css}" type="text/css" />
 </head>
 <body>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.exceptions.RecipeNotFoundException"*/-->
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
             <div th:replace="~{fragments/404ErrorFragment :: error404Fragment}"> </div>
 
+            <div class="row">
+                <div class="col-12 align-items-center justify-content-center">
+                    <p th:text="${exception.getMessage()}"></p>
+                </div>
+                <!-- /.col-12 align-items-center justify-content-center -->
+            </div>
         </div>
     </div>
 </div>
