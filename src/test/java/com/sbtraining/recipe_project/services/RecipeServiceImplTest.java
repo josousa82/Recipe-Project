@@ -55,7 +55,7 @@ class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
-    String expectedMsg = "Recipe not found";
+    String expectedMsg = "Recipe not found. For ID  with value: 1";
 
     @BeforeEach
     void setUp() {
@@ -126,7 +126,6 @@ class RecipeServiceImplTest {
         Set<Recipe> recipeSet = recipeService.getAllRecipes();
         assertEquals(1, recipeSet.size());
 
-        // BDD test
         verify(recipeRepository, times(1)).findAll();
     }
 
@@ -147,7 +146,6 @@ class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
     }
-
 
     @Test
     void getRecipeByIdThrowsExceptionIfIsNotFound()  {
@@ -190,7 +188,6 @@ class RecipeServiceImplTest {
     @Test
     void testSaveRecipe() {
     }
-
 
     @Test
     void testFindCommandById() {
