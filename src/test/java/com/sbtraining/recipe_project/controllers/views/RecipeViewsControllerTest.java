@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.controllers.exceptions.ControllerExceptionHandler;
 import com.sbtraining.recipe_project.converters.*;
 import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.*;
@@ -103,7 +104,10 @@ class RecipeViewsControllerTest {
 
         recipeCommand = recipeToRecipeCommand.convert(recipe1);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(recipeViewsControllerVictim).build();
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(recipeViewsControllerVictim)
+                .setControllerAdvice(ControllerExceptionHandler.class)
+                .build();
 
     }
 
@@ -128,7 +132,6 @@ class RecipeViewsControllerTest {
 
     @Test
     void testNumberFormatException() throws Exception {
-        when(recipeServiceMock.getRecipeById(anyLong())).thenThrow(NumberFormatException.class);
         mockMvc.perform(get("/recipe/a/show/"))
                .andExpect(status().isBadRequest())
                .andExpect(view().name("errors/400Error"));
@@ -136,7 +139,6 @@ class RecipeViewsControllerTest {
 
     @Test
     void testGetNewRecipeFrom() throws Exception {
-
         mockMvc.perform(get("/recipe/new"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeForm"))
