@@ -1,43 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" th:replace="~{fragments/layout :: layout (~{::body}, ~{::head},'Error', '404 Not Found Error')}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>404 Recipe not found</title>
-    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
 
-    <!-- Optional theme -->
-    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
-          rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
-
-    <link href="/static/css/error404.css" rel="stylesheet/css" th:href="@{/css/error404.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/error404.css}"  />
 </head>
 <body>
-<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.exceptions.RecipeNotFoundException"*/-->
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-            <div th:replace="~{fragments/404ErrorFragment :: error404Fragment}"> </div>
+<div th:replace="~{fragments/404ErrorFragment :: error404Fragment}"></div>
 
-            <div class="row">
-                <div class="col-12 align-items-center justify-content-center">
-                    <p th:text="${exception.getMessage()}"></p>
-                </div>
-                <!-- /.col-12 align-items-center justify-content-center -->
-            </div>
-        </div>
-    </div>
-</div>
+<p class="text-center" th:text="${exception.getMessage()}"></p>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
-        th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
-
-<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script crossorigin="anonymous" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
 </body>
 </html>
