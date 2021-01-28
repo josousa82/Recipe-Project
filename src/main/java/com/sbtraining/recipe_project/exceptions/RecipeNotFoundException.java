@@ -2,8 +2,6 @@ package com.sbtraining.recipe_project.exceptions;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Objects;
 
@@ -14,7 +12,7 @@ import java.util.Objects;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
-@ResponseStatus(HttpStatus.NOT_FOUND)
+//@ResponseStatus(HttpStatus.NOT_FOUND)
 public class RecipeNotFoundException extends RuntimeException {
 
     private String message = "Recipe not found." ;

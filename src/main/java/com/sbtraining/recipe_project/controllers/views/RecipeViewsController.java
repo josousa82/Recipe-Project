@@ -1,15 +1,15 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.services.RecipeService;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by sousaJ on 02/11/2020
@@ -54,5 +54,12 @@ public class RecipeViewsController {
     public String  deleteRecipeById(@PathVariable String id) {
         recipeService.deleteRecipeById(Long.valueOf(id));
         return "redirect:/";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(RecipeNotFoundException.class)
+    public ModelAndView handleRecipeNotFound(){
+        log.error("Recipe not found.");
+        return new ModelAndView("404Error");
     }
 }
