@@ -1,15 +1,15 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
-import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.services.RecipeService;
 import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Created by sousaJ on 02/11/2020
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  **/
 @Slf4j
 @Controller
-public class RecipeViewsController {
+public class RecipeViewsController extends AbstractExceptionsController {
 
     private final RecipeService recipeService;
     private String recipe = "recipe";
@@ -56,14 +56,4 @@ public class RecipeViewsController {
         return "redirect:/";
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(RecipeNotFoundException.class)
-    public ModelAndView handleRecipeNotFound(Exception ex){
-        log.error("Recipe not found.");
-        log.error(ex.getMessage());
-        var mv  = new ModelAndView();
-        mv.addObject("exception", ex);
-        mv.setViewName("404Error");
-        return mv;
-    }
 }
