@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (template,header, menu, title)">
+<html th:fragment="layout (template,header, menu, title)" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
-<!--    <link rel="shortcut icon" type="image/x-icon" th:href="@{/static/resources/img/logo.png}">-->
+    <!--    <link rel="shortcut icon" type="image/x-icon" th:href="@{/static/resources/img/logo.png}">-->
 
     <title th:text="${title}"></title>
 
@@ -19,18 +19,19 @@
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}">
 
-    <link href="../../static/resources/css/styles.css" rel="stylesheet"  th:href="@{/css/styles.css}" />
+    <link href="../../static/resources/css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
 
     <th:block th:include="${header}"/>
 
 </head>
 <body>
+<!-- TODO implement navbar fragment -->
+<div class="container">
+    <th:block th:include="${template}"/>
+</div>
 
-
-<th:block th:include="${template}"/>
-
-
+<!-- TODO implement footer fragment -->
 <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
-<script  th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.bundle.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

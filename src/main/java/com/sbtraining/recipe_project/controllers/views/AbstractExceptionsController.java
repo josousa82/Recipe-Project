@@ -21,7 +21,7 @@ public abstract class AbstractExceptionsController {
         log.error(ex.getMessage());
         var mv  = new ModelAndView();
         mv.addObject("exception", ex);
-        mv.setViewName("404Error");
+        mv.setViewName("errors/404Error");
         return mv;
     }
 
@@ -32,7 +32,7 @@ public abstract class AbstractExceptionsController {
         log.error(ex.getMessage());
         var mv  = new ModelAndView();
         mv.addObject("exception", ex);
-        mv.setViewName("404Error");
+        mv.setViewName("errors/400Error");
         return mv;
     }
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{fragments/layout :: layout (~{::body}, ~{::head},'Error', '404 Not Found Error')}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/css/error404.css}"  />
+</head>
+<body>
+
+<div th:replace="~{fragments/404ErrorFragment :: error404Fragment}"></div>
+
+
+
+</body>
+</html>
