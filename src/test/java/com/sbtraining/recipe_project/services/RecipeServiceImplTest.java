@@ -161,7 +161,7 @@ class RecipeServiceImplTest {
         when(recipeCommandToRecipe.convert(recipeCommand)).thenReturn(recipe);
         when(recipeToRecipeCommand.convert(recipe)).thenReturn(recipeCommand);
 
-        RecipeCommand savedRecipeCommand  = recipeService.saveRecipeCommand(recipeCommand);
+        RecipeCommand savedRecipeCommand  = recipeService.saveRecipeCommand(recipeCommand, any());
 
         assertNotNull(savedRecipeCommand);
         assertEquals(RECIPE_ID, savedRecipeCommand.getId());

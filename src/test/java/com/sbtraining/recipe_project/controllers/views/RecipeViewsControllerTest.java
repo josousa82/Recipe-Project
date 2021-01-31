@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
+import static com.sbtraining.recipe_project.controllers.views.ViewsLinksEnum.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -147,15 +148,37 @@ class RecipeViewsControllerTest {
 
     @Test
     void testPostNewRecipeForm() throws Exception{
-
         when(recipeServiceMock.saveRecipeCommand(any())).thenReturn(recipeCommand);
 
         mockMvc.perform(post("/recipe")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("id", "")
-                        .param("description", "some String"))
+                        .param("id",RECIPE_ID.toString())
+                        .param("description",RECIPE_DESCRIPTION)
+                        .param("prepTime", RECIPE_PREP_TIME.toString())
+                        .param("cookTime", RECIPE_COOK_TIME.toString())
+                        .param("servings", RECIPE_SERVINGS.toString())
+                        .param("url", RECIPE_URL)
+                        .param("directions", RECIPE_DIRECTIONS)
+                        .param("source", RECIPE_SOURCE)
+        )
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/recipe/1/show/"));
+                .andExpect(view().name(RECIPE_REDIRECT.getLink().concat("1/show/")));
+    }
+
+
+    @Test
+    void testPostNewRecipeFormFail() throws Exception{
+        var recipeCommandFailMock = RecipeCommand.builder().id(2L).build();
+
+        when(recipeServiceMock.saveRecipeCommand(any(),  any())).thenReturn(recipeCommandFailMock);
+
+        mockMvc.perform(post("/recipe")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("id", "")
+        )
+               .andExpect(status().isOk())
+               .andExpect(model().attributeExists("recipe"))
+               .andExpect(view().name(RECIPE_FORM.getLink()));
     }
 
     @Test
@@ -165,7 +188,7 @@ class RecipeViewsControllerTest {
 
         mockMvc.perform(get("/recipe/2/update"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("recipe/recipeForm"))
+                .andExpect(view().name(RECIPE_FORM.getLink()))
                 .andExpect(model().attributeExists("recipe"));
     }
 
@@ -175,7 +198,7 @@ class RecipeViewsControllerTest {
 
         mockMvc.perform(get("/recipe/1/delete"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/"));
+                .andExpect(view().name(RECIPE_REDIRECT_ALL.getLink()));
 
         verify(recipeServiceMock, times(1)).deleteRecipeById(anyLong());
     }

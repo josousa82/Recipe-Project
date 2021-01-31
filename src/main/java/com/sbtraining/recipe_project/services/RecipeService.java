@@ -1,9 +1,9 @@
 package com.sbtraining.recipe_project.services;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
-import com.sbtraining.recipe_project.exceptions.RecipeNotFoundException;
 import com.sbtraining.recipe_project.model.Recipe;
 import javassist.NotFoundException;
+import org.springframework.validation.BindingResult;
 
 import java.util.Set;
 
@@ -15,13 +15,15 @@ public interface RecipeService {
 
      Set<Recipe> getAllRecipes();
 
-     Recipe getRecipeById(Long id) throws NotFoundException, RecipeNotFoundException;
+     Recipe getRecipeById(Long id) throws NotFoundException;
 
      Recipe saveRecipe(Recipe recipe);
 
-     RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) throws RecipeNotFoundException;
+     RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand, BindingResult bindingResult) ;
 
-     RecipeCommand findCommandById(Long id) throws NotFoundException, RecipeNotFoundException;
+     RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) ;
+
+     RecipeCommand findCommandById(Long id) throws NotFoundException;
 
      void deleteRecipeById(Long id);
 }

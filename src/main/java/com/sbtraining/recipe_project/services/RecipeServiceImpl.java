@@ -8,6 +8,7 @@ import com.sbtraining.recipe_project.model.Recipe;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public Recipe getRecipeById(Long id) throws RecipeNotFoundException {
+    public Recipe getRecipeById(Long id)  {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
         if (recipeOptional.isEmpty()) {
             throw new RecipeNotFoundException("Recipe not found. For ID  with value: " + id.toString());
@@ -51,8 +52,18 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     @Transactional
-    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) throws RecipeNotFoundException {
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand, BindingResult bindingResult) {
+        return getConvertedRecipeCommand(recipeCommand);
+    }
 
+    @Override
+    @Transactional
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+        return getConvertedRecipeCommand(recipeCommand);
+    }
+
+    @Transactional
+    protected RecipeCommand getConvertedRecipeCommand(RecipeCommand recipeCommand) {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
 
         if (detachedRecipe == null) throw new RecipeNotFoundException("");
@@ -70,7 +81,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     @Transactional
-    public RecipeCommand findCommandById(Long id) throws  RecipeNotFoundException {
+    public RecipeCommand findCommandById(Long id)  {
         return recipeToRecipeCommand.convert(getRecipeById(id));
     }
 

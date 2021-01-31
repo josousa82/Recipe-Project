@@ -5,5 +5,5 @@ package com.sbtraining.recipe_project.model.enums;
  * in package - com.sbtraining.recipe_project.model.enums
  **/
 public enum Difficulty {
-    EASY, MODERATE, KIND_OF_HARD, HARD
+    NOT_DEFINED, EASY, MODERATE, KIND_OF_HARD, HARD
 }
