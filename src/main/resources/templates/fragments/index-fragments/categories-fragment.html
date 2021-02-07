@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<th:block th:fragment="categories(recipe)">
+
+
+    <th:block th:each="category, stats : ${recipe.categories}">
+
+        <span class="d-inline-block mx-3 py-1 position-relative" th:attr='data-filter=${category.description}' th:text="${category.description}">CATEGORY 1&nbsp;</span>
+
+    </th:block>
+</th:block>
+
+</body>
+</html>

@@ -1,6 +1,9 @@
 package com.sbtraining.recipe_project.controllers.views;
 
+import com.sbtraining.recipe_project.services.CategoryService;
 import com.sbtraining.recipe_project.services.RecipeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,17 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * in package - com.sbtraining.recipe_project.controllers.views
  **/
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class IndexController {
 
     private final RecipeService recipeService;
-
-    public IndexController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
+    private final CategoryService categoryService;
 
     @RequestMapping({"", "/", "/index", "/index.html"})
     public String getIndexPage(Model model){
         model.addAttribute("recipes" ,recipeService.getAllRecipes());
-        return "index";
+        model.addAttribute("categories", categoryService.getAllDistinctCategoriesDescription());
+        return "index2";
     }
 }

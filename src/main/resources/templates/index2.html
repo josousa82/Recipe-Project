@@ -1,66 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{fragments/layout :: layout (~{::body}, ~{::head},'Home', 'List of Recipes')}" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" th:replace="~{fragments/layout :: layout (~{::body}, ~{::head},'Home', 'List of Recipes')}"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
+    <link href="../../static/resources/css/-Filterable-Cards-.css" rel="stylesheet"
+          th:href="@{/css/-Filterable-Cards-.css}">
+    <link href="../../static/resources/css/-Filterable-Cards-.css" rel="stylesheet"
+          th:href="@{/css/fragments-css/recipe-card.css}">
+
 </head>
 
-
-<link rel="stylesheet" href="../../static/resources/css/-Filterable-Cards-.css" th:href="@{/css/-Filterable-Cards-.css}" >
-
 <body>
-
+<!--TODO: remove inline css to styles-->
 <div class="container-fluid" style="font-family: 'Open Sans', sans-serif;color: rgb(52,55,57);">
-    <div class="row text-center d-xl-flex flex-grow-1 flex-shrink-1 justify-content-center align-items-center" style="padding: 0px;padding-right: 0rem;padding-left: 0;text-align: center;">
+    <div class="row text-center d-xl-flex flex-grow-1 flex-shrink-1 justify-content-center align-items-center"
+         style="padding: 0px;padding-right: 0rem;padding-left: 0;text-align: center;">
         <div class="col-12 col-md-12 col-lg-9 col-xl-12 text-left align-self-center">
             <section class="py-5">
                 <div class="container">
                     <h1 class="display-4 d-table-row d-xl-flex justify-content-xl-center text-center mb-4">Recipes</h1>
-                    <div class="filtr-controls text-center lead text-uppercase mb-3"><span class="active d-inline-block mx-3 py-1 position-relative" data-filter="all">all </span><span class="d-inline-block mx-3 py-1 position-relative" data-filter="1">CATEGORY 1&nbsp;</span><span class="d-inline-block mx-3 py-1 position-relative" data-filter="2">category 2 </span><span class="d-inline-block mx-3 py-1 position-relative" data-filter="3">category 3 </span></div>
-                    <div class="row filtr-container">
-                        <div class="col-md-6 col-lg-4 filtr-item" data-category="2,3">
-                            <div class="card border-dark">
-                                <div class="card-header bg-dark text-light">
-                                    <h5 class="m-0">Recipe Title</h5>
-                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-01.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Recipe short description&nbsp;</p>
-                                </div>
-                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 filtr-item" data-category="1,3">
-                            <div class="card border-dark">
-                                <div class="card-header bg-dark text-light">
-                                    <h5 class="m-0">Lorem Ipsum</h5>
-                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-02.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.&nbsp;Peiores principem Constantium cautela sed cetera et nimia graves cetera modi in titulo causarum infudisset plagas apud sed ut siquid. Invadere tabescebat egressus ullo flagitii per parans per egressus edictus.<br></p>
-                                </div>
-                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 filtr-item" data-category="2,3">
-                            <div class="card border-dark">
-                                <div class="card-header bg-dark text-light">
-                                    <h5 class="m-0">Lorem Ipsum</h5>
-                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-03.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Observantes habitu ignoti conspiratione poterant homines formido cognita malorum conpluribus peragranter divites fingerent poterant peragranter.<br></p>
-                                </div>
-                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 filtr-item" data-category="3">
-                            <div class="card border-dark">
-                                <div class="card-header bg-dark text-light">
-                                    <h5 class="m-0">Lorem Ipsum</h5>
-                                </div><img class="img-fluid card-img w-100 d-block rounded-0" src="assets/img/th-06.jpg">
-                                <div class="card-body">
-                                    <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.&nbsp;Populique et auctoritate cum sint partes regina canities et circumspectum certamina suffragiorum reverenda et set circumspectum temporis auctoritate certamina verecundum quotquot domina per et sint auctoritate sunt omnes ubique redierit.<br></p>
-                                </div>
-                                <div class="d-flex card-footer"><button class="btn btn-dark btn-sm" type="button" style="border-radius: 4px;border-width: 0px;border-style: none;padding-right: 25px;width: 20rem;"><i class="fa fa-eye"></i>&nbsp;VIEW</button></div>
-                            </div>
+                    <div class="filtr-controls text-center lead text-uppercase mb-3">
+                        <span class="active d-inline-block mx-3 py-1 position-relative" data-filter="all">all </span>
+
+                        <!-- TODO: Show only categories that are present in the recipes returned-->
+                        <th:block th:each="category : ${categories}">
+                            <span class="d-inline-block mx-3 py-1 position-relative" th:attr='data-filter=${category}'
+                                  th:text="${category}">CATEGORY 1&nbsp;</span>
+                        </th:block>
+
+                    </div>
+
+                    <div class="row filtr-container" th:if="${not #lists.isEmpty(recipes)}">
+
+                        <div th:each="recipe : ${recipes}">
+                            <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+                            <div th:include="fragments/index-fragments/recipe-card-fragment::recipeCard(${recipe})"></div>
                         </div>
                     </div>
                 </div>
@@ -68,37 +43,6 @@
         </div>
     </div>
 </div>
-<div class="footer-dark">
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-3 item">
-                    <h3>Services</h3>
-                    <ul>
-                        <li><a href="#">Web design</a></li>
-                        <li><a href="#">Development</a></li>
-                        <li><a href="#">Hosting</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6 col-md-3 item">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="#">Company</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6 item text">
-                    <h3>Company Name</h3>
-                    <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
-                </div>
-                <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
-            </div>
-            <p class="copyright">Company Name Â© 2017</p>
-        </div>
-    </footer>
-</div>
-<script src="../../static/resources/js/-Filterable-Cards-.js" th:src="@{/js/-Filterable-Cards-.js}"></script>
 </body>
 
 </html>

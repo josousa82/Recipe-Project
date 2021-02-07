@@ -1,6 +1,7 @@
 package com.sbtraining.recipe_project.controllers.views;
 
 import com.sbtraining.recipe_project.model.Recipe;
+import com.sbtraining.recipe_project.services.CategoryService;
 import com.sbtraining.recipe_project.services.RecipeServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,12 +38,15 @@ class IndexControllerViewTest {
     RecipeServiceImpl recipeService;
 
     @Mock
+    CategoryService categoryService;
+
+    @Mock
     Model model;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        indexController = new IndexController(recipeService);
+        indexController = new IndexController(recipeService, categoryService);
     }
 
     @Test
@@ -54,7 +58,7 @@ class IndexControllerViewTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
         // attention with the static matchers imports
-        mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(status().isOk()).andExpect(view().name("index"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(status().isOk()).andExpect(view().name("index2"));
     }
 
     @Test
@@ -71,7 +75,7 @@ class IndexControllerViewTest {
         String viewName = indexController.getIndexPage(model);
 
         // then
-        assertEquals("index", viewName);
+        assertEquals("index2", viewName);
 
         // interactions tests
         verify(recipeService, times(1)).getAllRecipes();
