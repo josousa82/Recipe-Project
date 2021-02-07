@@ -1,12 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
-<div th:fragment="error404Fragment" class="mainbox" >
+<th:block th:fragment="error404Fragment" >
+
+<div class="row-cols-1 mainbox" >
     <div class="err">4</div>
     <i class="far fa-question-circle fa-spin"></i>
     <div class="err2">4</div>
     <div class="msg">Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?<p>Let's go <a th:href="@{/index}">home</a> and try from there.</p></div>
-    <div class="row-cols-12 text-center align-bottom" >
-        <p th:text="${exception.getMessage()}"></p>
-    </div>
+
 </div>
+<div class="row-cols-1 text-center align-bottom" >
+    <p th:text="${exception.getMessage()}"></p>
+</div>
+
+</th:block>
 </body>

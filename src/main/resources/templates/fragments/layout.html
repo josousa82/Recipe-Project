@@ -2,9 +2,8 @@
 <html th:fragment="layout (template,header, menu, title)" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <!--    <link rel="shortcut icon" type="image/x-icon" th:href="@{/static/resources/img/logo.png}">-->
 
@@ -17,21 +16,33 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}">
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}">-->
+    <link rel="stylesheet" href="../../static/resources/css/boostrapCustom/bootstrap.min.css" th:href="@{/css/boostrapCustom/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link href="../../static/resources/css/styles.css" rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="../../static/resources/css/-Filterable-Cards-.css" th:href="@{/css/-Filterable-Cards-.css}" >
+    <link rel="stylesheet" href="../../static/resources/css/footer-dark.css" th:href="@{/css/footer-dark.css}">
+    <link rel="stylesheet" href="../../static/resources/css/styles.css"  th:href="@{/css/style.css}"/>
 
     <th:block th:include="${header}"/>
 
 </head>
 <body>
+
+<th:block th:include="/fragments/layout-fragments/NavbarFragment::navbar--fragment" />
+
 <!-- TODO implement navbar fragment -->
-<div class="container">
-    <th:block th:include="${template}"/>
-</div>
+<th:block th:include="${template}"/>
 
 <!-- TODO implement footer fragment -->
+<th:block th:include="/fragments/layout-fragments/footer-fragment::footer-dark" />
+
 <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.bundle.min.js}"></script>
+<script src="../../static/resources/js/-Filterable-Cards-.js" th:src="@{/js/-Filterable-Cards-.js}"></script>
+<script src="../../static/resources/js/clean-blog.js" th:src="@{/js/clean-blog.js}"></script>
 </body>
 </html>
