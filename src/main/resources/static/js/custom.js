@@ -12,3 +12,13 @@
 //         $("#upload_img_form").submit();
 //     });
 // });
+
+(function($){
+
+    $(function(){
+        $('.truncate').succinct({
+            size: 240
+        });
+    });
+
+})(jQuery);

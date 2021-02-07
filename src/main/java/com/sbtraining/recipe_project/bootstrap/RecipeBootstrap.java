@@ -5,7 +5,10 @@ import com.sbtraining.recipe_project.model.enums.Difficulty;
 import com.sbtraining.recipe_project.repositories.CategoryRepository;
 import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import com.sbtraining.recipe_project.repositories.UnitOfMeasureRepository;
+import com.sbtraining.recipe_project.services.ImageService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
@@ -21,20 +24,15 @@ import java.util.List;
  **/
 @Slf4j
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
-
+    private final ImageService imageService;
     private final Environment environment;
 
-    public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository, Environment environment) {
-        this.categoryRepository = categoryRepository;
-        this.recipeRepository = recipeRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.environment = environment;
-    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {

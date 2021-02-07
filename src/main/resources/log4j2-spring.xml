@@ -33,7 +33,7 @@
 
     <Loggers>
         <!-- LOG everything at INFO level -->
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
             <!--            <AppenderRef ref="Console" level="diag" />-->
@@ -41,7 +41,7 @@
         </Root>
 
 
-        <Logger name="com.sbtraining.recipe_project" level="info"/>
+        <Logger name="com.sbtraining.recipe_project" level="debug"/>
     </Loggers>
 
 </Configuration>

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="../../static/resources/css/-Filterable-Cards-.css" th:href="@{/css/-Filterable-Cards-.css}" >
+<!--    <link rel="stylesheet" href="../../static/resources/css/-Filterable-Cards-.css" th:href="@{/css/-Filterable-Cards-.css}" >-->
     <link rel="stylesheet" href="../../static/resources/css/footer-dark.css" th:href="@{/css/footer-dark.css}">
     <link rel="stylesheet" href="../../static/resources/css/styles.css"  th:href="@{/css/style.css}"/>
 
@@ -34,15 +34,22 @@
 
 <th:block th:include="/fragments/layout-fragments/NavbarFragment::navbar--fragment" />
 
-<!-- TODO implement navbar fragment -->
 <th:block th:include="${template}"/>
 
-<!-- TODO implement footer fragment -->
 <th:block th:include="/fragments/layout-fragments/footer-fragment::footer-dark" />
 
 <script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.bundle.min.js}"></script>
-<script src="../../static/resources/js/-Filterable-Cards-.js" th:src="@{/js/-Filterable-Cards-.js}"></script>
-<script src="../../static/resources/js/clean-blog.js" th:src="@{/js/clean-blog.js}"></script>
+<script src="../../static/resources/js/libraries/filterable-cards/-Filterable-Cards-.js"
+        th:src="@{/js/libraries/filterable-cards/-Filterable-Cards-.js}"></script>
+<script src="../../static/resources/js/libraries/clean-blog/clean-blog.js"
+        th:src="@{/js/libraries/clean-blog/clean-blog.js}"></script>
+
+<script src="../../static/resources/js/libraries/jquery-succinct/succinct.min.js"
+        th:src="@{/js/libraries/jquery-succinct/succinct.min.js}"></script>
+
+<script src="../../static/resources/js/custom.js"
+        th:src="@{/js/custom.js}"></script>
+
 </body>
 </html>
