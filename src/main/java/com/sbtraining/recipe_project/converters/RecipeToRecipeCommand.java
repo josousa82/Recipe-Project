@@ -1,13 +1,17 @@
 package com.sbtraining.recipe_project.converters;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.converters.utilsConverters.BytesToFileConverter;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sun.istack.Nullable;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by sousaJ on 12/11/2020
@@ -15,17 +19,14 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @Builder
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 
     private final CategoryToCategoryCommand categoryToCategoryCommand;
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final NotesToNotesCommand notesToNotesCommand;
+    private final BytesToFileConverter bytesToFileConverter;
 
-    public RecipeToRecipeCommand(CategoryToCategoryCommand categoryToCategoryCommand, IngredientToIngredientCommand ingredientToIngredientCommand, NotesToNotesCommand notesToNotesCommand) {
-        this.categoryToCategoryCommand = categoryToCategoryCommand;
-        this.ingredientToIngredientCommand = ingredientToIngredientCommand;
-        this.notesToNotesCommand = notesToNotesCommand;
-    }
 
     @Synchronized
     @Nullable
@@ -37,7 +38,7 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
        final RecipeCommand recipeCommand = RecipeCommand.builder()
                 .id(recipe.getId())
                 .description(recipe.getDescription())
-                .image(recipe.getImage())
+                .image((MultipartFile) bytesToFileConverter.convert(recipe.getImage()))
                 .prepTime(recipe.getPrepTime())
                 .cookTime(recipe.getCookTime())
                 .servings(recipe.getServings())

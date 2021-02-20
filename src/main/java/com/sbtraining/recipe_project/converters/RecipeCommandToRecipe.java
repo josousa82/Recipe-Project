@@ -5,10 +5,12 @@ import com.sbtraining.recipe_project.model.Recipe;
 import lombok.Builder;
 import lombok.Synchronized;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -43,7 +45,6 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
           Recipe recipe = Recipe.builder()
                 .id(recipeCommand.getId())
-                .image(recipeCommand.getImage())
                 .description(recipeCommand.getDescription())
                 .prepTime(recipeCommand.getPrepTime())
                 .cookTime(recipeCommand.getCookTime())
@@ -54,12 +55,19 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
                 .difficulty(recipeCommand.getDifficulty())
                 .notes(notesCommandToNotes.convert(recipeCommand.getNotes())).build();
 
+
+        try {
+            recipe.setImage(ArrayUtils.nullToEmpty(recipeCommand.getImage().getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         if (CollectionUtils.isNotEmpty(recipeCommand.getIngredients()))
         {
             recipeCommand.getIngredients().forEach(ingredientCommand ->
-                   recipe.addIngredient(Objects.requireNonNull(ingredientCommandToIngredient.convert(ingredientCommand))));
+            recipe.addIngredient(Objects.requireNonNull(ingredientCommandToIngredient.convert(ingredientCommand))));
         }
-
         if (CollectionUtils.isNotEmpty(recipeCommand.getCategories()))
         {
             recipeCommand.getCategories().forEach(categoryCommand ->

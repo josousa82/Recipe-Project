@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by sousaJ on 08/09/2020
@@ -33,10 +34,10 @@ public class RecipeRestController {
     }
 
     @GetMapping("/allRecipes")
-    public List<Recipe> getAllRecipes() {
+    public Set<Recipe> getAllRecipes() {
         List<Recipe> recipes = new ArrayList<>();
         recipeService.getAllRecipes().iterator().forEachRemaining(recipes::add);
-        return recipes;
+        return recipeService.getAllRecipes();
     }
 
 

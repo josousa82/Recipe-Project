@@ -1,7 +1,10 @@
 package com.sbtraining.recipe_project.services;
 
+import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.converters.utilsConverters.BytesToFileConverter;
+import com.sbtraining.recipe_project.converters.utilsConverters.MultipartFileToBytesConverter;
 import com.sbtraining.recipe_project.model.Recipe;
-import com.sbtraining.recipe_project.repositories.RecipeRepository;
+import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,11 +12,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -23,11 +27,22 @@ import static org.mockito.Mockito.*;
 class ImageServiceImplTest {
 
     @Mock
-    RecipeRepository recipeRepository;
+    RecipeService recipeService;
+
+    HttpServletResponse servletResponse;
+
+
+
+
+    MultipartFileToBytesConverter imageToBytesConverter;
+
+
+    BytesToFileConverter byteToImage;
 
     ImageService imageService;
 
     Recipe recipe;
+    RecipeCommand command;
     MultipartFile multipartFile;
 
     private final Long RECIPE_ID = 1L;
@@ -35,28 +50,51 @@ class ImageServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        imageService = new ImageServiceImpl(recipeRepository);
+
+         imageToBytesConverter = new MultipartFileToBytesConverter();
+         byteToImage = new BytesToFileConverter();
+         imageService = new ImageServiceImpl(recipeService, imageToBytesConverter, byteToImage);
 
         recipe = Recipe.builder()
                 .id(RECIPE_ID)
                 .build();
 
+        command = RecipeCommand.builder().id(RECIPE_ID).build();
+
         multipartFile = new MockMultipartFile("imageFile",
                                       "testing.txt", "text/plain", "Test file".getBytes());
+
+
     }
 
     @Test
-    void saveImageFile() throws IOException {
-        Optional<Recipe> recipeOptional = Optional.of(recipe);
-        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+    void saveImageFile() throws IOException, NotFoundException {
+        when(recipeService.getRecipeById(anyLong())).thenReturn(recipe);
 
         ArgumentCaptor<Recipe> argumentCaptor = ArgumentCaptor.forClass(Recipe.class);
 
-        imageService.saveImageFile(RECIPE_ID, multipartFile);
+        imageService.saveImageFile(command, multipartFile);
 
-        verify(recipeRepository, times(1)).save(argumentCaptor.capture());
-        Recipe savedRecipe =argumentCaptor.getValue();
+        verify(recipeService, times(1)).saveRecipe(argumentCaptor.capture());
+        Recipe savedRecipe = argumentCaptor.getValue();
+
         assertEquals(multipartFile.getBytes().length, savedRecipe.getImage().length);
+
+    }
+
+    @Test
+    void getRecipeImageTest() throws NotFoundException {
+
+        recipe.setImage(imageToBytesConverter.convert(multipartFile));
+
+        when(recipeService.getRecipeById(anyLong())).thenReturn(recipe);
+
+        MockHttpServletResponse response = new MockHttpServletResponse();
+
+        imageService.getRecipeImage(anyLong(),response);
+
+        verify(recipeService, times(1)).findCommandById(anyLong());
+
     }
 
 

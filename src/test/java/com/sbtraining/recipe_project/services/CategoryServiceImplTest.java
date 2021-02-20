@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Set;
 
-import static com.sbtraining.recipe_project.utils.CategoryUtils.getIterableListCategories;
+import static com.sbtraining.recipe_project.utils.CategoryUtils.iterableCategories;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +29,7 @@ class CategoryServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        categoryUtils = getIterableListCategories();
+        categoryUtils = iterableCategories();
         categoryService = new CategoryServiceImpl(categoryRepository);
     }
 

@@ -2,6 +2,7 @@ package com.sbtraining.recipe_project.converters;
 
 
 import com.sbtraining.recipe_project.model.Notes;
+import com.sbtraining.recipe_project.utils.TestNotesUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NotesToNotesCommandTest {
 
     public static final Long ID_VALUE = 1L;
-    public static final String NOTES = "flower";
+    public static final String NOTES = "notes 1";
 
     Notes notesToConvert;
 
@@ -19,10 +20,7 @@ class NotesToNotesCommandTest {
 
     @BeforeEach
     void setUp() {
-        notesToConvert = Notes.builder()
-                .id(ID_VALUE)
-                .recipeNotes(NOTES)
-                .build();
+        notesToConvert = TestNotesUtils.notes_1;
 
         converter = new NotesToNotesCommand();
 

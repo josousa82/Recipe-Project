@@ -1,6 +1,9 @@
 package com.sbtraining.recipe_project.services;
 
+import com.sbtraining.recipe_project.commands.RecipeCommand;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by sousaJ on 02/01/2021
@@ -8,5 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 
 public interface ImageService {
-    void saveImageFile(Long recipeId, MultipartFile any);
+    void saveImageFile(RecipeCommand command, MultipartFile any);
+    HttpServletResponse getRecipeImage(Long id, HttpServletResponse response);
 }

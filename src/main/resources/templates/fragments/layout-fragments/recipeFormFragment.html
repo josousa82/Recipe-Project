@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title></title>
+</head>
+<body>
+
+<th:block th:fragment="recipe-form-fragment(recipe)">
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+
+
+    <div id="wrapper">
+
+        <th:block th:include="fragments/layout-fragments/recipeImageModalForm::recipeImageModal-fragment(${recipe})"></th:block>
+
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Create a Recipe</h3>
+                    <form method="post" th:action="@{/recipe}" th:object="${recipe}">
+                        <!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+                        <input th:field="${recipe.id}" type="hidden">
+                        <div class="row mb-3">
+                            <div class="col-lg-4">
+                                <div class="card mb-3">
+                                    <div class="card-body text-center shadow">
+                                        <img class="rounded-circle mb-3 mt-4" height="160"
+                                             th:src="@{'/recipe/' + ${recipe.id} + '/get/image/'}" width="160" >
+                                        <div class="mb-3">
+                                            <button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#uploadRecipeImageModal">Upload Recipe
+                                                Picture
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card shadow mb-3">
+                                            <div class="card-header py-3">
+                                                <p class="text-primary m-0 font-weight-bold">Recipe</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <form>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="recipe-description"><strong>Recipe
+                                                                    Name</strong></label>
+                                                                <input autocomplete="on"
+                                                                       class="form-control" id="recipe-description"
+                                                                       minlength="10" name="recipe-description"
+                                                                       placeholder="Recipe Name" required type="text"
+                                                                       th:field="*{description}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-source"><strong>Source</strong></label><input
+                                                                    class="form-control"
+                                                                    id="recipe-source" name="recipe-source"
+                                                                    placeholder="Recipe Source" type="text"
+                                                                    th:field="*{source}"
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-url"><strong>Url</strong></label><input
+                                                                    class="form-control"
+                                                                    id="recipe-url" name="url"
+                                                                    placeholder="Recipe Url"
+                                                                    type="url" th:field="*{url}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-categories"><strong>Categories</strong></label><input
+                                                                    class="form-control"
+                                                                    id="recipe-categories" name="recipe-categories"
+                                                                    placeholder="categories"
+                                                                    type="text"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-cookTime"><strong>Cook
+                                                                Time</strong></label><input class="form-control"
+                                                                                            id="recipe-cookTime"
+                                                                                            name="recipe-cookTime"
+                                                                                            placeholder="Cook Time"
+                                                                                            type="text" th:field="*{cookTime}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-prepTime"><strong>Preparation
+                                                                Time</strong></label><input class="form-control"
+                                                                                            id="recipe-prepTime"
+                                                                                            name="recipe-prepTime"
+                                                                                            placeholder="Preparation Time"
+                                                                                            type="text" th:field="*{prepTime}"></div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-servings"><strong>Servings</strong></label><input
+                                                                    class="form-control" id="recipe-servings"
+                                                                    name="recipe-servings" placeholder="Doe"
+                                                                    type="text" th:field="*{servings}"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group"><label
+                                                                    for="recipe-directions"><strong>Directions</strong><br></label><textarea
+                                                                    class="form-control summernote"
+                                                                    id="recipe-directions"
+                                                                    name="recipe-directions" th:field="*{directions}"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col" >
+                                                            <div class="form-group"><label
+                                                                    for="recipe-notes"><strong>Notes</strong><br></label><textarea
+                                                                    class="form-control summernote" id="recipe-notes"
+                                                                    name="recipe-notes" th:field="*{notes.recipeNotes}"></textarea></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 16px;">
+                                                        <button
+                                                                class="btn btn-primary btn-sm" type="submit">Save
+                                                            Recipe
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="card shadow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card shadow mb-5"></div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fa fa-angle-up"></i></a>
+    </div>
+
+    <!--    <script th:src="@{js/custom.js}"></script>-->
+</th:block>
+</body>
+</html>

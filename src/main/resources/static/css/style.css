@@ -32,3 +32,27 @@
 /*  margin-top: 1rem !important;*/
 /*  !*padding-top: 1rem;*!*/
 /*}*/
+
+recipe-card--btn {
+    width: 100% !important;
+}
+
+.bg-cover {
+    width: 100%;
+    height: 180px;
+    background-size: cover;
+}
+
+
+.scroll-to-top{
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(90,92,105,.5);
+    line-height: 46px;
+}

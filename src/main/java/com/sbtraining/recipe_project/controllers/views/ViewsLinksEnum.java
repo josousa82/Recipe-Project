@@ -7,9 +7,9 @@ package com.sbtraining.recipe_project.controllers.views;
 
 public enum ViewsLinksEnum {
 
-    RECIPE_FORM ("recipe/recipeForm"),
+    RECIPE_FORM ("recipe/recipeForm2"),
     RECIPE_REDIRECT_ALL ("redirect:/"),
-    RECIPE_SHOW ("recipe/show"),
+    RECIPE_SHOW ("recipe/show2"),
     RECIPE_REDIRECT("redirect:/recipe/");
 
     private final String value;

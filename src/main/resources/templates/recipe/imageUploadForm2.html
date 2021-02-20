@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+</head>
+
+<body>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" >Upload a new Image</h1>
+                    </div>
+                    <div class="panel-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 mx-auto">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div th:text="${message}" th:if="${message ne null}" class="alert alert-danger" role="alert">test</div>
+                                            </div>
+                                        </div>
+                                        <form enctype="multipart/form-data" method="post"
+                                               th:action="@{'/recipe/' + ${recipe.getId()} + '/image/uploadImage'}">
+                                        <div class="form-group">
+                                            <label class="control-label">Select File</label>
+                                            <input type="file" th:name="image"  class="form-control-file">
+                                        </div>
+                                            <div class="row-no-gutters d-block">
+                                                <a type="button" class="btn btn-primary" id="btn_back" th:href="@{'/recipe/' + ${recipe.getId()} + '/show/' }">Back To Recipe</a>
+                                                <button type="submit" class="btn btn-primary" id="btn_submit_img" >Submit</button>
+                                            </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+</body>
+</html>

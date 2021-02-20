@@ -11,20 +11,25 @@ class CategoryUtils {
 
     static category2 = new Category(
             id: 2,
-            description: "category1",
+            description: "category2",
     )
 
     static category3 = new Category(
             id: 3,
-            description: "category2",
+            description: "category3",
     )
 
     static category4 = new Category(
             id: 4,
-            description: "category3",
+            description: "category4",
     )
 
-    static Iterable<Category> getIterableListCategories (){
-        [category1, category2, category3, category4]
-    }
+
+
+    static final setOfCategories = [category1, category2, category3, category4] as HashSet
+
+    static Iterable<Category> iterableCategories () {
+        [category1, category2, category3, category4]   }
+
+
 }

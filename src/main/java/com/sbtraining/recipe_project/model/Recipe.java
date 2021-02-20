@@ -41,8 +41,14 @@ public class Recipe {
 
     private String url;
 
+    private String cor;
+
     @Lob
     private String directions;
+
+    //TODO implement directions logic to present has a list
+
+//    private Directions directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     @Builder.Default
@@ -55,7 +61,7 @@ public class Recipe {
     private Set<Category> categories = new HashSet<>();
 
     @Lob
-    private Byte[] image;
+    private byte[] image;
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
