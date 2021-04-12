@@ -11,7 +11,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by sousaJ on 12/11/2020
@@ -38,7 +37,6 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
        final RecipeCommand recipeCommand = RecipeCommand.builder()
                 .id(recipe.getId())
                 .description(recipe.getDescription())
-                .image((MultipartFile) bytesToFileConverter.convert(recipe.getImage()))
                 .prepTime(recipe.getPrepTime())
                 .cookTime(recipe.getCookTime())
                 .servings(recipe.getServings())
@@ -48,6 +46,13 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
                 .difficulty(recipe.getDifficulty())
                 .notes(notesToNotesCommand.convert(recipe.getNotes()))
                 .build();
+
+//        try {
+//            recipeCommand.setImage( bytesToFileConverter.convert(recipe.getImage()));
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         if(CollectionUtils.isNotEmpty(recipe.getIngredients())){
             recipe.getIngredients().

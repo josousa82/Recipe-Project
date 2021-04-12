@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{frontend-ui/pages/layout :: layout ( ~{::head},~{::body},'Home', 'Home Page')}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+
+<th:block th:include="/frontend-ui/body-template/fragments/homePagefrag::homePagefrag" />
+
+<th:block th:include="/frontend-ui/footer/fragments/footer-fragment::featureRecipeSectionFragment" />
+
+</body>
+
+</html>

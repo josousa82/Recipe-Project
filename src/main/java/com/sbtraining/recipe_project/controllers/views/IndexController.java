@@ -23,6 +23,6 @@ public class IndexController {
     public String getIndexPage(Model model){
         model.addAttribute("recipes" ,recipeService.getAllRecipes());
         model.addAttribute("categories", categoryService.getAllDistinctCategoriesDescription());
-        return "index2";
+        return ViewsLinksEnum.INDEX_HOME.getLink();
     }
 }

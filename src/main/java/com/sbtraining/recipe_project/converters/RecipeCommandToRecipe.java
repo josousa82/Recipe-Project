@@ -1,16 +1,17 @@
 package com.sbtraining.recipe_project.converters;
 
 import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.converters.utilsConverters.MultipartFileToBytesConverter;
 import com.sbtraining.recipe_project.model.Recipe;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -19,20 +20,15 @@ import java.util.Objects;
  **/
 @Component
 @Builder
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
     private final CategoryCommandToCategory categoryCommandToCategory;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final NotesCommandToNotes notesCommandToNotes;
+    private final MultipartFileToBytesConverter imageToBytesConverter;
 
-    public RecipeCommandToRecipe(CategoryCommandToCategory categoryCommandToCategory,
-                                 IngredientCommandToIngredient ingredientCommandToIngredient,
-                                 NotesCommandToNotes notesCommandToNotes) {
 
-        this.categoryCommandToCategory = categoryCommandToCategory;
-        this.ingredientCommandToIngredient = ingredientCommandToIngredient;
-        this.notesCommandToNotes = notesCommandToNotes;
-    }
 
     @Synchronized
     @Nullable
@@ -56,12 +52,9 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
                 .notes(notesCommandToNotes.convert(recipeCommand.getNotes())).build();
 
 
-        try {
-            recipe.setImage(ArrayUtils.nullToEmpty(recipeCommand.getImage().getBytes()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//                recipe.setImage(ArrayUtils.nullToEmpty(imageToBytesConverter.convert(recipeCommand.getImage())));
 
+                //TODO FIx command if ingredients or categories are not passed
 
         if (CollectionUtils.isNotEmpty(recipeCommand.getIngredients()))
         {

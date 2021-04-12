@@ -29,7 +29,8 @@ class CategoryUtils {
     static final setOfCategories = [category1, category2, category3, category4] as HashSet
 
     static Iterable<Category> iterableCategories () {
-        [category1, category2, category3, category4]   }
+        [category1, category2, category3, category4]
+    }
 
 
 }

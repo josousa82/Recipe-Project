@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+<html  lang="en" th:replace="~{frontend-ui/pages/layout :: layout (~{::head},~{::body},'Recipe', ${recipe.description})}" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+</head>
+
+
+<body>
+<!--/*@thymesVar id="recipe" type="com.sbtraining.recipe_project.model.Recipe"*/-->
+<div th:include="frontend-ui/body-template/fragments/recipe-fragment::recipe-fragment(${recipe})"></div>
+</body>
+</html>

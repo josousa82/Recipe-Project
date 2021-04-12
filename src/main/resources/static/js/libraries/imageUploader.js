@@ -6,8 +6,10 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imageResult')
+            $('#imageResult , #image-preview')
                 .attr('src', e.target.result);
+            $('#upload')
+                .attr('val', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }

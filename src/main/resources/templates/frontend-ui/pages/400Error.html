@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout :: layout (~{::body}, ~{::head},'Error', '400 Bad request')}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" th:href="@{/css/error404.css}"  />
+</head>
+<body>
+
+<div th:replace="~{fragments/error-fragments/400ErrorFragment :: error400Fragment}"></div>
+
+<!--<p class="text-center" th:text="${exception.getMessage()}"></p>-->
+
+</body>
+</html>

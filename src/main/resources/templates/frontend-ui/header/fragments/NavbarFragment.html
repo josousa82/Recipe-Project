@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:fragment="navbar--fragment(menu, headerClass)">
+
+    <!-- Header Section Begin -->
+    <header th:class="${headerClass}">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="./index.html"><img src="img/little-logo.png" alt=""></a>
+            </div>
+            <div class="nav-menu">
+                <nav class="main-menu mobile-menu">
+                    <ul>
+
+                        <li class="" th:class="${active==menu ? ' active ' : ''}" th:fragment="menuItem (path,active,title,text)">
+                            <a th:href="@{__${path}__}" th:title="${title}">
+                                <span th:text="${text}">Template</span>
+                            </a>
+                        </li>
+
+                        <li th:replace="::menuItem ('/','home','Home Page','Home')">
+                            <span>Home</span>
+                        </li>
+
+                        <li th:replace="::menuItem ('/recipe/1/show/','recipe','Recipe Page','Recipe')">
+                            <span>Home</span>
+                        </li>
+
+                        <li><a href="recipe.html">Recipes</a></li>
+
+<!--                        <li ><a href="./index.html">Home</a></li>-->
+                        <li><a href="#">Pages</a>
+                            <ul class="sub-menu">
+                                <li><a href="about-me.html">About Me</a></li>
+                                <li><a href="categories.html">Categories</a></li>
+                                <li><a href="recipe.html">Recipe</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="recipe.html">Recipes</a></li>
+                        <li><a href="categories.html">Best Of</a></li>
+                        <li class="active"><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-right search-switch">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+
+<!--    <ul class="navbar-nav ml-auto">-->
+<!--        <li class="nav-item" th:class=" 'nav-item' +  ${active==menu ? ' active ' : ''}" th:fragment="menuItem (path,active,title,glyph,text)">-->
+<!--            <a class="nav-link text-white d-flex align-items-center" th:href="@{__${path}__}" th:title="${title}">-->
+<!--                <span class="text-white mr-2 text-center"> <i class="bi text-white bi-house-door-fill " th:class="'bi bi-'+${glyph}" ></i></span>-->
+<!--                <span class="text-center" th:text="${#strings.toUpperCase(text)}">Template</span>-->
+<!--            </a>-->
+<!--        </li>-->
+
+<!--        <li class="nav-item text-white"  th:replace="::menuItem ('/','home','home page','house-door-fill','Home')">-->
+<!--            <i class="bi bi-house-door-fill"></i>-->
+<!--            <span>HOME</span>-->
+<!--        </li>-->
+
+<!--        <li class="nav-item text-white"  th:replace="::menuItem ('/owners/find','owners','find owners','search','Find owners')">-->
+<!--            <i class="bi bi-search"></i>-->
+<!--            <span>FIND OWNERS</span>-->
+<!--        </li>-->
+
+<!--        <li class="nav-item text-white"  th:replace="::menuItem ('/vets.html','vets','veterinarians','card-list','Veterinarians')">-->
+<!--            <i class="bi bi-card-list"></i>-->
+<!--            <span>VETERINARIANS</span>-->
+<!--        </li>-->
+
+<!--        <li   class="nav-item text-white" th:replace="::menuItem ('/oups','error','trigger a RuntimeException to see how it is handled','exclamation-triangle','Error')">-->
+<!--            <i class="bi bi-exclamation-triangle"></i>-->
+<!--            <span>ERROR</span>-->
+<!--        </li>-->
+</th:block>
+</body>
+</html>

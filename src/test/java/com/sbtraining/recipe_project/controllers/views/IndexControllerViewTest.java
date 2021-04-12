@@ -58,7 +58,8 @@ class IndexControllerViewTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
         // attention with the static matchers imports
-        mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(status().isOk()).andExpect(view().name("index2"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+               .andExpect(status().isOk()).andExpect(view().name("frontend-ui/pages/home"));
     }
 
     @Test
@@ -75,7 +76,7 @@ class IndexControllerViewTest {
         String viewName = indexController.getIndexPage(model);
 
         // then
-        assertEquals("index2", viewName);
+        assertEquals("frontend-ui/pages/home", viewName);
 
         // interactions tests
         verify(recipeService, times(1)).getAllRecipes();

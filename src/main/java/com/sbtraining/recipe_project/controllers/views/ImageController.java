@@ -50,7 +50,7 @@ public class ImageController {
             return "redirect:/recipe/" + id + "/image/uploadForm/";
         } else {
 
-            imageService.saveImageFile(command, image);
+//            imageService.saveImageFile(command, image);
             attributes.addFlashAttribute(MODEL_MSG, "You successfully uploaded " + image.getOriginalFilename() + '!');
             return ViewsLinksEnum.RECIPE_FORM.getLink();
         }

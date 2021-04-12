@@ -5,7 +5,6 @@ import com.sbtraining.recipe_project.model.enums.Difficulty;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -56,9 +55,7 @@ public class RecipeCommand {
     @Builder.Default
     private Set<IngredientCommand> ingredients = new HashSet<>();
 
-
-
-    private MultipartFile image;
+    private byte[] image;
 
     @Builder.Default
     private Difficulty difficulty = Difficulty.NOT_DEFINED;

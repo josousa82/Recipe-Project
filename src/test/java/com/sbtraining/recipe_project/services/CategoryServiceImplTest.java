@@ -40,6 +40,6 @@ class CategoryServiceImplTest {
     void getAllDistinctCategoriesDescription() {
         when(categoryRepository.findAll()).thenReturn(categoryUtils);
         Set<String> result = categoryService.getAllDistinctCategoriesDescription();
-        assertEquals( 3, result.size());
+        assertEquals( 4, result.size());
     }
 }

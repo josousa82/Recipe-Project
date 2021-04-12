@@ -64,6 +64,7 @@ class ImageControllerTest {
                                                             "testing.txt",
                                                             "text/plain",
                                                                 "test file".getBytes());
+
         mockMvc.perform(multipart("/recipe/1/image/uploadImage/").file(mockMultipartFile))
                .andExpect(status().is3xxRedirection())
                .andExpect(header().string("Location", "/recipe/1/show/"));
