@@ -36,7 +36,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class IngredientServiceImpIT {
+class IngredientServiceImpITTest {
 
     public static final Long RECIPE_ID = 1L;
     public static final String RECIPE_DESCRIPTION = "flower";

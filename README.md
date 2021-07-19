@@ -16,8 +16,7 @@ See deployment for notes on how to deploy the project on a live system.
 ## Build Status
 
 #### Code Quality
-* [![Codacy Badge](https://app.codacy.com/project/badge/Grade/184b8e4e3c344094b599e2a4fe811951)](https://www.codacy.com/manual/josousa82/Recipe-Project/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josousa82/Recipe-Project&amp;utm_campaign=Badge_Grade)
-
+* [![Codacy Badge](https://app.codacy.com/project/badge/Grade/18ad3aa85f344ab09d73f68cba09ef70)](https://www.codacy.com/gh/josousa82/Recipe-Project/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josousa82/Recipe-Project&amp;utm_campaign=Badge_Grade)
 #### CircleCI
 * [![<CircleCI>](https://circleci.com/gh/josousa82/Recipe-Project.svg?style=shield)](https://circleci.com/gh/josousa82/Recipe-Project)
 

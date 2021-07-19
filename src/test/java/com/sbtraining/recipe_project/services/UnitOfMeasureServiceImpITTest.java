@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class UnitOfMeasureServiceImpIT {
+class UnitOfMeasureServiceImpITTest {
 
     UnitOfMeasureToUnitOfMeasureCommand command = new UnitOfMeasureToUnitOfMeasureCommand();
     UnitOfMeasureService service;

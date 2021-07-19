@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ImageServiceImpIT {
+class ImageServiceImpITTest {
 
     @Mock
     RecipeRepository recipeRepository;

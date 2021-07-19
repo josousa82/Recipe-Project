@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class RecipeServiceImpIT {
+class RecipeServiceImpITTest {
 
 
     public static final Long RECIPE_ID = 1L;
