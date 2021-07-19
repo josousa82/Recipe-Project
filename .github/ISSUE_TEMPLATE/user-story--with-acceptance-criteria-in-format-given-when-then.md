@@ -2,7 +2,7 @@
 name: User Story  with acceptance criteria in format given when then
 about: User story, with acceptance criteria in format given when then
 title: "[USER STORY]"
-labels: enhancement, good first issue, feature development, Refactor, TODO, Epic
+labels: ''
 assignees: josousa82
 
 ---
