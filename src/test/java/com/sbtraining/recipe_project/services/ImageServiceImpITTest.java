@@ -1,7 +1,11 @@
 package com.sbtraining.recipe_project.services;
 
+import com.sbtraining.recipe_project.commands.RecipeCommand;
+import com.sbtraining.recipe_project.converters.CategoryToCategoryCommand;
+import com.sbtraining.recipe_project.converters.IngredientToIngredientCommand;
+import com.sbtraining.recipe_project.converters.NotesToNotesCommand;
+import com.sbtraining.recipe_project.converters.RecipeToRecipeCommand;
 import com.sbtraining.recipe_project.model.Recipe;
-import com.sbtraining.recipe_project.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +17,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -23,9 +26,22 @@ import static org.mockito.Mockito.*;
 class ImageServiceImpITTest {
 
     @Mock
-    RecipeRepository recipeRepository;
+    RecipeService recipeService;
 
     ImageService imageService;
+
+    RecipeCommand recipeCommand;
+
+    @Mock
+    CategoryToCategoryCommand categoryToCategoryCommand;
+
+    @Mock
+    IngredientToIngredientCommand ingredientToIngredientCommand;
+
+    @Mock
+    NotesToNotesCommand notesToNotesCommand;
+
+    RecipeToRecipeCommand recipeToCommand;
 
     Recipe recipe;
     MultipartFile multipartFile;
@@ -34,28 +50,28 @@ class ImageServiceImpITTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
-        imageService = new ImageServiceImpl(recipeRepository);
+        MockitoAnnotations.openMocks(this);
+        imageService = new ImageServiceImpl(recipeService);
 
         recipe = Recipe.builder()
                 .id(RECIPE_ID)
                 .build();
-
+        recipeToCommand = new RecipeToRecipeCommand(categoryToCategoryCommand, ingredientToIngredientCommand,notesToNotesCommand );
         multipartFile = new MockMultipartFile("imageFile",
                                       "testing.txt", "text/plain", "Test file".getBytes());
     }
 
     @Test
     void saveImageFile() throws IOException {
-        Optional<Recipe> recipeOptional = Optional.of(recipe);
-        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+        RecipeCommand command = recipeToCommand.convert(recipe);
+        when(recipeService.findCommandById(anyLong())).thenReturn(command);
 
-        ArgumentCaptor<Recipe> argumentCaptor = ArgumentCaptor.forClass(Recipe.class);
+        ArgumentCaptor<RecipeCommand> argumentCaptor = ArgumentCaptor.forClass(RecipeCommand.class);
 
         imageService.saveImageFile(RECIPE_ID, multipartFile);
 
-        verify(recipeRepository, times(1)).save(argumentCaptor.capture());
-        Recipe savedRecipe =argumentCaptor.getValue();
+        verify(recipeService, times(1)).saveRecipeCommand(argumentCaptor.capture());
+        RecipeCommand savedRecipe = argumentCaptor.getValue();
         assertEquals(multipartFile.getBytes().length, savedRecipe.getImage().length);
     }
 

@@ -4,8 +4,10 @@ import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.model.Recipe;
 import com.sun.istack.Nullable;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -15,17 +17,13 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 @Builder
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
 
     private final CategoryToCategoryCommand categoryToCategoryCommand;
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final NotesToNotesCommand notesToNotesCommand;
 
-    public RecipeToRecipeCommand(CategoryToCategoryCommand categoryToCategoryCommand, IngredientToIngredientCommand ingredientToIngredientCommand, NotesToNotesCommand notesToNotesCommand) {
-        this.categoryToCategoryCommand = categoryToCategoryCommand;
-        this.ingredientToIngredientCommand = ingredientToIngredientCommand;
-        this.notesToNotesCommand = notesToNotesCommand;
-    }
 
     @Synchronized
     @Nullable

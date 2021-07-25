@@ -23,7 +23,7 @@ public interface RecipeService {
 
      RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) ;
 
-     RecipeCommand findCommandById(Long id) throws NotFoundException;
+     RecipeCommand findCommandById(Long id) ;
 
      void deleteRecipeById(Long id);
 }
