@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
-    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <link crossorigin="anonymous" rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
 
     <!-- Optional theme -->
-    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
-          rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
+    <link crossorigin="anonymous" rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap-theme.min.css}">
     <link href="../../static/css/style.css" rel="stylesheet/css" th:href="@{/css/style.css}" type="text/css" />
 </head>
 
@@ -28,7 +26,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row col-md-12">
-                        <img src="../../static/img/pexels-photo-4191620.jpeg" th:src="@{'/recipe/' + ${recipe.getId()} + '/get/image/'}" width="auto" height="200">
+                        <img  th:src="@{'/recipe/' + ${recipe.getId()} + '/get/image/'}" width="auto" height="200">
                     </div>
                     <div class="row">
                         <div class="col-md-2">

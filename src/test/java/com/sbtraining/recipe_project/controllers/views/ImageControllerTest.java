@@ -4,6 +4,7 @@ import com.sbtraining.recipe_project.commands.RecipeCommand;
 import com.sbtraining.recipe_project.services.ImageService;
 import com.sbtraining.recipe_project.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -73,15 +74,13 @@ class ImageControllerTest {
     @Test
     void renderImageFromDB() throws Exception {
         String fakeImage = "fake image";
-        Byte[] bytesFromDB = new Byte[fakeImage.getBytes().length];
+        byte[] bytesFromDB = new byte[fakeImage.getBytes().length];
         int i = 0;
         for (byte prymByte : fakeImage.getBytes()){
             bytesFromDB[i++] = prymByte;
         }
 
-        command.setImage(bytesFromDB);
-
-        when(recipeService.findCommandById(anyLong())).thenReturn(command);
+        when(imageService.getImageByRecipeId(anyLong())).thenReturn(bytesFromDB);
 
         MockHttpServletResponse response = mockMvc.perform(get("/recipe/1/get/image/"))
                 .andExpect(status().isOk())
@@ -89,6 +88,16 @@ class ImageControllerTest {
 
         byte[] responseBytes = response.getContentAsByteArray();
         assertEquals(fakeImage.getBytes().length, responseBytes.length );
+    }
+
+    // TODO Refactor image service, controller advice exceptions and tests
+    @Disabled
+    @Test
+    void testGetImageNumberFormatException() throws Exception {
+        when(imageService.getImageByRecipeId(anyLong())).thenThrow(NumberFormatException.class);
+        mockMvc.perform(get("/recipe/asdf/get/image"))
+                .andExpect(status().isBadRequest())
+                .andExpect(view().name("400error"));
     }
 
 }
